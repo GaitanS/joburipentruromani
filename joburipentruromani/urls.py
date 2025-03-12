@@ -20,6 +20,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib.auth import views as auth_views
 from jobs.views import CustomPasswordResetView, CustomPasswordResetDoneView, register
+from jobs.admin import admin_site  # Import your custom admin site
 
 # Sitemap
 from django.contrib.sitemaps.views import sitemap
@@ -27,7 +28,7 @@ from jobs.sitemaps import JobSitemap, CategorySitemap, CompanySitemap, BlogPostS
 from django.views.generic.base import TemplateView
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('admin/', admin_site.urls),  # Use custom admin site
     path('', include('jobs.urls')),
     
     # Authentication URLs

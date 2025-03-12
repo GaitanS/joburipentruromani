@@ -15,11 +15,29 @@ from .admin_subscription import (
     StripeWebhookEventAdmin
 )
 
+class JoburiPentruRomaniAdminSite(admin.AdminSite):
+    site_title = _('JoburiPentruRomani Admin')
+    site_header = _('JoburiPentruRomani Administration')
+    index_title = _('Site Administration')
+
+# Create instance of custom admin site
+admin_site = JoburiPentruRomaniAdminSite(name='admin')
+
+# Register your models with the custom admin site
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
     list_display = ('name', 'job_count')
     prepopulated_fields = {'slug': ('name',)}
     search_fields = ('name',)
+    
+    # Add custom list actions
+    actions = ['reset_job_count']
+    
+    def reset_job_count(self, request, queryset):
+        for category in queryset:
+            category.job_count = category.job_set.count()
+            category.save()
+    reset_job_count.short_description = _("Reset job count for selected categories")
 
 
 @admin.register(Location)
