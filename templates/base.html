@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}JoburiPentruRomani - Găsește jobul potrivit pentru tine{% endblock %}</title>
+    <meta name="description" content="{% block meta_description %}Găsește jobul potrivit pentru tine din mii de oportunități de muncă pentru profesioniști ca tine, actualizate zilnic{% endblock %}">
+    <meta name="keywords" content="locuri de muncă, joburi, carieră, angajare, România">
+    
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="/static/images/favicon.ico" type="image/x-icon">
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/static/css/style.css">
+    <!-- Facebook Popup CSS -->
+    <link rel="stylesheet" href="/static/css/facebook-popup.css">
+    <!-- Cookie Consent CSS -->
+    <link rel="stylesheet" href="/static/css/cookie-consent.css">
+    <link rel="stylesheet" href="/static/css/blog.css">
+
+    <!-- Mobile-specific meta tags for improved responsive design -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    
+    <!-- Viewport meta tag with maximum-scale to prevent unintended zooming -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <meta name="theme-color" content="#4785F4">
+    
+    <!-- AdSense Header Code -->
+    {% if not request.user.is_staff %}
+        <!-- Updated AdSense script with modern implementation -->
+        <!-- Configure for GDPR compliance - will be managed by cookie consent -->
+        <script>window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);}</script>
+        
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script>
+        <script>
+            // Configure page-level settings for better ad performance
+            window.adsbygoogle = window.adsbygoogle || [];
+            // Enable page-level ads (auto ads) - place ads automatically in appropriate positions
+            adsbygoogle.push({
+                google_ad_client: "ca-pub-XXXXXXXXXXXXXXXX"
+            });
+            
+            // Track ad performance metrics
+            window.addEventListener('load', function() {
+                setTimeout(function() { if(typeof adsbygoogle.requestNonPersonalizedAds === 'undefined') { console.log('Ad blocker detected'); } }, 1000);
+            });
+        </script>
+        
+    {% endif %}
+    
+    {% block extra_head %}{% endblock %}
+</head>
+<body>
+    <!-- Header -->
+    <!-- AdSense Placeholder: header (desktop) -->
+    <header class="bg-white py-2 sticky-top shadow-sm">
+        <div class="container">
+            <nav class="navbar navbar-expand-lg p-0">
+                <a href="{% url 'jobs:home' %}" class="navbar-brand text-decoration-none me-auto">
+                    <div class="d-flex align-items-center">
+                        <div class="logo-icon">
+                            <i class="fas fa-briefcase"></i>
+                        </div>
+                        <span class="logo-text ms-2">JoburiPentruRomani</span>
+                    </div>
+                </a>
+                
+                <button class="navbar-toggler ms-auto d-lg-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#navbarOffcanvas" 
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                
+                <!-- Desktop Navigation (visible only on lg and above) -->
+                <div class="d-none d-lg-flex flex-grow-1 justify-content-between align-items-center px-3">
+                    <!-- Desktop Nav Links -->
+                    <ul class="navbar-nav me-auto mb-0 d-flex">
+                        <li class="nav-item mx-1">
+                            <a class="nav-link px-3 py-2" href="{% url 'jobs:job_list' %}">Locuri de muncă</a>
+                  </li>
+                            <li class="nav-item mx-1">
+                            <a class="nav-link px-3 py-2" href="{% url 'jobs:for_companies' %}">Pentru companii</a>
+                        </li>
+                        <li class="nav-item mx-1">
+                            <a class="nav-link px-3 py-2" href="{% url 'jobs:about' %}">Despre noi</a>
+                        </li>
+                        <li class="nav-item mx-1">
+                            <a class="nav-link px-3 py-2" href="{% url 'jobs:blog_home' %}">Blog</a>
+                        </li>
+                    </ul>
+                    
+                    <!-- Desktop Authentication Buttons -->
+                   <div class="d-flex flex-wrap gap-2">
+                       {% if user.is_authenticated %}
+                           <div class="dropdown">
+                                <button class="btn btn-outline-secondary dropdown-toggle px-3" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <span class="px-1">{{ user.username }}
+</span>
+                                </button>
+                                <ul class="dropdown-menu dropdown-menu-end py-2">
+                                    {% if user.company %}
+                               
+                                        <li><a class="dropdown-item py-2" href="{% url 'jobs:company_dashboard' %}">Dashboard Companie</a></li>
+                                    {% else %}
+                                        <li><a class="dropdown-item py-2" href="{% url 'jobs:user_dashboard' %}">Dashboard</a></li>
+                                    {% endif %}
+                                    <li><hr class="dropdown-divider my-2"></li>
+                                    <li><a class="dropdown-item py-2" href="{% url 'logout' %}">Deconectare</a></li>
+                                </ul>
+                            </div>
+                        {% else %}
+                            <a href="{% url 'login' %}" class="btn btn-outline-secondary px-3 py-2">Conectare</a>
+                            <a href="{% url 'register' %}" class="btn btn-outline-secondary px-3 py-2">Înregistrare</a>
+                        {% endif %}
+                        <div class="ms-3">
+                            <a href="{% if user.is_authenticated %}{% if user.company %}#{% else %}{% url 'register' %}{% endif %}{% else %}{% url 'register' %}{% endif %}" class="btn btn-primary px-3 py-2">Postează anunț</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Mobile Off-canvas Menu -->
+                <div class="offcanvas offcanvas-end d-lg-none" tabindex="-1" id="navbarOffcanvas" aria-labelledby="navbarOffcanvasLabel">
+                    <div class="offcanvas-header border-bottom">
+                        <h5 class="offcanvas-title" id="navbarOffcanvasLabel">Meniu</h5>
+                        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                    </div>
+                    <div class="offcanvas-body px-4">
+                        <ul class="navbar-nav w-100">
+                            <li class="nav-item">
+                                <a class="nav-link py-3 border-bottom d-flex align-items-center" href="{% url 'jobs:job_list' %}">
+                                    <i class="fas fa-briefcase me-3"></i><span>Locuri de muncă
+</span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link py-3 border-bottom d-flex align-items-center" href="{% url 'jobs:for_companies' %}">
+                                    <i class="fas fa-building me-3"></i><span>Pentru companii
+</span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link py-3 border-bottom d-flex align-items-center" href="{% url 'jobs:about' %}">
+                                    <i class="fas fa-info-circle me-3"></i><span>Despre noi
+</span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link py-3 border-bottom d-flex align-items-center" href="{% url 'jobs:blog_home' %}">
+                                    <i class="fas fa-blog me-3"></i><span>Blog
+</span>
+                            </a>
+                            </li>
+                            <li class="nav-item">
+                                <div class="py-2"></div>
+                            </li>
+                            {% if user.is_authenticated %}
+                                <li class="nav-item mt-3"><a href="{% if user.is_authenticated %}{% if user.company %}#{% else %}{% url 'register' %}{% endif %}{% else %}{% url 'register' %}{% endif %}" class="btn btn-primary w-100 mb-2">Postează anunț</a></li>
+                                <li class="nav-item mb-2"><a href="{% if user.company %}{% url 'jobs:company_dashboard' %}{% else %}{% url 'jobs:user_dashboard' %}{% endif %}" class="btn btn-outline-primary w-100">Dashboard</a></li>
+                                <li class="nav-item mb-3"><a href="{% url 'logout' %}" class="btn btn-outline-secondary w-100">Deconectare</a></li>
+                            {% else %}
+                                <li class="nav-item mt-3"><a href="{% if user.is_authenticated %}{% if user.company %}#{% else %}{% url 'register' %}{% endif %}{% else %}{% url 'register' %}{% endif %}" class="btn btn-primary w-100 mb-2">Postează anunț</a></li>
+                                <li class="nav-item mb-2"><a href="{% url 'login' %}" class="btn btn-outline-primary w-100">Conectare</a></li>
+                                <li class="nav-item mb-3"><a href="{% url 'register' %}" class="btn btn-outline-secondary w-100">Înregistrare</a></li>
+                            {% endif %}
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+    
+    <!-- Enhanced AdSense Header Banner - High Visibility Placement -->
+    {% load adsense %}
+    {% if not request.user.is_staff and not request.resolver_match.url_name == 'job_search' %}
+        <div class="container py-3">
+            <div class="ad-container header-ad bg-light p-3 rounded shadow-sm border border-primary position-relative">
+                <div class="ad-badge position-absolute" style="top:-10px; right:10px; z-index:10">
+                    <span class="badge bg-primary text-white px-2 py-1">Sponsorizat</span>
+                </div>
+                <div class="text-center mb-2">
+                    <div class="small text-muted">Oferte de angajare</div>
+                </div>
+                <div class="ad-content">
+                    {% render_ad 'header' %}
+                </div>
+                <style>
+                    .header-ad:hover { box-shadow: 0 0 15px rgba(0,0,0,0.1); transform: translateY(-2px); transition: all 0.3s ease; }
+                </style>
+            </div>
+        </div>
+    {% endif %}
+    
+    <!-- Main Content -->
+    
+    <!-- Personalized ad notice (GDPR compliance) -->
+    <div class="container mb-3 d-none" id="ad-consent-notice">
+        <div class="alert alert-info small mb-0" role="alert">Acest site folosește reclame personalizate. <a href="{% url 'jobs:privacy' %}" class="alert-link">Află mai multe</a></div>
+    </div>
+    
+    <!-- Sticky Ad Button (right side) - Appears on scroll -->
+    <div class="d-none d-lg-block position-fixed" id="sticky-ad-button" 
+         style="right:-80px; bottom:120px; z-index:999; transition: all 0.5s ease; transform: rotate(-90deg); transform-origin: left bottom;">
+        <button class="btn btn-warning text-dark shadow px-3 py-2" onclick="document.getElementById('sticky-ad-content').classList.toggle('show')">
+            <i class="fas fa-bullhorn me-2"></i> Oferte Speciale
+        </button>
+        <div id="sticky-ad-content" class="bg-white rounded shadow p-3 position-absolute" 
+             style="transform: rotate(90deg); right:70px; bottom:40px; width:300px; display:none; border:2px solid #FFC107;">
+            {% render_lazy_ad 'sidebar' %}
+        </div>
+    </div>
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+    
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-5 mt-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3 mb-4">
+                    <h5 class="mb-4">JoburiPentruRomani</h5>
+                    <p>Platforma de joburi dedicată românilor - pentru operatori, constructori, șoferi și multe alte profesii.</p>
+                </div>
+                <div class="col-md-3 mb-4">
+                    <h5 class="mb-4">Link-uri rapide</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="{% url 'jobs:job_list' %}" class="text-decoration-none text-white">Locuri de muncă</a></li>
+                        <li class="mb-2"><a href="{% url 'jobs:for_companies' %}" class="text-decoration-none text-white">Pentru companii</a></li>
+                        <li class="mb-2"><a href="{% url 'jobs:about' %}" class="text-decoration-none text-white">Despre noi</a></li>
+                        <li class="mb-2"><a href="{% url 'jobs:about' %}#contact" class="text-decoration-none text-white">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3 mb-4">
+                    <h5 class="mb-4">Categorii populare</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="{% url 'jobs:job_list' %}?category=soferi-tir" class="text-decoration-none text-white">Șoferi TIR</a></li>
+                        <li class="mb-2"><a href="{% url 'jobs:job_list' %}?category=constructii" class="text-decoration-none text-white">Construcții</a></li>
+                        <li class="mb-2"><a href="{% url 'jobs:job_list' %}?category=operatori" class="text-decoration-none text-white">Operatori</a></li>
+                        <li class="mb-2"><a href="{% url 'jobs:job_list' %}?category=sudori" class="text-decoration-none text-white">Sudori</a></li>
+                        <li class="mb-2"><a href="{% url 'jobs:terms' %}" class="text-decoration-none text-white">Termeni și Condiții</a></li>
+                        <li class="mb-2"><a href="{% url 'jobs:privacy' %}" class="text-decoration-none text-white">Politica de Confidențialitate</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3 mb-4">
+                    <h5 class="mb-4">Contact</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><i class="fas fa-phone me-2"></i> +40 712 345 678</li>
+                        <li class="mb-2"><i class="fas fa-map-marker-alt me-2"></i> București, Romania</li>
+                    </ul>
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col-md-6">
+                    <p class="mb-0">© {% now "Y" %} JoburiPentruRomani. Toate drepturile rezervate. | 
+                       <a href="{% url 'jobs:terms' %}" class="text-white">Termeni și condiții</a> | 
+                       <a href="{% url 'jobs:privacy' %}" class="text-white">Politica de confidențialitate</a></p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- Enhanced AdSense Footer Banner -->
+    {% if not request.user.is_staff and not request.resolver_match.url_name == 'company_dashboard' and not request.resolver_match.url_name == 'user_dashboard' %}
+        <div class="container py-4">
+            <div class="ad-container footer-ad bg-light p-3 rounded shadow-sm border border-success position-relative">
+                <div class="ad-badge position-absolute" style="top:-10px; left:10px;">
+                    <span class="badge bg-success px-2 py-1">Recomandate</span>
+                </div>
+                <div class="text-center mb-2">
+                    <div class="small text-muted">Oferte de angajare care ți se potrivesc</div>
+                </div>
+                <div class="ad-content py-2">
+                    {% render_ad 'footer' %}
+                </div>
+                <style>
+                    .footer-ad:hover { box-shadow: 0 0 15px rgba(40,167,69,0.2); transition: all 0.3s ease; }
+                </style>
+            </div>
+        </div>
+    {% endif %}
+    
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Custom JS -->
+    <script src="/static/js/main.js"></script>
+    
+    <!-- Cookie Consent Banner -->
+    <script src="/static/js/cookie-consent.js"></script>
+
+    <!-- AdSense optimization script -->
+    {% if not request.user.is_staff %}
+    <script>
+        // Optimize ad loading and display
+        document.addEventListener('DOMContentLoaded', function() {
+            // Show ad consent notice for EU visitors (GDPR compliance)
+            if (navigator.languages && /^(fr|de|es|it|nl|pt|pl|ro|hu|cz|gr|dk|fi|se|no|at|be|ie|lu)/.test(navigator.languages[0])) {
+                const consentNotice = document.getElementById('ad-consent-notice');
+                if (consentNotice) {
+                    consentNotice.classList.remove('d-none');
+                    // Auto-hide after 10 seconds
+                    setTimeout(() => consentNotice.classList.add('d-none'), 10000);
+                }
+            }
+            
+            // Lazy load ads as user scrolls
+            const adContainers = document.querySelectorAll('.ad-container, .lazy-ad-container');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        // Highlight the ad container briefly when it comes into view
+                        entry.target.classList.add('ad-highlight');
+                        setTimeout(() => entry.target.classList.remove('ad-highlight'), 1000);
+                        
+                        // Push ad if it contains AdSense code
+                        if (entry.target.querySelector('.adsbygoogle')) {
+                            (adsbygoogle = window.adsbygoogle || []).push({});
+                        }
+                    }
+                });
+            }, {threshold: 0.2});
+            adContainers.forEach(container => observer.observe(container));
+            
+            // Show sticky ad button on scroll
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 500) {
+                    document.getElementById('sticky-ad-button').style.right = '0px';
+                } else {
+                    document.getElementById('sticky-ad-button').style.right = '-80px';
+                }
+            });
+        });
+    </script>
+    {% endif %}
+    
+    <!-- Facebook Popup JS -->
+    <script src="/static/js/facebook-popup.js"></script>
+    
+    <!-- Ad Enhancement Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Sticky Ad Button Click Handler
+            document.getElementById('sticky-ad-button')?.addEventListener('click', function() {
+                const adContent = document.getElementById('sticky-ad-content');
+                if (adContent) {
+                    if (adContent.style.display === 'none' || !adContent.style.display) {
+                        adContent.style.display = 'block';
+                    } else {
+                        adContent.style.display = 'none';
+                 }   }
+                }
+           } );
+        });
+    </script>
+    
+    <!-- Custom page scripts -->
+    {% block extra_scripts %}{% endblock %}
+    </script>
+    
+    <!-- Include Facebook popup component -->
+    {% include 'components/facebook_popup.html' %}
+</body>
+</html>

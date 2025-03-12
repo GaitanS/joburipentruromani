@@ -1,0 +1,330 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load adsense %}
+{% load humanize %}
+
+{% block title %}{{ company.name }} - Profil Companie - JoburipentruRomani{% endblock %}
+
+{% block meta_description %}Descoperă oportunitățile de carieră la {{ company.name }}. Aplică acum pentru joburile disponibile și dezvoltă-ți cariera alături de o companie de top.{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row">
+        <!-- Main Content -->
+        <div class="col-lg-8">
+            <!-- Company Profile -->
+            <div class="bg-white p-4 rounded shadow-sm mb-4">
+                <div class="d-flex align-items-center mb-4">
+                    <div class="company-logo me-4">
+                        {% if company.logo %}
+                            <img src="{{ company.logo.url }}" alt="{{ company.name }}" class="rounded" width="100">
+                        {% else %}
+                            <div class="logo-placeholder rounded" style="width: 100px; height: 100px; font-size: 2.5rem;">
+                                {{ company.name|slice:":1" }}
+                            </div>
+                        {% endif %}
+                    </div>
+                    <div>
+                        <h1 class="h3 mb-1">{{ company.name }}</h1>
+                        {% if company.website %}
+                            <a href="{{ company.website }}" target="_blank" rel="noopener noreferrer" class="text-decoration-none">
+                                <i class="fas fa-globe me-1"></i> {{ company.website|cut:"https://"|cut:"http://"|cut:"www." }}
+                            </a>
+                        {% endif %}
+                    </div>
+                </div>
+                
+                <div class="company-details mb-4">
+                    <div class="row g-3">
+                        {% if company.founded_year %}
+                            <div class="col-md-4">
+                                <div class="d-flex align-items-center">
+                                    <div class="icon-wrapper me-2 text-primary">
+                                        <i class="fas fa-calendar-alt"></i>
+                                    </div>
+                                    <div>
+                                        <small class="text-muted d-block">Înființată în</small>
+                                        <span>{{ company.founded_year }}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endif %}
+                        
+                        {% if company.employees %}
+                            <div class="col-md-4">
+                                <div class="d-flex align-items-center">
+                                    <div class="icon-wrapper me-2 text-primary">
+                                        <i class="fas fa-users"></i>
+                                    </div>
+                                    <div>
+                                        <small class="text-muted d-block">Angajați</small>
+                                        <span>{{ company.employees }}+</span>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endif %}
+                        
+                        <div class="col-md-4">
+                            <div class="d-flex align-items-center">
+                                <div class="icon-wrapper me-2 text-primary">
+                                    <i class="fas fa-briefcase"></i>
+                                </div>
+                                <div>
+                                    <small class="text-muted d-block">Joburi active</small>
+                                    <span>{{ jobs|length }}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                {% if company.description %}
+                    <div class="company-description mb-0">
+                        <h2 class="h5 mb-3">Despre {{ company.name }}</h2>
+                        <div class="description-text">
+                            {{ company.description|linebreaks }}
+                        </div>
+                    </div>
+                {% endif %}
+            </div>
+            
+            <!-- AdSense Below Company Profile -->
+            <div class="mb-4 p-3 bg-light rounded border-start border-4 border-primary" id="ad-container-company">
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                    <span class="small text-muted">Sponsorizat</span>
+                    <span class="badge bg-primary">Oferta {{ company.name }}</span>
+                </div>
+                {% render_ad 'job_detail' %}
+            </div>
+            
+            <!-- Company Jobs -->
+            <div class="bg-white p-4 rounded shadow-sm mb-4">
+                <h2 class="h4 mb-4">Joburi disponibile la {{ company.name }}</h2>
+                
+                {% if jobs %}
+                    <div class="job-listings">
+                        {% for job in jobs %}
+                            <div class="job-item p-3 mb-3 border rounded">
+                                <div class="row align-items-center">
+                                    <div class="col-md-8 mb-2 mb-md-0">
+                                        <h3 class="h5 mb-1">
+                                            <a href="{% url 'jobs:job_detail' job.slug %}" class="text-decoration-none stretched-link">{{ job.title }}</a>
+                                        </h3>
+                                        <p class="location mb-0 text-muted">
+                                            <i class="fas fa-map-marker-alt me-1"></i> {{ job.location.city }}
+                                            {% if job.is_remote %}
+                                                <span class="badge bg-success ms-2">Remote</span>
+                                            {% endif %}
+                                        </p>
+                                    </div>
+                                    <div class="col-md-4 text-md-end">
+                                        <div class="job-meta mb-2">
+                                            <span class="badge bg-light text-dark me-2">{{ job.get_job_type_display }}</span>
+                                            <span class="text-muted small">{{ job.created_at|date:"d M Y" }}</span>
+                                        </div>
+                                        {% if job.salary_min and job.salary_max %}
+                                            <div class="salary text-success fw-bold">{{ job.salary_min|intcomma }} - {{ job.salary_max|intcomma }} RON/lună</div>
+                                        {% elif job.salary_min %}
+                                            <div class="salary text-success fw-bold">De la {{ job.salary_min|intcomma }} RON/lună</div>
+                                        {% else %}
+                                            <div class="salary text-muted">Salariu nespecificat</div>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            {% if forloop.counter|divisibleby:3 %}
+                                <!-- Insert styled ad after every 3 jobs -->
+                                <div class="ad-wrapper my-4 p-2 bg-light rounded border-start border-3 border-warning">
+                                    <div class="small text-muted mb-2">Sponsorizat</div>
+                                    {% render_ad 'job_listing' %}
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <div class="alert alert-info">
+                        <i class="fas fa-info-circle me-2"></i> Nu există joburi active la {{ company.name }} momentan. Te rugăm să revii mai târziu.
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+        
+        <!-- Sidebar -->
+        <div class="col-lg-4">
+            <!-- AdSense Sidebar - Sticky Positioned -->
+            <div class="sticky-top" style="top: 20px; z-index: 1;">
+                <div class="bg-white p-4 rounded shadow-sm mb-4" id="ad-container-sidebar">
+                    <div class="small text-muted mb-2">Sponsorizat</div>
+                    {% render_ad 'sidebar' %}
+                </div>
+            </div>
+            
+            <!-- Company Details -->
+            <div class="bg-white p-4 rounded shadow-sm mb-4">
+                <h3 class="h5 mb-3">Informații despre companie</h3>
+                
+                <ul class="list-unstyled">
+                    {% if company.founded_year %}
+                        <li class="mb-3">
+                            <div class="d-flex">
+                                <div class="icon-wrapper me-2 text-primary">
+                                    <i class="fas fa-calendar-alt"></i>
+                                </div>
+                                <div>
+                                    <small class="text-muted d-block">Înființată în</small>
+                                    <span>{{ company.founded_year }}</span>
+                                </div>
+                            </div>
+                        </li>
+                    {% endif %}
+                    
+                    {% if company.employees %}
+                        <li class="mb-3">
+                            <div class="d-flex">
+                                <div class="icon-wrapper me-2 text-primary">
+                                    <i class="fas fa-users"></i>
+                                </div>
+                                <div>
+                                    <small class="text-muted d-block">Angajați</small>
+                                    <span>{{ company.employees }}+</span>
+                                </div>
+                            </div>
+                        </li>
+                    {% endif %}
+                    
+                    {% if company.website %}
+                        <li class="mb-3">
+                            <div class="d-flex">
+                                <div class="icon-wrapper me-2 text-primary">
+                                    <i class="fas fa-globe"></i>
+                                </div>
+                                <div>
+                                    <small class="text-muted d-block">Website</small>
+                                    <a href="{{ company.website }}" target="_blank" rel="noopener noreferrer" class="text-decoration-none">
+                                        {{ company.website|cut:"https://"|cut:"http://"|cut:"www." }}
+                                    </a>
+                                </div>
+                            </div>
+                        </li>
+                    {% endif %}
+                </ul>
+                
+                {% if company.is_featured %}
+                    <div class="mt-3 pt-3 border-top">
+                        <span class="badge bg-warning">Companie promovată</span>
+                    </div>
+                {% endif %}
+            </div>
+            
+            <!-- Similar Companies -->
+            <div class="bg-white p-4 rounded shadow-sm mb-4">
+                <h3 class="h5 mb-3">Companii similare</h3>
+                
+                <ul class="list-unstyled">
+                    {% for similar_company in similar_companies %}
+                        <li class="mb-3">
+                            <a href="{% url 'jobs:company_detail' similar_company.slug %}" class="text-decoration-none d-flex align-items-center company-link">
+                                <div class="small-company-logo me-2">
+                                    {% if similar_company.logo %}
+                                        <img src="{{ similar_company.logo.url }}" alt="{{ similar_company.name }}" class="rounded" width="40">
+                                    {% else %}
+                                        <div class="logo-placeholder rounded" style="width: 40px; height: 40px; font-size: 1rem;">
+                                            {{ similar_company.name|slice:":1" }}
+                                        </div>
+                                    {% endif %}
+                                </div>
+                                <div>
+                                    <span class="company-name d-block">{{ similar_company.name }}</span>
+                                    <small class="text-muted">{{ similar_company.jobs.count }} joburi active</small>
+                                </div>
+                            </a>
+                        </li>
+                    {% empty %}
+                        <li class="text-muted small">Nu există companii similare momentan.</li>
+                    {% endfor %}
+                </ul>
+            </div>
+            
+            <!-- Additional AdSense -->
+            <div class="bg-white p-4 rounded shadow-sm mt-4 border-top border-4 border-success" id="ad-container-sidebar-bottom">
+                <div class="small text-muted mb-2">Sponsorizat</div>
+                <div class="text-center mb-2">
+                    <span class="badge bg-success">Oferte similare</span>
+                </div>
+                {% render_ad 'sidebar' %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    /* Ad styling for better visibility and engagement */
+    #ad-container-company:hover, 
+    #ad-container-sidebar:hover,
+    #ad-container-sidebar-bottom:hover,
+    .ad-wrapper:hover {
+        box-shadow: 0 0 10px rgba(0, 123, 255, 0.25);
+        transition: box-shadow 0.3s ease;
+    }
+    
+    /* Subtle hover effect for similar companies list */
+    .company-link {
+        transition: all 0.2s ease;
+        padding: 6px;
+        border-radius: 4px;
+    }
+    
+    .company-link:hover {
+        background-color: rgba(13, 110, 253, 0.05);
+    }
+    
+    /* Icon styling */
+    .icon-wrapper {
+        color: #0d6efd;
+    }
+    
+    /* Logo placeholder styling */
+    .logo-placeholder {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #f8f9fa;
+        color: #0d6efd;
+    }
+</style>
+
+{% block extra_scripts %}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Track scroll depth for optimized ad visibility
+        const companyDescription = document.querySelector('.company-description');
+        const jobListings = document.querySelector('.job-listings');
+        const companyAd = document.getElementById('ad-container-company');
+        
+        let hasScrolledToJobs = false;
+        
+        window.addEventListener('scroll', function() {
+            // When user scrolls to job listings section, highlight the sidebar bottom ad
+            if (!hasScrolledToJobs && jobListings && window.scrollY > (jobListings.offsetTop - window.innerHeight/2)) {
+                hasScrolledToJobs = true;
+                
+                // Highlight sidebar bottom ad
+                const sidebarBottomAd = document.getElementById('ad-container-sidebar-bottom');
+                if (sidebarBottomAd) {
+                    setTimeout(function() {
+                        sidebarBottomAd.style.transform = 'translateY(-5px)';
+                        sidebarBottomAd.style.transition = 'transform 0.5s ease';
+                        
+                        // Reset after animation
+                        setTimeout(function() {
+                            sidebarBottomAd.style.transform = 'translateY(0)';
+                        }, 500);
+                    }, 800);
+                }
+            }
+        });
+    });
+</script>
+{% endblock %}
+{% endblock %}

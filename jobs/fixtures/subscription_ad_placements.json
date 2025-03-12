@@ -1,0 +1,62 @@
+[
+  {
+    "model": "jobs.adplacement",
+    "pk": 9,
+    "fields": {
+      "name": "Subscription Top",
+      "position": "subscription_top",
+      "ad_code": "<div class=\"ad-container\">\n<!-- Google AdSense Subscription Top -->\n<ins class=\"adsbygoogle\"\n     style=\"display:block\"\n     data-ad-client=\"ca-pub-XXXXXXXXXXXXXXXX\"\n     data-ad-slot=\"XXXXXXXXXX\"\n     data-ad-format=\"auto\"\n     data-full-width-responsive=\"true\"></ins>\n<script>\n     (adsbygoogle = window.adsbygoogle || []).push({});\n</script>\n</div>",
+      "is_active": true,
+      "display_order": 9,
+      "target_devices": "all"
+    }
+  },
+  {
+    "model": "jobs.adplacement",
+    "pk": 10,
+    "fields": {
+      "name": "Subscription Bottom",
+      "position": "subscription_bottom",
+      "ad_code": "<div class=\"ad-container\">\n<!-- Google AdSense Subscription Bottom -->\n<ins class=\"adsbygoogle\"\n     style=\"display:block\"\n     data-ad-client=\"ca-pub-XXXXXXXXXXXXXXXX\"\n     data-ad-slot=\"XXXXXXXXXX\"\n     data-ad-format=\"auto\"\n     data-full-width-responsive=\"true\"></ins>\n<script>\n     (adsbygoogle = window.adsbygoogle || []).push({});\n</script>\n</div>",
+      "is_active": true,
+      "display_order": 10,
+      "target_devices": "all"
+    }
+  },
+  {
+    "model": "jobs.adplacement",
+    "pk": 11,
+    "fields": {
+      "name": "Subscription Sidebar",
+      "position": "subscription_sidebar",
+      "ad_code": "<div class=\"ad-container\">\n<!-- Google AdSense Subscription Sidebar -->\n<ins class=\"adsbygoogle\"\n     style=\"display:block\"\n     data-ad-client=\"ca-pub-XXXXXXXXXXXXXXXX\"\n     data-ad-slot=\"XXXXXXXXXX\"\n     data-ad-format=\"auto\"\n     data-full-width-responsive=\"true\"></ins>\n<script>\n     (adsbygoogle = window.adsbygoogle || []).push({});\n</script>\n</div>",
+      "is_active": true,
+      "display_order": 11,
+      "target_devices": "desktop"
+    }
+  },
+  {
+    "model": "jobs.adplacement",
+    "pk": 12,
+    "fields": {
+      "name": "Subscription Dashboard",
+      "position": "subscription_dashboard",
+      "ad_code": "<div class=\"ad-container\">\n<!-- Google AdSense Subscription Dashboard -->\n<ins class=\"adsbygoogle\"\n     style=\"display:block\"\n     data-ad-client=\"ca-pub-XXXXXXXXXXXXXXXX\"\n     data-ad-slot=\"XXXXXXXXXX\"\n     data-ad-format=\"auto\"\n     data-full-width-responsive=\"true\"></ins>\n<script>\n     (adsbygoogle = window.adsbygoogle || []).push({});\n</script>\n</div>",
+      "is_active": true,
+      "display_order": 12,
+      "target_devices": "all"
+    }
+  },
+  {
+    "model": "jobs.adplacement",
+    "pk": 13,
+    "fields": {
+      "name": "Subscription Plan Comparison",
+      "position": "subscription_comparison",
+      "ad_code": "<div class=\"ad-container\">\n<!-- Google AdSense Subscription Comparison -->\n<ins class=\"adsbygoogle\"\n     style=\"display:block\"\n     data-ad-client=\"ca-pub-XXXXXXXXXXXXXXXX\"\n     data-ad-slot=\"XXXXXXXXXX\"\n     data-ad-format=\"auto\"\n     data-full-width-responsive=\"true\"></ins>\n<script>\n     (adsbygoogle = window.adsbygoogle || []).push({});\n</script>\n</div>",
+      "is_active": true,
+      "display_order": 13,
+      "target_devices": "all"
+    }
+  }
+]

@@ -1,0 +1,159 @@
+{% extends 'jobs/subscription/base_subscription.html' %}
+{% load static %}
+{% load i18n %}
+{% load adsense %}
+
+{% block title %}Abonament Activat - JoburipentruRomani{% endblock %}
+
+{% block subscription_content %}
+<!-- Discreet AdSense Top of Success Page -->
+<div class="bg-light rounded p-3 mb-4">
+    <div class="small text-muted mb-2">Conținut sponsorizat</div>
+    {% render_ad 'subscription_top' %}
+</div>
+
+<div class="bg-white rounded shadow-sm p-5 text-center">
+    <div class="mb-4">
+        <i class="fas fa-check-circle text-success" style="font-size: 5rem;"></i>
+    </div>
+    
+    <h1 class="h3 mb-3">Felicitări! Abonamentul tău a fost activat.</h1>
+    
+    <p class="lead mb-4">
+        Îți mulțumim pentru încredere. Abonamentul tău este acum activ și poți începe să folosești toate funcționalitățile incluse.
+    </p>
+    
+    <div class="row justify-content-center mb-5">
+        <div class="col-md-8">
+            <div class="card bg-light">
+                <div class="card-body p-4">
+                    <h2 class="h5 mb-3">Detalii abonament</h2>
+                    
+                    <div class="d-flex justify-content-between mb-2">
+                        <span>Plan:</span>
+                        <span class="fw-bold">{{ plan.name }}</span>
+                    </div>
+                    
+                    <div class="d-flex justify-content-between mb-2">
+                        <span>Stare:</span>
+                        <span class="badge bg-success">Activ</span>
+                    </div>
+                    
+                    <div class="d-flex justify-content-between mb-2">
+                        <span>Perioada de facturare:</span>
+                        <span>{% if request.session.subscription_billing_cycle == 'annual' %}Anuală{% else %}Lunară{% endif %}</span>
+                    </div>
+                    
+                    <div class="d-flex justify-content-between mb-2">
+                        <span>Include:</span>
+                        <span>
+                            {% if plan.max_active_jobs == 1 %}
+                                1 anunț activ
+                            {% elif plan.max_active_jobs < 0 %}
+                                Anunțuri nelimitate
+                            {% else %}
+                                {{ plan.max_active_jobs }} anunțuri active
+                            {% endif %}
+                        </span>
+                    </div>
+                    
+                    <div class="d-flex justify-content-between">
+                        <span>Anunțuri promovate:</span>
+                        <span>
+                            {% if plan.promoted_listings_count == 0 %}
+                                -
+                            {% elif plan.promoted_listings_count == 1 %}
+                                1 anunț promovat
+                            {% else %}
+                                {{ plan.promoted_listings_count }} anunțuri promovate
+                            {% endif %}
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="d-flex flex-column flex-md-row justify-content-center gap-3">
+        <a href="{% url 'jobs:subscription_dashboard' %}" class="btn btn-primary">
+            <i class="fas fa-tachometer-alt me-2"></i> Accesează Dashboard Abonament
+        </a>
+        <a href="{% url 'jobs:company_dashboard' %}" class="btn btn-outline-primary">
+            <i class="fas fa-building me-2"></i> Înapoi la Dashboard Companie
+        </a>
+    </div>
+</div>
+
+<!-- Next Steps Card -->
+<div class="bg-white rounded shadow-sm p-4 mt-4">
+    <h2 class="h4 mb-4">Ce urmează?</h2>
+    
+    <div class="row g-4">
+        <div class="col-md-4">
+            <div class="d-flex">
+                <div class="flex-shrink-0 text-primary me-3">
+                    <div class="bg-primary bg-opacity-10 rounded-circle p-3">
+                        <i class="fas fa-bullhorn fa-2x"></i>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="h5 mb-2">Postează anunțuri</h3>
+                    <p class="text-muted small mb-0">
+                        Începe să postezi anunțuri de angajare pentru a atrage candidați potriviți pentru compania ta.
+                    </p>
+                    <a href="{% url 'jobs:company_dashboard' %}" class="btn btn-sm btn-link px-0">Postează un anunț</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="d-flex">
+                <div class="flex-shrink-0 text-primary me-3">
+                    <div class="bg-primary bg-opacity-10 rounded-circle p-3">
+                        <i class="fas fa-chart-line fa-2x"></i>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="h5 mb-2">Monitorizează statistici</h3>
+                    <p class="text-muted small mb-0">
+                        Verifică performanța anunțurilor tale și urmărește numărul de aplicări primite.
+                    </p>
+                    <a href="{% url 'jobs:company_dashboard' %}" class="btn btn-sm btn-link px-0">Vezi statistici</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="d-flex">
+                <div class="flex-shrink-0 text-primary me-3">
+                    <div class="bg-primary bg-opacity-10 rounded-circle p-3">
+                        <i class="fas fa-search fa-2x"></i>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="h5 mb-2">Caută candidați</h3>
+                    <p class="text-muted small mb-0">
+                        Folosește accesul la baza de date cu CV-uri pentru a găsi candidați potriviți pentru pozițiile tale.
+                    </p>
+                    <a href="#" class="btn btn-sm btn-link px-0">Caută CV-uri</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Email Receipt Notice -->
+<div class="alert alert-info mt-4">
+    <i class="fas fa-envelope me-2"></i>
+    Un email de confirmare cu detaliile abonamentului și factura a fost trimis la adresa ta de email.
+</div>
+
+<!-- Enhanced AdSense Bottom of Success Page -->
+<div class="bg-light rounded p-3 mt-4">
+    <div class="small text-muted mb-2">Conținut sponsorizat</div>
+    {% render_ad 'subscription_bottom' %}
+</div>
+
+<!-- Side AdSense Placement for Desktop -->
+<div class="d-none d-lg-block position-fixed" style="top: 30%; right: 20px; max-width: 160px;">
+    {% render_ad 'subscription_sidebar' %}
+</div>
+{% endblock %}

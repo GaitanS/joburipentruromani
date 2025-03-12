@@ -1,0 +1,141 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load adsense %}
+
+{% block extra_head %}
+<!-- Blog specific SEO meta tags -->
+{% if meta_title %}
+    <title>{{ meta_title }}</title>
+{% endif %}
+
+{% if meta_description %}
+    <meta name="description" content="{{ meta_description }}">
+{% endif %}
+
+{% if meta_keywords %}
+    <meta name="keywords" content="{{ meta_keywords }}">
+{% endif %}
+
+<!-- Open Graph tags for social sharing -->
+<meta property="og:type" content="article">
+<meta property="og:url" content="{{ request.build_absolute_uri }}">
+<meta property="og:title" content="{{ meta_title|default:block.super }}">
+<meta property="og:description" content="{{ meta_description|default:'' }}">
+{% if post.featured_image %}
+    <meta property="og:image" content="{{ request.scheme }}://{{ request.get_host }}{{ post.featured_image.url }}">
+{% endif %}
+
+<!-- Structured data for SEO -->
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "{% if meta_type %}{{ meta_type }}{% else %}WebPage{% endif %}",
+    "name": "{{ meta_title|default:block.super }}",
+    "description": "{{ meta_description|default:'' }}",
+    "url": "{{ request.build_absolute_uri }}",
+    {% if post.featured_image %}
+    "image": "{{ request.scheme }}://{{ request.get_host }}{{ post.featured_image.url }}",
+    {% endif %}
+    "publisher": {
+        "@type": "Organization",
+        "name": "JoburiPentruRomani",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "{{ request.scheme }}://{{ request.get_host }}{% static 'images/logo.png' %}"
+        }
+    }
+}
+</script>
+{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row">
+        <!-- Main Content -->
+        <div class="col-lg-8 mb-4">
+            {% block blog_content %}{% endblock %}
+            
+            <!-- AdSense Content Bottom -->
+            <div class="ad-container mt-5 p-3 bg-light rounded border">
+                <div class="small text-muted mb-1 text-center">Oferte de angajare recomandate</div>
+                {% render_ad 'job_listing' %}
+            </div>
+        </div>
+        
+        <!-- Sidebar -->
+        <div class="col-lg-4">
+            <div class="blog-sidebar">
+                <!-- Search Box -->
+                <div class="bg-white p-4 rounded shadow-sm mb-4">
+                    <h3 class="h5 mb-3">Caută articole</h3>
+                    <form action="{% url 'jobs:blog_search' %}" method="GET">
+                        <div class="input-group">
+                            <input type="text" class="form-control" name="q" placeholder="Caută în blog...">
+                            <button class="btn btn-primary" type="submit">
+                                <i class="fas fa-search"></i>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+                
+                <!-- Categories -->
+                <div class="bg-white p-4 rounded shadow-sm mb-4">
+                    <h3 class="h5 mb-3">Categorii</h3>
+                    <ul class="list-unstyled">
+                        {% for category in categories %}
+                            <li class="mb-2">
+                                <a href="{% url 'jobs:blog_category' category.slug %}" class="text-decoration-none">
+                                    {{ category.name }} <span class="badge bg-light text-dark">{{ category.post_count }}</span>
+                                </a>
+                            </li>
+                        {% empty %}
+                            <li>Nu există categorii.</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                
+                <!-- Popular Tags Cloud -->
+                {% if popular_tags %}
+                <div class="bg-white p-4 rounded shadow-sm mb-4">
+                    <h3 class="h5 mb-3">Etichete populare</h3>
+                    <div class="tag-cloud">
+                        {% for tag in popular_tags %}
+                            <a href="{% url 'jobs:blog_tag' tag.slug %}" class="tag-cloud-item">
+                                #{{ tag.name }}
+                            </a>
+                        {% endfor %}
+                    </div>
+                </div>
+                {% endif %}
+                
+                <!-- AdSense Sidebar -->
+                <div class="sticky-top" style="top: 20px; z-index: 1;">
+                    <div class="bg-white p-4 rounded shadow-sm mb-4 border border-1 border-primary">
+                        <div class="small text-muted mb-2 text-center">Oferte de muncă</div>
+                        {% render_ad 'sidebar' %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_scripts %}
+<!-- Additional blog-specific scripts -->
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Initialize social sharing buttons
+        const shareButtons = document.querySelectorAll('.social-share-btn');
+        shareButtons.forEach(button => {
+            button.addEventListener('click', function(e) {
+                e.preventDefault();
+                const url = this.getAttribute('href');
+                window.open(url, 'share-window', 'height=450, width=550, top=' + 
+                    (window.innerHeight / 2 - 225) + ', left=' + 
+                    (window.innerWidth / 2 - 275) + ', toolbar=0, location=0, menubar=0, directories=0, scrollbars=0');
+            });
+        });
+    });
+</script>
+{% endblock %}

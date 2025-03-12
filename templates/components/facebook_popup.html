@@ -1,0 +1,52 @@
+{% load static %}
+
+<div class="fb-popup-overlay" id="fbPopupOverlay">
+    <div class="fb-popup-container">
+        <div class="fb-popup-header">
+            <h3 class="fb-popup-title">Da-ne un like pe facebook.</h3>
+            <button type="button" class="fb-popup-close" id="fbPopupClose">
+                <img src="{% static 'images/close-icon.png' %}" alt="Close">
+            </button>
+        </div>
+        
+        <div class="fb-popup-content">
+            <!-- Facebook Like button -->
+            <div class="fb-like-container">
+                <div class="fb-like-button">
+                    <a href="https://www.facebook.com/joburipentruromani" target="_blank" class="btn btn-primary fb-action-btn">
+                        <i class="fab fa-facebook-f me-2"></i> Like
+                    </a>
+                </div>
+                <div class="fb-share-button">
+                    <a href="https://www.facebook.com/sharer/sharer.php?u=https://joburipentruromani.ro" target="_blank" class="btn btn-outline-primary fb-action-btn">
+                        Share
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Facebook Page Preview -->
+            <div class="fb-page-preview">
+                <div class="fb-page-header">
+                    <img src="{% static 'images/fb-page-banner.jpg' %}" alt="Romani in Germania" class="fb-page-banner">
+                </div>
+                <div class="fb-page-info">
+                    <div class="fb-page-profile">
+                        <img src="{% static 'images/fb-page-profile.jpg' %}" alt="Profile" class="fb-page-profile-img">
+                        <div class="fb-page-meta">
+                            <h4 class="fb-page-name">Romani in Germania</h4>
+                            <p class="fb-page-followers">14,663 followers</p>
+                        </div>
+                    </div>
+                    <div class="fb-page-actions">
+                        <a href="https://www.facebook.com/joburipentruromani" target="_blank" class="btn btn-primary fb-follow-btn">
+                            <i class="fab fa-facebook-f me-1"></i> Follow Page
+                        </a>
+                        <a href="https://www.facebook.com/sharer/sharer.php?u=https://joburipentruromani.ro" target="_blank" class="btn btn-outline-secondary fb-share-btn">
+                            <i class="fas fa-share-alt me-1"></i> Share
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

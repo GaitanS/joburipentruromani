@@ -1,0 +1,318 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load adsense %}
+
+{% block title %}Planuri de Abonament - JoburipentruRomani{% endblock %}
+
+{% block meta_description %}Alegeți planul de abonament potrivit pentru nevoile de recrutare ale companiei dumneavoastră. De la planuri gratuite la planuri enterprise, vă oferim opțiuni flexibile pentru a găsi candidații potriviți.{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row mb-5">
+        <div class="col-md-8 mx-auto text-center">
+            <h1 class="display-5 fw-bold mb-3">Planuri de Abonament</h1>
+            <p class="lead text-muted">Alegeți planul potrivit pentru nevoile companiei dumneavoastră</p>
+        </div>
+    </div>
+    
+    <!-- AdSense Top of Subscription Page -->
+    <div class="row mb-5">
+        <div class="col-12">
+            <div class="p-3 bg-light rounded" id="ad-container-subscription-top">
+                <div class="small text-muted mb-2">Sponsorizat</div>
+                {% render_ad 'subscription_top' %}
+            </div>
+        </div>
+    </div>
+    
+    <!-- Pricing Toggle -->
+    <div class="row mb-5">
+        <div class="col-md-6 mx-auto">
+            <div class="d-flex justify-content-center align-items-center">
+                <span class="h5 mb-0 me-3">Plată Lunară</span>
+                <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" id="billingToggle" style="width: 3rem; height: 1.5rem;">
+                </div>
+                <span class="h5 mb-0 ms-3">Plată Anuală</span>
+                <span class="badge bg-danger ms-2">Economisești 17%</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pricing Cards -->
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-5 g-4 mb-5">
+        {% for plan in plans %}
+            <div class="col">
+                <div class="card h-100 pricing-card {% if plan.tier == 'business' %}border-primary{% endif %}">
+                    {% if plan.tier == 'business' %}
+                        <div class="position-absolute top-0 start-50 translate-middle">
+                            <span class="badge bg-primary px-3 py-2 rounded-pill">Popular</span>
+                        </div>
+                    {% endif %}
+                    <div class="card-header bg-transparent border-0 text-center pt-4">
+                        <h3 class="plan-name h4 mb-0">{{ plan.name }}</h3>
+                    </div>
+                    <div class="card-body text-center">
+                        <div class="plan-price mb-4">
+                            <span class="currency">€</span>
+                            <span class="price-monthly fw-bold {% if plan.tier == 'free' %}d-inline{% else %}d-inline{% endif %}" style="font-size: 2.5rem;">{{ plan.price_monthly|floatformat:0 }}</span>
+                            <span class="price-annually fw-bold d-none" style="font-size: 2.5rem;">{{ plan.price_annually|floatformat:0|divisibleby:12 }}</span>
+                            <span class="period text-muted">/lună</span>
+                        </div>
+                        
+                        <p class="plan-description text-muted mb-4">{{ plan.description }}</p>
+                        
+                        <ul class="list-unstyled plan-features text-start">
+                            <li class="mb-3 d-flex align-items-center">
+                                <i class="fas fa-check text-success me-2"></i>
+                                {% if plan.max_active_jobs == -1 %}
+                                    <span>Anunțuri active: Nelimitat</span>
+                                {% else %}
+                                    <span>Anunțuri active: {{ plan.max_active_jobs }}</span>
+                                {% endif %}
+                            </li>
+                            <li class="mb-3 d-flex align-items-center">
+                                <i class="fas fa-check text-success me-2"></i>
+                                <span>Vizibilitate anunțuri: {{ plan.job_visibility_days }} zile</span>
+                            </li>
+                            <li class="mb-3 d-flex align-items-center">
+                                <i class="fas {% if plan.has_candidate_cv_access %}fa-check text-success{% else %}fa-times text-danger{% endif %} me-2"></i>
+                                <span>Acces CV candidați</span>
+                            </li>
+                            <li class="mb-3 d-flex align-items-center">
+                                {% if plan.promoted_listings_count > 0 %}
+                                    <i class="fas fa-check text-success me-2"></i>
+                                    <span>{{ plan.promoted_listings_count }} anunțuri promovate</span>
+                                {% else %}
+                                    <i class="fas fa-times text-danger me-2"></i>
+                                    <span>Fără anunțuri promovate</span>
+                                {% endif %}
+                            </li>
+                            <li class="mb-3 d-flex align-items-center">
+                                <i class="fas {% if plan.has_priority_support %}fa-check text-success{% else %}fa-times text-danger{% endif %} me-2"></i>
+                                <span>Suport prioritar</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="card-footer bg-transparent border-0 text-center pb-4">
+                        {% if plan.tier == 'free' %}
+                            <a href="#" class="btn btn-outline-primary w-100">Înscrie-te Gratuit</a>
+                        {% else %}
+                            <a href="#" class="btn {% if plan.tier == 'business' %}btn-primary{% else %}btn-outline-primary{% endif %} w-100">Alege Plan</a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+    
+    <!-- Features Comparison -->
+    <div class="row mb-5">
+        <div class="col-12">
+            <div class="card shadow-sm">
+                <div class="card-header bg-light">
+                    <h3 class="h4 mb-0">Comparație Completă a Funcționalităților</h3>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Funcționalitate</th>
+                                    {% for plan in plans %}
+                                        <th class="text-center">{{ plan.name }}</th>
+                                    {% endfor %}
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Anunțuri active</td>
+                                    {% for plan in plans %}
+                                        <td class="text-center">
+                                            {% if plan.max_active_jobs == -1 %}
+                                                Nelimitat
+                                            {% else %}
+                                                {{ plan.max_active_jobs }}
+                                            {% endif %}
+                                        </td>
+                                    {% endfor %}
+                                </tr>
+                                <tr>
+                                    <td>Vizibilitate anunțuri</td>
+                                    {% for plan in plans %}
+                                        <td class="text-center">{{ plan.job_visibility_days }} zile</td>
+                                    {% endfor %}
+                                </tr>
+                                <tr>
+                                    <td>Acces CV candidați</td>
+                                    {% for plan in plans %}
+                                        <td class="text-center">
+                                            {% if plan.has_candidate_cv_access %}
+                                                <i class="fas fa-check text-success"></i>
+                                            {% else %}
+                                                <i class="fas fa-times text-danger"></i>
+                                            {% endif %}
+                                        </td>
+                                    {% endfor %}
+                                </tr>
+                                <tr>
+                                    <td>Anunțuri promovate</td>
+                                    {% for plan in plans %}
+                                        <td class="text-center">{{ plan.promoted_listings_count }}</td>
+                                    {% endfor %}
+                                </tr>
+                                <tr>
+                                    <td>Suport prioritar</td>
+                                    {% for plan in plans %}
+                                        <td class="text-center">
+                                            {% if plan.has_priority_support %}
+                                                <i class="fas fa-check text-success"></i>
+                                            {% else %}
+                                                <i class="fas fa-times text-danger"></i>
+                                            {% endif %}
+                                        </td>
+                                    {% endfor %}
+                                </tr>
+                                <tr>
+                                    <td>Dashboard angajator</td>
+                                    {% for plan in plans %}
+                                        <td class="text-center">
+                                            {% if plan.tier == 'promoted_only' %}
+                                                Limitat
+                                            {% else %}
+                                                <i class="fas fa-check text-success"></i>
+                                            {% endif %}
+                                        </td>
+                                    {% endfor %}
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- FAQ Section -->
+    <div class="row mb-5">
+        <div class="col-md-10 mx-auto">
+            <h3 class="h4 mb-4 text-center">Întrebări Frecvente</h3>
+            
+            <div class="accordion" id="subscriptionFaq">
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingOne">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                            Pot schimba planul în orice moment?
+                        </button>
+                    </h2>
+                    <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#subscriptionFaq">
+                        <div class="accordion-body">
+                            Da, puteți face upgrade sau downgrade la planul dumneavoastră în orice moment. Modificările vor fi aplicate imediat, iar diferența de preț va fi ajustată corespunzător.
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingTwo">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                            Ce se întâmplă cu anunțurile mele când expiră abonamentul?
+                        </button>
+                    </h2>
+                    <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#subscriptionFaq">
+                        <div class="accordion-body">
+                            Când abonamentul expiră, anunțurile active vor rămâne vizibile până la sfârșitul perioadei lor de valabilitate. Nu veți putea posta anunțuri noi până când nu reînnoiți abonamentul.
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingThree">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                            Cum funcționează promovarea anunțurilor?
+                        </button>
+                    </h2>
+                    <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#subscriptionFaq">
+                        <div class="accordion-body">
+                            Anunțurile promovate apar în partea de sus a rezultatelor căutării, sunt evidențiate cu un badge special și sunt incluse în newsletterele noastre săptămânale trimise candidaților. Acestea primesc de 3-5 ori mai multe vizualizări decât anunțurile standard.
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingFour">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                            Oferți reduceri pentru ONG-uri sau startup-uri?
+                        </button>
+                    </h2>
+                    <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour" data-bs-parent="#subscriptionFaq">
+                        <div class="accordion-body">
+                            Da, oferim reduceri speciale pentru organizații non-profit și startup-uri. Vă rugăm să ne contactați la <a href="mailto:suport@joburipentruromani.ro">suport@joburipentruromani.ro</a> pentru mai multe detalii.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- AdSense Bottom of Subscription Page -->
+    <div class="row mb-5">
+        <div class="col-12">
+            <div class="p-3 bg-light rounded" id="ad-container-subscription-bottom">
+                <div class="small text-muted mb-2">Sponsorizat</div>
+                {% render_ad 'subscription_bottom' %}
+            </div>
+        </div>
+    </div>
+    
+    <!-- CTA Section -->
+    <div class="row">
+        <div class="col-md-8 mx-auto text-center">
+            <h3 class="h4 mb-3">Aveți întrebări sau aveți nevoie de asistență?</h3>
+            <p class="mb-4">Echipa noastră de suport este disponibilă pentru a vă ajuta să alegeți planul potrivit pentru compania dumneavoastră.</p>
+            <div class="d-flex justify-content-center gap-3">
+                <a href="#" class="btn btn-primary">Contactați-ne</a>
+                <a href="#" class="btn btn-outline-primary">Programați o demonstrație</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    /* Price card styling */
+    .pricing-card {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    
+    .pricing-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    }
+    
+    /* Ad container styling */
+    #ad-container-subscription-top:hover,
+    #ad-container-subscription-bottom:hover {
+        box-shadow: 0 0 10px rgba(0, 123, 255, 0.25);
+        transition: box-shadow 0.3s ease;
+    }
+</style>
+
+{% block extra_scripts %}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Monthly/Annual billing toggle
+        const billingToggle = document.getElementById('billingToggle');
+        const monthlyPrices = document.querySelectorAll('.price-monthly');
+        const annualPrices = document.querySelectorAll('.price-annually');
+        
+        billingToggle.addEventListener('change', function() {
+            if (this.checked) {
+                // Annual billing
+                monthlyPrices.forEach(el => el.classList.add('d-none'));
+                annualPrices.forEach(el => el.classList.remove('d-none'));
+            } else {
+                // Monthly billing
+                monthlyPrices.forEach(el => el.classList.remove('d-none'));
+                annualPrices.forEach(el => el.classList.add('d-none'));
+            }
+        });
+    });
+</script>
+{% endblock %}
+{% endblock %}

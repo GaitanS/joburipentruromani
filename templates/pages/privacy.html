@@ -1,0 +1,183 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load adsense %}
+
+{% block title %}Politica de Confidențialitate - JoburipentruRomani{% endblock %}
+{% block meta_description %}Politica de confidențialitate a platformei JoburipentruRomani. Aflați cum colectăm, utilizăm și protejăm datele dumneavoastră personale.{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row">
+        <div class="col-lg-8">
+            <div class="bg-white p-4 rounded shadow-sm mb-4">
+                <h1 class="h2 mb-4">Politica de Confidențialitate</h1>
+                <p class="text-muted small">Ultima actualizare: {{ current_date }}</p>
+                
+                <div class="mb-4">
+                    <p>Această Politică de Confidențialitate descrie modul în care JoburipentruRomani colectează, utilizează și partajează informațiile dumneavoastră atunci când utilizați platforma noastră. Vă rugăm să citiți cu atenție această politică pentru a înțelege practicile noastre privind datele dumneavoastră.</p>
+                </div>
+                
+                <!-- AdSense In-Content -->
+                <div class="my-4">
+                    {% render_ad 'content' %}
+                </div>
+                
+                <div class="mb-4">
+                    <h2 class="h4 mb-3">1. Informațiile pe care le colectăm</h2>
+                    
+                    <p><strong>1.1. Informații furnizate direct de dumneavoastră</strong></p>
+                    <p>Atunci când vă înregistrați și utilizați platforma noastră, colectăm următoarele tipuri de informații:</p>
+                    <ul>
+                        <li>Informații de profil (nume, adresă de email, număr de telefon)</li>
+                        <li>Informații profesionale (CV, experiență de muncă, educație, abilități)</li>
+                        <li>Informații despre companie (pentru angajatori)</li>
+                        <li>Conținut generat de utilizator (anunțuri de locuri de muncă, aplicații pentru joburi, recenzii, mesaje)</li>
+                        <li>Orice alte informații pe care alegeți să ni le furnizați</li>
+                    </ul>
+                    
+                    <p><strong>1.2. Informații colectate automat</strong></p>
+                    <p>Când utilizați platforma noastră, colectăm automat anumite informații despre dispozitivul dumneavoastră și interacțiunea cu platforma, inclusiv:</p>
+                    <ul>
+                        <li>Date de utilizare (paginile vizitate, timpul petrecut pe platformă, acțiunile efectuate)</li>
+                        <li>Informații despre dispozitiv (tip de dispozitiv, sistem de operare, browser)</li>
+                        <li>Adresa IP</li>
+                        <li>Cookie-uri și tehnologii similare</li>
+                    </ul>
+                </div>
+                
+                <div class="mb-4">
+                    <h2 class="h4 mb-3">2. Cum utilizăm informațiile</h2>
+                    <p>Utilizăm informațiile colectate pentru:</p>
+                    <ul>
+                        <li>A vă oferi serviciile noastre și a îmbunătăți platforma</li>
+                        <li>A facilita comunicarea între angajatori și candidați</li>
+                        <li>A personaliza experiența dumneavoastră pe platformă</li>
+                        <li>A vă trimite notificări, actualizări și materiale de marketing (dacă v-ați abonat)</li>
+                        <li>A preveni activitățile frauduloase și a asigura securitatea platformei</li>
+                        <li>A respecta obligațiile legale</li>
+                    </ul>
+                </div>
+                
+                <div class="mb-4">
+                    <h2 class="h4 mb-3">3. Conținutul utilizatorilor și limitarea răspunderii</h2>
+                    
+                    <p class="bg-light p-3 border-start border-4 border-warning"><strong>IMPORTANT:</strong> JoburipentruRomani este o platformă care permite utilizatorilor să publice conținut, inclusiv anunțuri de locuri de muncă, profiluri de companii și CV-uri. Conținutul postat de utilizatori este responsabilitatea exclusivă a utilizatorilor respectivi.</p>
+                    
+                    <p><strong>3.1. Conținutul utilizatorilor</strong></p>
+                    <p>Platforma noastră găzduiește conținut generat de utilizatori, inclusiv anunțuri de locuri de muncă și profiluri. Nu verificăm exhaustiv sau sistematic acuratețea, legalitatea sau autenticitatea acestui conținut. Utilizatorii sunt singurii responsabili pentru informațiile pe care le postează.</p>
+                    
+                    <p><strong>3.2. Postări false sau înșelătoare</strong></p>
+                    <p class="bg-light p-3 border-start border-4 border-danger"><strong>NOTĂ IMPORTANTĂ:</strong> JoburipentruRomani nu garantează autenticitatea sau acuratețea anunțurilor de locuri de muncă sau a profilurilor de companii postate pe platformă. Nu suntem responsabili pentru postările false, înșelătoare sau frauduloase făcute de utilizatori. Utilizatorii folosesc platforma pe propriul risc și sunt încurajați să verifice independent legitimitatea oricărui anunț sau profil înainte de a furniza informații personale sau a lua orice decizie bazată pe conținutul platformei.</p>
+                    
+                    <p><strong>3.3. Raportarea conținutului problematic</strong></p>
+                    <p>Dacă identificați conținut care credeți că încalcă Termenii și Condițiile noastre sau este fraudulos, vă încurajăm să îl raportați prin funcționalitatea "Raportează abuz" sau prin contactarea noastră direct. Ne rezervăm dreptul, dar nu avem obligația, de a investiga și de a elimina conținutul raportat.</p>
+                </div>
+                
+                <!-- AdSense In-Content -->
+                <div class="my-4">
+                    {% render_ad 'content' %}
+                </div>
+                
+                <div class="mb-4">
+                    <h2 class="h4 mb-3">4. Partajarea informațiilor</h2>
+                    <p>Putem partaja informațiile dumneavoastră în următoarele situații:</p>
+                    <ul>
+                        <li><strong>Cu alți utilizatori ai platformei:</strong> Anumite informații din profilul dumneavoastră și conținutul pe care îl postați sunt vizibile pentru alți utilizatori ai platformei.</li>
+                        <li><strong>Cu furnizorii de servicii:</strong> Colaborăm cu terțe părți care ne furnizează servicii precum găzduirea site-ului, analiza datelor și asistență pentru clienți.</li>
+                        <li><strong>Pentru publicitate:</strong> Utilizăm servicii de publicitate terțe (inclusiv Google AdSense) care pot colecta informații despre utilizarea platformei pentru a vă arăta reclame relevante.</li>
+                        <li><strong>În circumstanțe legale:</strong> Putem divulga informațiile dumneavoastră dacă suntem obligați prin lege sau dacă considerăm că această acțiune este necesară pentru a proteja drepturile noastre sau siguranța altora.</li>
+                    </ul>
+                </div>
+                
+                <div class="mb-4">
+                    <h2 class="h4 mb-3">5. Cookie-uri și tehnologii similare</h2>
+                    <p>Utilizăm cookie-uri și tehnologii similare pentru a:</p>
+                    <ul>
+                        <li>Menține funcționalitatea platformei</li>
+                        <li>Analiza utilizarea platformei</li>
+                        <li>Personaliza experiența utilizatorului</li>
+                        <li>Livra publicitate personalizată</li>
+                    </ul>
+                    <p>Puteți configura browserul pentru a refuza toate sau anumite cookie-uri, sau pentru a vă alerta când site-urile web setează sau accesează cookie-uri. Dacă dezactivați sau refuzați cookie-urile, anumite părți ale platformei pot deveni inaccesibile sau pot funcționa necorespunzător.</p>
+                </div>
+                
+                <div class="mb-4">
+                    <h2 class="h4 mb-3">6. Publicitate și Google AdSense</h2>
+                    <p>Platforma noastră utilizează Google AdSense, un serviciu de publicitate oferit de Google, pentru a afișa reclame pe site. Acest serviciu utilizează cookie-uri DART pentru a afișa reclame relevante pentru dumneavoastră în funcție de interesele dumneavoastră și vizitele anterioare pe site-uri web.</p>
+                    
+                    <p>Google utilizează aceste informații pentru a afișa reclame personalizate. Puteți opta pentru a nu utiliza cookie-ul DART vizitând pagina de politică de confidențialitate pentru rețeaua și conținutul de publicitate Google.</p>
+                    
+                    <p>În plus, folosim și alte rețele de publicitate pentru a afișa reclame pe platforma noastră. Aceste rețele pot folosi informații (care nu includ numele, adresa, adresa de email sau numărul de telefon) despre vizitele dumneavoastră pe platformă pentru a furniza reclame despre produse și servicii care vă interesează.</p>
+                </div>
+                
+                <div class="mb-4">
+                    <h2 class="h4 mb-3">7. Drepturile dumneavoastră privind datele</h2>
+                    <p>În funcție de jurisdicția dumneavoastră, puteți avea următoarele drepturi:</p>
+                    <ul>
+                        <li>Dreptul de a accesa informațiile pe care le deținem despre dumneavoastră</li>
+                        <li>Dreptul de a corecta informațiile inexacte</li>
+                        <li>Dreptul de a șterge informațiile dumneavoastră personale</li>
+                        <li>Dreptul de a restricționa sau de a vă opune procesării informațiilor</li>
+                        <li>Dreptul la portabilitatea datelor</li>
+                        <li>Dreptul de a retrage consimțământul</li>
+                    </ul>
+                    <p>Pentru a vă exercita aceste drepturi, vă rugăm să ne contactați utilizând informațiile furnizate la sfârșitul acestei politici.</p>
+                </div>
+                
+                <div class="mb-4">
+                    <h2 class="h4 mb-3">8. Securitatea datelor</h2>
+                    <p>Implementăm măsuri de securitate rezonabile pentru a proteja informațiile dumneavoastră împotriva accesului neautorizat, modificării, divulgării sau distrugerii. Cu toate acestea, nicio metodă de transmitere pe internet sau de stocare electronică nu este 100% sigură, și nu putem garanta securitatea absolută a datelor dumneavoastră.</p>
+                </div>
+                
+                <div class="mb-4">
+                    <h2 class="h4 mb-3">9. Transferuri internaționale de date</h2>
+                    <p>Informațiile dumneavoastră pot fi transferate și procesate în țări din afara României, unde legile privind protecția datelor pot fi diferite. Prin utilizarea platformei noastre, sunteți de acord cu acest transfer de informații.</p>
+                </div>
+                
+                <div class="mb-4">
+                    <h2 class="h4 mb-3">10. Păstrarea datelor</h2>
+                    <p>Vom păstra informațiile dumneavoastră atât timp cât contul dumneavoastră este activ sau cât este necesar pentru a vă furniza serviciile. Vom păstra și utiliza informațiile dumneavoastră în măsura necesară pentru a respecta obligațiile noastre legale, a rezolva disputele și a aplica acordurile noastre.</p>
+                </div>
+                
+                <div class="mb-4">
+                    <h2 class="h4 mb-3">11. Modificări ale politicii de confidențialitate</h2>
+                    <p>Putem actualiza această politică de confidențialitate periodic pentru a reflecta, de exemplu, modificările practicilor noastre sau din alte motive operaționale, legale sau de reglementare. Vă încurajăm să revizuiți periodic această politică pentru a fi informat despre modul în care protejăm informațiile dumneavoastră.</p>
+                </div>
+                
+                <div class="mb-4">
+                    <h2 class="h4 mb-3">12. Contact</h2>
+                    <p>Dacă aveți întrebări sau preocupări cu privire la această Politică de Confidențialitate sau practicile noastre privind datele, vă rugăm să ne contactați la:</p>
+                    <p><strong>Email:</strong> contact@joburipentruromani.ro</p>
+                    <p><strong>Adresă:</strong> Str. Exemplului nr. 123, București, România</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-lg-4">
+            <!-- AdSense Sidebar -->
+            <div class="bg-white p-4 rounded shadow-sm mb-4">
+                {% render_ad 'sidebar' %}
+            </div>
+            
+            <!-- Table of Contents -->
+            <div class="bg-white p-4 rounded shadow-sm mb-4 sticky-top" style="top: 20px;">
+                <h3 class="h5 mb-3">Cuprins</h3>
+                <ul class="list-unstyled">
+                    <li class="mb-2"><a href="#" class="text-decoration-none">1. Informațiile pe care le colectăm</a></li>
+                    <li class="mb-2"><a href="#" class="text-decoration-none">2. Cum utilizăm informațiile</a></li>
+                    <li class="mb-2"><a href="#" class="text-decoration-none">3. Conținutul utilizatorilor și limitarea răspunderii</a></li>
+                    <li class="mb-2"><a href="#" class="text-decoration-none">4. Partajarea informațiilor</a></li>
+                    <li class="mb-2"><a href="#" class="text-decoration-none">5. Cookie-uri și tehnologii similare</a></li>
+                    <li class="mb-2"><a href="#" class="text-decoration-none">6. Publicitate și Google AdSense</a></li>
+                    <li class="mb-2"><a href="#" class="text-decoration-none">7. Drepturile dumneavoastră privind datele</a></li>
+                    <li class="mb-2"><a href="#" class="text-decoration-none">8. Securitatea datelor</a></li>
+                    <li class="mb-2"><a href="#" class="text-decoration-none">9. Transferuri internaționale de date</a></li>
+                    <li class="mb-2"><a href="#" class="text-decoration-none">10. Păstrarea datelor</a></li>
+                    <li class="mb-2"><a href="#" class="text-decoration-none">11. Modificări ale politicii</a></li>
+                    <li class="mb-2"><a href="#" class="text-decoration-none">12. Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

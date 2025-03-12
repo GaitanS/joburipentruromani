@@ -1,0 +1,420 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load adsense %}
+{% load humanize %}
+
+{% block title %}Dashboard Companie - JoburipentruRomani{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row">
+        <!-- Sidebar -->
+        <div class="col-lg-3 mb-4">
+            <div class="list-group shadow-sm">
+                <a href="{% url 'jobs:company_dashboard' %}" class="list-group-item list-group-item-action active">
+                    <i class="fas fa-th-list me-2"></i> Joburile mele
+                </a>
+                <a href="#" class="list-group-item list-group-item-action">
+                    <i class="fas fa-users me-2"></i> Aplicări
+                </a>
+                <a href="#" class="list-group-item list-group-item-action">
+                    <i class="fas fa-chart-line me-2"></i> Statistici
+                </a>
+                <a href="#" class="list-group-item list-group-item-action">
+                    <i class="fas fa-building me-2"></i> Profil companie
+                </a>
+                <a href="#" class="list-group-item list-group-item-action">
+                    <i class="fas fa-cog me-2"></i> Setări
+                </a>
+            </div>
+            
+            <!-- AdSense Sidebar -->
+            <div class="sticky-top" style="top: 20px; z-index: 1;">
+                <div class="mt-4 p-3 bg-light rounded border" id="ad-container-company-dashboard">
+                    <div class="small text-muted mb-2">Sponsorizat</div>
+                    {% render_ad 'company_dashboard' %}
+                </div>
+            </div>
+        </div>
+        
+        <!-- Main Content -->
+        <div class="col-lg-9">
+            <!-- Company Overview -->
+            <div class="bg-white rounded shadow-sm p-4 mb-4">
+                <div class="d-flex align-items-center mb-4">
+                    <div class="company-logo me-4">
+                        {% if company.logo %}
+                            <img src="{{ company.logo.url }}" alt="{{ company.name }}" class="rounded" width="80">
+                        {% else %}
+                            <div class="logo-placeholder rounded" style="width: 80px; height: 80px; font-size: 2rem;">
+                                {{ company.name|slice:":1" }}
+                            </div>
+                        {% endif %}
+                    </div>
+                    <div>
+                        <h1 class="h3 mb-1">{{ company.name }}</h1>
+                        <p class="text-muted mb-0">Dashboard Companie</p>
+                    </div>
+                    <div class="ms-auto">
+                        <a href="{% url 'jobs:company_detail' company.slug %}" class="btn btn-outline-primary btn-sm">
+                            <i class="fas fa-external-link-alt me-1"></i> Vizualizează profil
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Quick Stats -->
+                <div class="row row-cols-1 row-cols-md-3 g-4">
+                    <div class="col">
+                        <div class="card h-100 border-0 bg-light">
+                            <div class="card-body">
+                                <div class="d-flex align-items-center">
+                                    <div class="stats-icon rounded-circle bg-primary text-white me-3">
+                                        <i class="fas fa-briefcase"></i>
+                                    </div>
+                                    <div>
+                                        <h3 class="h2 mb-0">{{ jobs|length }}</h3>
+                                        <p class="text-muted mb-0">Joburi active</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card h-100 border-0 bg-light">
+                            <div class="card-body">
+                                <div class="d-flex align-items-center">
+                                    <div class="stats-icon rounded-circle bg-success text-white me-3">
+                                        <i class="fas fa-users"></i>
+                                    </div>
+                                    <div>
+                                        <h3 class="h2 mb-0">{{ applications|length }}</h3>
+                                        <p class="text-muted mb-0">Aplicări totale</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card h-100 border-0 bg-light">
+                            <div class="card-body">
+                                <div class="d-flex align-items-center">
+                                    <div class="stats-icon rounded-circle bg-info text-white me-3">
+                                        <i class="fas fa-eye"></i>
+                                    </div>
+                                    <div>
+                                        <h3 class="h2 mb-0">0</h3>
+                                        <p class="text-muted mb-0">Vizualizări</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Job Listings -->
+            <div class="bg-white rounded shadow-sm p-4 mb-4">
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <h2 class="h4 mb-0">Joburile mele</h2>
+                    <a href="#" class="btn btn-primary">
+                        <i class="fas fa-plus me-1"></i> Adaugă job nou
+                    </a>
+                </div>
+                
+                {% if jobs %}
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>Titlu</th>
+                                    <th>Locație</th>
+                                    <th>Data postării</th>
+                                    <th>Aplicări</th>
+                                    <th>Status</th>
+                                    <th>Acțiuni</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for job in jobs %}
+                                    <tr>
+                                        <td>
+                                            <a href="{% url 'jobs:job_detail' job.slug %}" class="text-decoration-none fw-bold">
+                                                {{ job.title }}
+                                            </a>
+                                        </td>
+                                        <td>
+                                            {{ job.location.city }}
+                                            {% if job.is_remote %}
+                                                <span class="badge bg-success ms-1">Remote</span>
+                                            {% endif %}
+                                        </td>
+                                        <td>{{ job.created_at|date:"d M Y" }}</td>
+                                        <td>
+                                            <span class="badge bg-light text-dark">
+                                                {{ job.applications.count }} aplicări
+                                            </span>
+                                        </td>
+                                        <td>
+                                            {% if job.status == 'active' %}
+                                                <span class="badge bg-success">Activ</span>
+                                            {% elif job.status == 'filled' %}
+                                                <span class="badge bg-info">Ocupat</span>
+                                            {% elif job.status == 'expired' %}
+                                                <span class="badge bg-danger">Expirat</span>
+                                            {% endif %}
+                                        </td>
+                                        <td>
+                                            <div class="btn-group">
+                                                <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                                    <i class="fas fa-ellipsis-v"></i>
+                                                </button>
+                                                <ul class="dropdown-menu dropdown-menu-end">
+                                                    <li><a class="dropdown-item" href="{% url 'jobs:job_detail' job.slug %}">
+                                                        <i class="fas fa-eye me-1"></i> Vezi jobul
+                                                    </a></li>
+                                                    <li><a class="dropdown-item" href="#">
+                                                        <i class="fas fa-edit me-1"></i> Editează
+                                                    </a></li>
+                                                    <li><a class="dropdown-item" href="#">
+                                                        <i class="fas fa-users me-1"></i> Vezi aplicări
+                                                    </a></li>
+                                                    <li><hr class="dropdown-divider"></li>
+                                                    <li><a class="dropdown-item" href="#">
+                                                        <i class="fas fa-chart-bar me-1"></i> Statistici
+                                                    </a></li>
+                                                    <li><a class="dropdown-item" href="#">
+                                                        <i class="fas fa-share-alt me-1"></i> Distribuie
+                                                    </a></li>
+                                                    <li><hr class="dropdown-divider"></li>
+                                                    <li><a class="dropdown-item text-danger" href="#">
+                                                        <i class="fas fa-trash-alt me-1"></i> Șterge
+                                                    </a></li>
+                                                </ul>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    
+                                    {% if forloop.counter == 2 or forloop.counter|divisibleby:4 %}
+                                        <tr class="ad-row">
+                                            <td colspan="6" class="py-3">
+                                                <div class="p-2 bg-light rounded border-start border-3 border-primary">
+                                                    <div class="d-flex justify-content-between align-items-center mb-2">
+                                                        <span class="small text-muted">Sponsorizat</span>
+                                                        <span class="badge bg-primary">Ofertă recomandată</span>
+                                                    </div>
+                                                    {% render_ad 'job_listing' %}
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    {% endif %}
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                {% else %}
+                    <div class="alert alert-info">
+                        <i class="fas fa-info-circle me-2"></i> Nu ai adăugat încă niciun job.
+                        <a href="#" class="alert-link">Adaugă primul tău job</a> pentru a începe să primești aplicări!
+                    </div>
+                {% endif %}
+            </div>
+            
+            <!-- Recent Applications -->
+            <div class="bg-white rounded shadow-sm p-4 mb-4">
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <h2 class="h4 mb-0">Aplicări recente</h2>
+                    <a href="#" class="btn btn-outline-primary btn-sm">Vezi toate aplicările</a>
+                </div>
+                
+                {% if applications %}
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>Candidat</th>
+                                    <th>Job</th>
+                                    <th>Data aplicării</th>
+                                    <th>Status</th>
+                                    <th>Acțiuni</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for application in applications|slice:":5" %}
+                                    <tr>
+                                        <td>
+                                            <div class="d-flex align-items-center">
+                                                <div class="avatar rounded-circle bg-light text-center me-2" style="width: 40px; height: 40px; line-height: 40px;">
+                                                    {{ application.user.first_name|slice:":1" }}
+                                                </div>
+                                                <div>
+                                                    {{ application.user.get_full_name }}
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <a href="{% url 'jobs:job_detail' application.job.slug %}" class="text-decoration-none">
+                                                {{ application.job.title }}
+                                            </a>
+                                        </td>
+                                        <td>{{ application.created_at|date:"d M Y" }}</td>
+                                        <td>
+                                            {% if application.status == 'pending' %}
+                                                <span class="badge bg-warning text-dark">În așteptare</span>
+                                            {% elif application.status == 'reviewed' %}
+                                                <span class="badge bg-info">Verificat</span>
+                                            {% elif application.status == 'interviewed' %}
+                                                <span class="badge bg-primary">Intervievat</span>
+                                            {% elif application.status == 'hired' %}
+                                                <span class="badge bg-success">Angajat</span>
+                                            {% elif application.status == 'rejected' %}
+                                                <span class="badge bg-danger">Respins</span>
+                                            {% endif %}
+                                        </td>
+                                        <td>
+                                            <div class="btn-group">
+                                                <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                                    <i class="fas fa-ellipsis-v"></i>
+                                                </button>
+                                                <ul class="dropdown-menu dropdown-menu-end">
+                                                    <li><a class="dropdown-item" href="#">Vezi CV</a></li>
+                                                    <li><a class="dropdown-item" href="#">Schimbă status</a></li>
+                                                    <li><a class="dropdown-item" href="#">Contactează candidatul</a></li>
+                                                </ul>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                {% else %}
+                    <div class="alert alert-info">
+                        <i class="fas fa-info-circle me-2"></i> Nu ai primit încă nicio aplicare.
+                    </div>
+                {% endif %}
+            </div>
+            
+            <!-- Employer Tips -->
+            <div class="bg-white rounded shadow-sm p-4">
+                <h2 class="h4 mb-4">Sfaturi pentru angajatori</h2>
+                
+                <div class="row g-4">
+                    <div class="col-md-6">
+                        <div class="d-flex">
+                            <div class="tip-icon me-3 text-primary">
+                                <i class="fas fa-edit"></i>
+                            </div>
+                            <div>
+                                <h3 class="h5 mb-2">Crează anunțuri clare</h3>
+                                <p class="text-muted small mb-0">Descrie clar responsabilitățile, cerințele și beneficiile pentru a atrage candidații potriviți.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="d-flex">
+                            <div class="tip-icon me-3 text-primary">
+                                <i class="fas fa-hand-holding-usd"></i>
+                            </div>
+                            <div>
+                                <h3 class="h5 mb-2">Menționează salariul</h3>
+                                <p class="text-muted small mb-0">Anunțurile cu informații salariale primesc cu 30% mai multe aplicări.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="d-flex">
+                            <div class="tip-icon me-3 text-primary">
+                                <i class="fas fa-tachometer-alt"></i>
+                            </div>
+                            <div>
+                                <h3 class="h5 mb-2">Răspunde rapid</h3>
+                                <p class="text-muted small mb-0">Verifică regulat aplicările și oferă feedback candidaților în timp util.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="d-flex">
+                            <div class="tip-icon me-3 text-primary">
+                                <i class="fas fa-bullhorn"></i>
+                            </div>
+                            <div>
+                                <h3 class="h5 mb-2">Promovează joburile</h3>
+                                <p class="text-muted small mb-0">Folosește opțiunile de promovare pentru a crește vizibilitatea anunțurilor tale.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- AdSense after employer tips - high engagement area -->
+                <div class="ad-container mt-4 p-3 bg-light rounded border-top border-4 border-success">
+                    <div class="small text-muted mb-2">Sponsorizat</div>
+                    <div class="text-center mb-2">
+                        <span class="badge bg-success">Pentru angajatori</span>
+                    </div>
+                    {% render_ad 'company_dashboard' %}
+                </div>
+                
+                <div class="mt-4 text-center">
+                    <a href="#" class="btn btn-primary">
+                        <i class="fas fa-plus me-1"></i> Adaugă job nou
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .stats-icon {
+        width: 48px;
+        height: 48px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5rem;
+ 
+    }
+    
+    .tip-icon {
+        font-size: 1.5rem;
+    }
+    
+    /* Ad styling */
+    .ad-container:hover {
+        box-shadow: 0 0 8px rgba(0, 123, 255, 0.25);
+        transition: box-shadow 0.3s ease;
+    }
+    
+    /* Highlight ad row in table */
+    .ad-row {
+        background-color: #f8f9fa;
+    }
+</style>
+
+{% block extra_scripts %}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Track user interaction for optimized ad engagement
+        const adContainers = document.querySelectorAll('[id^="ad-container"]');
+        const tipSection = document.querySelector('.tip-icon').closest('.bg-white');
+        let tipsViewed = false;
+        
+        // Ad highlighting when user scrolls to tips section
+        window.addEventListener('scroll', function() {
+            if (!tipsViewed && tipSection && window.scrollY > (tipSection.offsetTop - window.innerHeight)) {
+                tipsViewed = true;
+                
+                // Highlight the bottom ad when user reaches employer tips
+                setTimeout(function() {
+                    const bottomAd = document.querySelector('.ad-container');
+                    if (bottomAd) {
+                        bottomAd.classList.add('border-3');
+                        bottomAd.style.transition = 'all 0.3s ease';
+                    }
+                }, 500);
+            }
+        });
+    });
+</script>
+{% endblock %}
+{% endblock %}

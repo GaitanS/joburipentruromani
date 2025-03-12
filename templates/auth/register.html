@@ -1,0 +1,243 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load adsense %}
+
+{% block title %}Înregistrare - JoburipentruRomani{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow">
+                <div class="card-body p-4">
+                    <h2 class="text-center mb-4">Înregistrare</h2>
+                    
+                    <!-- AdSense Above Registration Form -->
+                    <div class="mb-4">
+                        {% render_ad 'header' %}
+                    </div>
+                    
+                    <ul class="nav nav-tabs mb-4" id="registerTab" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link active" id="job-seeker-tab" data-bs-toggle="tab" data-bs-target="#job-seeker" type="button" role="tab" aria-controls="job-seeker" aria-selected="true">
+                                <i class="fas fa-user me-2"></i>Candidat
+                            </button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="employer-tab" data-bs-toggle="tab" data-bs-target="#employer" type="button" role="tab" aria-controls="employer" aria-selected="false">
+                                <i class="fas fa-building me-2"></i>Angajator
+                            </button>
+                        </li>
+                    </ul>
+                    
+                    <div class="tab-content" id="registerTabContent">
+                        <!-- Job Seeker Registration -->
+                        <div class="tab-pane fade show active" id="job-seeker" role="tabpanel" aria-labelledby="job-seeker-tab">
+                            <p class="text-muted mb-4">Creează un cont de candidat pentru a aplica la locuri de muncă, a salva anunțuri favorite și a primi notificări personalizate.</p>
+                            
+                            <form method="post" action="{% url 'register' %}">
+                                {% csrf_token %}
+                                <input type="hidden" name="user_type" value="job_seeker">
+                                
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label for="id_first_name" class="form-label">Prenume</label>
+                                        <input type="text" name="first_name" id="id_first_name" class="form-control" required>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label for="id_last_name" class="form-label">Nume</label>
+                                        <input type="text" name="last_name" id="id_last_name" class="form-control" required>
+                                    </div>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label for="id_username" class="form-label">Nume utilizator</label>
+                                    <input type="text" name="username" id="id_username" class="form-control" required>
+                                    <small class="form-text text-muted">Numele de utilizator poate conține litere, cifre și @/./+/-/_</small>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label for="id_email" class="form-label">Email</label>
+                                    <input type="email" name="email" id="id_email" class="form-control" required>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label for="id_phone" class="form-label">Telefon</label>
+                                    <input type="tel" name="phone" id="id_phone" class="form-control">
+                                    <small class="form-text text-muted">Opțional, dar recomandat pentru a fi contactat de angajatori</small>
+                                </div>
+                                
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label for="id_password1" class="form-label">Parolă</label>
+                                        <input type="password" name="password1" id="id_password1" class="form-control" required>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label for="id_password2" class="form-label">Confirmă parola</label>
+                                        <input type="password" name="password2" id="id_password2" class="form-control" required>
+                                    </div>
+                                </div>
+                                
+                                <div class="mb-3 form-check">
+                                    <input type="checkbox" class="form-check-input" id="id_terms" name="terms" required>
+                                    <label class="form-check-label" for="id_terms">Sunt de acord cu <a href="{% url 'jobs:terms' %}" class="text-decoration-none">Termenii și condițiile</a> și <a href="{% url 'jobs:privacy' %}" class="text-decoration-none">Politica de confidențialitate</a></label>
+                                </div>
+                                
+                                <!-- AdSense In-Form Banner -->
+                                <div class="my-4">
+                                    {% render_ad 'content' %}
+                                </div>
+                                
+                                <button type="submit" class="btn btn-primary w-100 mt-3">Înregistrează-te ca și candidat</button>
+                            </form>
+                        </div>
+                        
+                        <!-- Employer Registration -->
+                        <div class="tab-pane fade" id="employer" role="tabpanel" aria-labelledby="employer-tab">
+                            <p class="text-muted mb-4">Creează un cont de angajator pentru a posta anunțuri de angajare, a accesa CV-uri și a gestiona procesul de recrutare.</p>
+                            
+                            <form method="post" action="{% url 'register' %}">
+                                {% csrf_token %}
+                                <input type="hidden" name="user_type" value="employer">
+                                
+                                <div class="mb-3">
+                                    <label for="id_company_name" class="form-label">Nume companie</label>
+                                    <input type="text" name="company_name" id="id_company_name" class="form-control" required>
+                                </div>
+                                
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label for="id_first_name_company" class="form-label">Prenume contact</label>
+                                        <input type="text" name="first_name" id="id_first_name_company" class="form-control" required>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label for="id_last_name_company" class="form-label">Nume contact</label>
+                                        <input type="text" name="last_name" id="id_last_name_company" class="form-control" required>
+                                    </div>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label for="id_username_company" class="form-label">Nume utilizator</label>
+                                    <input type="text" name="username" id="id_username_company" class="form-control" required>
+                                    <small class="form-text text-muted">Numele de utilizator poate conține litere, cifre și @/./+/-/_</small>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label for="id_email_company" class="form-label">Email</label>
+                                    <input type="email" name="email" id="id_email_company" class="form-control" required>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label for="id_phone_company" class="form-label">Telefon</label>
+                                    <input type="tel" name="phone" id="id_phone_company" class="form-control" required>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label for="id_website" class="form-label">Website</label>
+                                    <input type="url" name="website" id="id_website" class="form-control" placeholder="https://...">
+                                    <small class="form-text text-muted">Opțional</small>
+                                </div>
+                                
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label for="id_password1_company" class="form-label">Parolă</label>
+                                        <input type="password" name="password1" id="id_password1_company" class="form-control" required>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label for="id_password2_company" class="form-label">Confirmă parola</label>
+                                        <input type="password" name="password2" id="id_password2_company" class="form-control" required>
+                                    </div>
+                                </div>
+                                
+                                <div class="mb-3 form-check">
+                                    <input type="checkbox" class="form-check-input" id="id_terms_company" name="terms" required>
+                                    <label class="form-check-label" for="id_terms_company">Sunt de acord cu <a href="{% url 'jobs:terms' %}" class="text-decoration-none">Termenii și condițiile</a> și <a href="{% url 'jobs:privacy' %}" class="text-decoration-none">Politica de confidențialitate</a></label>
+                                </div>
+                                
+                                <!-- AdSense In-Form Banner -->
+                                <div class="my-4">
+                                    {% render_ad 'content' %}
+                                </div>
+                                
+                                <button type="submit" class="btn btn-primary w-100 mt-3">Înregistrează-te ca angajator</button>
+                            </form>
+                        </div>
+                    </div>
+                    
+                    <div class="text-center mt-4">
+                        <p>Ai deja cont? <a href="{% url 'login' %}" class="text-decoration-none">Conectează-te</a></p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- AdSense Below Registration Form -->
+            <div class="mt-4">
+                {% render_ad 'footer' %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Password match validation for job seeker form
+        const validatePasswordJobSeeker = function() {
+            const password1 = document.getElementById('id_password1').value;
+            const password2 = document.getElementById('id_password2').value;
+            if (password1 !== password2) {
+                document.getElementById('id_password2').setCustomValidity('Parolele nu se potrivesc');
+            } else {
+                document.getElementById('id_password2').setCustomValidity('');
+            }
+        };
+        
+        // Password match validation for employer form
+        const validatePasswordEmployer = function() {
+            const password1 = document.getElementById('id_password1_company').value;
+            const password2 = document.getElementById('id_password2_company').value;
+            if (password1 !== password2) {
+                document.getElementById('id_password2_company').setCustomValidity('Parolele nu se potrivesc');
+            } else {
+                document.getElementById('id_password2_company').setCustomValidity('');
+            }
+        };
+        
+        // Set up validation for job seeker form
+        const password1Field = document.getElementById('id_password1');
+        const password2Field = document.getElementById('id_password2');
+        
+        if (password1Field && password2Field) {
+            password1Field.addEventListener('change', validatePasswordJobSeeker);
+            password2Field.addEventListener('keyup', validatePasswordJobSeeker);
+        }
+        
+        // Set up validation for employer form
+        const password1FieldCompany = document.getElementById('id_password1_company');
+        const password2FieldCompany = document.getElementById('id_password2_company');
+        
+        if (password1FieldCompany && password2FieldCompany) {
+            password1FieldCompany.addEventListener('change', validatePasswordEmployer);
+            password2FieldCompany.addEventListener('keyup', validatePasswordEmployer);
+        }
+        
+        // Display any form errors that may have been passed back from the server
+        {% if form.errors %}
+            const formErrors = {{ form.errors.as_json|safe }};
+            let errorMessage = 'Există următoarele erori în formular:\n';
+            
+            for (const field in formErrors) {
+                errorMessage += `- ${field}: ${formErrors[field][0].message}\n`;
+            }
+            
+            alert(errorMessage);
+            
+            // Switch to the appropriate tab if there's a user_type error
+            if ('user_type' in formErrors) {
+                if (formErrors.user_type[0].message.includes('employer')) {
+                    document.getElementById('employer-tab').click();
+                }
+            }
+        {% endif %}
+    });
+</script>
+{% endblock %}

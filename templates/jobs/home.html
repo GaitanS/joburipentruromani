@@ -1,0 +1,451 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load adsense %}
+{% load humanize %}
+
+{% block title %}JoburiPentruRomani - Găsește jobul potrivit pentru tine{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="hero-section py-5 bg-light">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-10 text-center">
+                <h1 class="display-4 mb-4">
+                    <span class="text-dark">Găsește </span>
+                    <span class="text-primary">jobul</span>
+                    <br class="d-md-block d-none">
+                    <span class="text-primary">potrivit </span>
+                    <span class="text-dark">pentru tine</span>
+                </h1>
+                <p class="lead mb-5">Mii de oportunități de muncă pentru profesioniști ca tine, actualizate zilnic</p>
+                        <!-- Mobile-Optimized Search Form -->
+        
+                <div class="search-form p-4 bg-white rounded shadow-sm">
+                    <form action="{% url 'jobs:job_list' %}" method="GET">
+                        <div class="row g-2 g-md-3">
+                            <div class="col-12 col-md-5 mb-3 mb-md-0">
+                                <div class="input-group">
+                                    <span class="input-group-text bg-white border-end-0">
+                                        <i class="fas fa-search text-muted"></i>
+                                    </span>
+                                    <input type="text" name="q" class="form-control border-start-0" 
+                                           placeholder="Ce job cauți? (Ex: șofer, constructor)" 
+                                           aria-label="Job title">
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-5 mb-3 mb-md-0">
+                                <div class="input-group">
+                                    <span class="input-group-text bg-white border-end-0">
+                                        <i class="fas fa-map-marker-alt text-muted"></i>
+                                    </span>
+                                    <input type="text" name="location" class="form-control border-start-0" 
+                                           placeholder="Unde? (Țară, Oraș)" 
+                                           aria-label="Location">
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-2 mx-auto" style="max-width: 300px;">
+                                <button type="submit" class="btn btn-primary w-100">Caută joburi</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- AdSense High-Visibility Top Ad -->
+<div class="container py-3">
+    <div class="bg-light p-3 rounded border border-primary position-relative" id="hero-ad-container">
+        <div class="position-absolute" style="top:-10px; right:10px; z-index:1">
+            <span class="badge bg-primary text-white px-3 py-1">Recomandate pentru tine</span>
+        </div>
+        <div class="text-center mb-2">
+            <i class="fas fa-bullhorn text-warning me-1"></i>
+            <span class="small text-muted">Joburi care ți se potrivesc, actualizate zilnic</span>
+        </div>
+        <div class="py-2">{% render_ad 'header' %}
+</div>
+    </div>
+</div>
+
+<!-- Categories Section -->
+<section class="categories-section py-5">
+    <div class="container">
+        <h2 class="section-title text-center mb-5">Categorii populare</h2>
+        <div class="row row-cols-2 row-cols-md-3 row-cols-lg-6 g-4 justify-content-center">
+            <div class="col">
+                <a href="{% url 'jobs:job_list' %}?category=soferi-tir" class="category-card text-decoration-none">
+                    <div class="card h-100 text-center border-0">
+                        <div class="category-icon-wrapper mx-auto mb-3">
+                            <i class="fas fa-truck-moving"></i>
+                        </div>
+                        <div class="card-body p-0">
+                            <h5 class="card-title">Șoferi TIR</h5>
+                            <p class="card-text text-muted">120+ joburi</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            
+            <div class="col">
+                <a href="{% url 'jobs:job_list' %}?category=constructii" class="category-card text-decoration-none">
+                    <div class="card h-100 text-center border-0">
+                        <div class="category-icon-wrapper mx-auto mb-3">
+                            <i class="fas fa-hard-hat"></i>
+                        </div>
+                        <div class="card-body p-0">
+                            <h5 class="card-title">Construcții</h5>
+                            <p class="card-text text-muted">80+ joburi</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            
+            <div class="col">
+                <a href="{% url 'jobs:job_list' %}?category=operatori" class="category-card text-decoration-none">
+                    <div class="card h-100 text-center border-0">
+                        <div class="category-icon-wrapper mx-auto mb-3">
+                            <i class="fas fa-cogs"></i>
+                        </div>
+                        <div class="card-body p-0">
+                            <h5 class="card-title">Operatori</h5>
+                            <p class="card-text text-muted">200+ joburi</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            
+            <div class="col">
+                <a href="{% url 'jobs:job_list' %}?category=asistenti-medicali" class="category-card text-decoration-none">
+                    <div class="card h-100 text-center border-0">
+                        <div class="category-icon-wrapper mx-auto mb-3">
+                            <i class="fas fa-heartbeat"></i>
+                        </div>
+                        <div class="card-body p-0">
+                            <h5 class="card-title">Asistenți Medicali</h5>
+                            <p class="card-text text-muted">90+ joburi</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            
+            <div class="col">
+                <a href="{% url 'jobs:job_list' %}?category=sudori" class="category-card text-decoration-none">
+                    <div class="card h-100 text-center border-0">
+                        <div class="category-icon-wrapper mx-auto mb-3">
+                            <i class="fas fa-drafting-compass"></i>
+                        </div>
+                        <div class="card-body p-0">
+                            <h5 class="card-title">Sudori</h5>
+                            <p class="card-text text-muted">40+ joburi</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            
+            <div class="col">
+                <a href="{% url 'jobs:job_list' %}?category=ingrijire-batrani" class="category-card text-decoration-none">
+                    <div class="card h-100 text-center border-0">
+                        <div class="category-icon-wrapper mx-auto mb-3">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="card-body p-0">
+                            <h5 class="card-title">Îngrijire Bătrâni</h5>
+                            <p class="card-text text-muted">120+ joburi</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+    
+</section>
+
+<!-- AdSense Between Categories and Jobs -->
+<div class="container my-5 py-3">
+    <div class="bg-light p-4 rounded shadow-sm border border-2 border-warning position-relative" id="mid-page-ad">
+        <div class="position-absolute" style="top:-15px; left:50%; transform:translateX(-50%); z-index:2">
+            <span class="badge bg-warning text-dark px-3 py-2">
+                <i class="fas fa-bolt me-1"></i> Top joburi disponibile acum
+            </span>
+        </div>
+        <div class="text-center mb-3 mt-2">
+            <h5 class="text-primary">Oportunități care se potrivesc experienței tale</h5>
+            <p class="small text-muted mb-0">Poziții verificate cu salarii competitive</p>
+        </div>
+        <div class="p-2">{% render_ad 'between_categories' %}
+</div>
+    </div>
+</div>
+
+<!-- Featured Jobs Section -->
+<section class="featured-jobs-section py-5">
+    <div class="container">
+        <h2 class="section-title text-center mb-5">Joburi recomandate</h2>
+        <p class="text-center text-muted mb-5">Cele mai recente și atractive oportunități de angajare</p>
+        
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+            {% for job in featured_jobs %}
+                <div class="col mb-3">
+                    <div class="card h-100 job-card">
+                        <div class="card-body">
+                            {% if job.is_featured %}
+                                <span class="badge bg-warning mb-2">Recomandat</span>
+                            {% endif %}
+                            <h5 class="card-title">
+                                <a href="{% url 'jobs:job_detail' job.slug %}" class="text-decoration-none">{{ job.title }}</a>
+                            </h5>
+                            <p class="company-name">{{ job.company.name }}</p>
+                            <p class="location text-muted">
+                                <i class="fas fa-map-marker-alt me-1"></i> {{ job.location.city }}, {{ job.location.country }}
+                            </p>
+                            <p class="job-type">
+                                <span class="badge bg-light text-dark">{{ job.get_job_type_display }}</span>
+                                {% if job.is_remote %}
+                                    <span class="badge bg-success ms-1">Remote</span>
+                                {% endif %}
+                            </p>
+                        </div>
+                        <div class="card-footer bg-white">
+                            <div class="d-flex justify-content-between align-items-center">
+                                {% if job.salary_min and job.salary_max %}
+                                    <span class="salary">{{ job.salary_min|intcomma }} - {{ job.salary_max|intcomma }} RON/lună</span>
+                                {% elif job.salary_min %}
+                                    <span class="salary">De la {{ job.salary_min|intcomma }} RON/lună</span>
+                                {% else %}
+                                    <span class="salary">Salariu nespecificat</span>
+                                {% endif %}
+                                <a href="{% url 'jobs:job_detail' job.slug %}" class="btn btn-outline-primary btn-sm">Vezi detalii</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% empty %}
+                <!-- If no featured jobs, inject a sponsored one -->
+                <div class="col">
+                    {% render_native_ad_job %}
+                </div>
+            {% endfor %}
+
+            <!-- Insert a native ad after real jobs -->
+            {% if featured_jobs|length >= 2 %}
+                <div class="col">
+                    {% render_native_ad_job %}
+                </div>
+            {% endif %}
+        </div>
+        
+        <!-- Better Mobile Spacing -->
+        <div class="text-center mt-5">
+            <a href="{% url 'jobs:job_list' %}" class="btn btn-outline-primary">Vezi toate joburile <i class="fas fa-arrow-right ms-1"></i></a>
+        </div>
+    </div>
+</section>
+
+<!-- AdSense Attention-Drawing Banner -->
+<div class="container my-4">
+    <div class="row">
+        <div class="col-md-10 mx-auto">
+            <div class="bg-light p-4 rounded shadow border border-2 border-success position-relative" id="pre-cta-ad">
+                <div class="position-absolute" style="top:-12px; left:20px;">
+                    <span class="badge bg-success px-3 py-1">
+                        <i class="fas fa-star me-1"></i> Premium
+                    </span>
+                </div>
+                <div class="text-center mb-3">
+                    <h5 class="mb-1 text-success">Oferte speciale pentru profesioniști</h5>
+                    <p class="small text-muted">Joburi cu beneficii atractive și oportunități de creștere</p>
+                </div>
+                <div class="py-2">{% render_ad 'content' %}
+</div>
+            </div>
+        </div>
+    </div>
+
+<!-- Employer CTA Section -->
+<section class="employer-cta py-5 mt-5 bg-primary text-white">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-md-8 mx-auto text-center">
+                <div class="icon-wrapper mb-4">
+                    <i class="fas fa-briefcase fa-3x"></i>
+                </div>
+ 
+                <h2 class="mb-4">Ești în căutarea de personal calificat?</h2>
+                <p class="lead mb-4">Conectează-te cu profesioniști calificați din domeniul tău și găsește candidații potriviți pentru joburile tale.</p>
+                <div class="d-flex justify-content-center">
+                    <a href="{% url 'register' %}" class="btn btn-light">Postează un anunț</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- AdSense After Employer CTA -->
+<div class="container my-4">
+    <div class="row">
+        <div class="col-md-10 mx-auto">
+            <div class="bg-white p-4 rounded shadow-sm border border-2 border-primary position-relative" id="post-cta-ad">
+                <div class="position-absolute" style="top:-12px; right:20px;">
+                    <span class="badge bg-primary text-white px-3 py-1">
+                        <i class="fas fa-thumbs-up me-1"></i> Recomandat
+                    </span>
+                </div>
+                <div class="text-center mb-3">
+                    <h5 class="text-primary mb-1">Joburi cu cerere mare</h5>
+                    <p class="small text-muted">Poziții deschise cu procese rapide de aplicare</p>
+                </div>
+                <div class="py-2">{% render_ad 'footer' %}</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Recent Jobs Section -->
+<section class="recent-jobs-section py-5">
+    <div class="container">
+        <h2 class="section-title mb-4">Toate joburile</h2>
+        
+        <div class="row">
+            <div class="col-12">
+                <!-- Mobile-Friendly Job Listings Header -->
+                <div class="d-none d-md-block mb-3 p-3 bg-light rounded border border-primary position-relative">
+                    <div class="position-absolute" style="top:-10px; left:20px;">
+                        <span class="badge bg-primary px-3 py-1">Promovat</span>
+                    </div>
+                    <div class="text-center mb-2">
+                        <span class="small text-muted">Oferte speciale pentru profesioniști ca tine</span>
+                    </div>
+                    <div class="py-2">{% render_ad 'job_listing' %}
+</div>
+                </div>
+                
+                <div class="d-flex align-items-center justify-content-between mb-3">
+                    <a href="{% url 'jobs:job_list' %}" class="text-decoration-none">Vezi toate joburile <i class="fas fa-arrow-right ms-1"></i></a>
+                </div>
+                
+                <table class="table job-list-table">
+                    <tbody>
+                        {% for job in recent_jobs %}
+                            <tr>
+                                <td class="company-logo">
+                                    {% if job.company.logo %}
+                                        <img src="{{ job.company.logo.url }}" alt="{{ job.company.name }}" class="rounded-circle">
+                                    {% else %}
+                                        <div class="logo-placeholder rounded-circle">
+                                            {{ job.company.name|slice:":1" }}
+                                        </div>
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    <h5 class="mb-1">
+                                        <a href="{% url 'jobs:job_detail' job.slug %}" class="text-decoration-none">{{ job.title }}</a>
+                                    </h5>
+                                    <p class="company-name mb-0">{{ job.company.name }}</p>
+                                </td>
+                                <td class="location">
+                                    <i class="fas fa-map-marker-alt me-1"></i> {{ job.location.city }}
+, {{ job.location.country|default:"" }}
+                                </td>
+                                <td class="job-type">
+                                    <span class="badge bg-light text-dark">{{ job.get_job_type_display }}</span>
+                                </td>
+                                <td class="text-end">
+                                    <a href="{% url 'jobs:job_detail' job.slug %}" class="btn btn-outline-primary btn-sm">Vezi detalii</a>
+                                </td>
+                            </tr>
+                            
+                            {% if forloop.counter|divisibleby:3 %}
+                                <!-- Insert ad every 3 jobs -->
+                                <tr class="ad-row border-0">
+                                    <td colspan="5">
+                                        <div class="small text-muted text-center mb-1">Conținut sponsorizat</div>
+                                        {% render_ad 'between_categories' %}
+                                    </td>
+                                </tr>
+                            {% endif %}
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Fixed Bottom AdSense Banner for Mobile Only -->
+<div class="fixed-bottom d-md-none bg-white py-2 shadow-lg">
+    <div class="container">
+        <div class="d-flex align-items-center">
+            <div class="text-primary small d-none d-sm-block">
+                <i class="fas fa-bolt text-warning"></i> Nou
+                
+            </div>
+            <div class="w-100">
+                <div class="small text-center text-primary fw-bold mb-1">
+                    <i class="fas fa-star text-warning me-1"></i> Oferte limitate <i class="fas fa-star text-warning ms-1"></i>
+                </div>
+                <div>{% render_ad 'mobile_bottom' %}
+</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block extra_scripts %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Add interactive elements to enhance ad engagement
+    const adContainers = document.querySelectorAll('[id$="-ad"], [id$="-ad-container"]');
+    
+    // Add hover effects to ad containers
+    adContainers.forEach(container => {
+        container.addEventListener('mouseenter', function() {
+            this.style.boxShadow = '0 5px 15px rgba(0, 123, 255, 0.2)';
+            this.style.transform = 'translateY(-3px)';
+            this.style.transition = 'all 0.3s ease';
+            
+            // Add slight border change on hover for better visibility
+            if (this.classList.contains('border-primary')) {
+                this.classList.remove('border-primary');
+                this.classList.add('border-warning');
+            } else if (this.classList.contains('border-success')) {
+                this.classList.remove('border-success');
+                this.classList.add('border-danger');
+            }
+        });
+        
+        container.addEventListener('mouseleave', function() {
+            this.style.boxShadow = '';
+            this.style.transform = 'translateY(0)';
+            
+            // Restore original border
+            if (this.classList.contains('border-warning')) {
+                this.classList.remove('border-warning');
+                this.classList.add('border-primary');
+            } else if (this.classList.contains('border-danger')) {
+                this.classList.remove('border-danger');
+                this.classList.add('border-success');
+            }
+        });
+    });
+    
+    // Add CSS for pulse effect
+    const style = document.createElement('style');
+    style.innerHTML = `
+        .pulse-highlight {
+            animation: pulse 1.5s ease-in-out;
+        }
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(40, 167, 69, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(40, 167, 69, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(40, 167, 69, 0); }
+        }
+    `;
+    document.head.appendChild(style);
+});
+</script>
+{% endblock %}

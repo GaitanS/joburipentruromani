@@ -1,0 +1,102 @@
+[
+  {
+    "model": "jobs.subscriptionplan",
+    "pk": 1,
+    "fields": {
+      "tier": "free",
+      "name": "Free Plan",
+      "description": "Perfect for small businesses testing the waters with occasional hiring needs.",
+      "price_monthly": 0.00,
+      "price_annually": 0.00,
+      "max_active_jobs": 1,
+      "job_visibility_days": 30,
+      "has_candidate_cv_access": true,
+      "promoted_listings_count": 0,
+      "has_priority_support": false,
+      "stripe_monthly_price_id": "",
+      "stripe_annual_price_id": "",
+      "is_active": true,
+      "order": 1
+    }
+  },
+  {
+    "model": "jobs.subscriptionplan",
+    "pk": 2,
+    "fields": {
+      "tier": "standard",
+      "name": "Standard Plan",
+      "description": "Ideal for growing businesses with regular hiring needs throughout the year.",
+      "price_monthly": 25.00,
+      "price_annually": 250.00,
+      "max_active_jobs": 5,
+      "job_visibility_days": 30,
+      "has_candidate_cv_access": true,
+      "promoted_listings_count": 0,
+      "has_priority_support": false,
+      "stripe_monthly_price_id": "price_monthly_standard",
+      "stripe_annual_price_id": "price_annual_standard",
+      "is_active": true,
+      "order": 2
+    }
+  },
+  {
+    "model": "jobs.subscriptionplan",
+    "pk": 3,
+    "fields": {
+      "tier": "business",
+      "name": "Business Plan",
+      "description": "Perfect for medium-sized companies with multiple departments and ongoing recruitment needs.",
+      "price_monthly": 99.00,
+      "price_annually": 990.00,
+      "max_active_jobs": 15,
+      "job_visibility_days": 45,
+      "has_candidate_cv_access": true,
+      "promoted_listings_count": 2,
+      "has_priority_support": false,
+      "stripe_monthly_price_id": "price_monthly_business",
+      "stripe_annual_price_id": "price_annual_business",
+      "is_active": true,
+      "order": 3
+    }
+  },
+  {
+    "model": "jobs.subscriptionplan",
+    "pk": 4,
+    "fields": {
+      "tier": "enterprise",
+      "name": "Enterprise Plan",
+      "description": "Designed for large organizations with extensive and continuous recruitment activities.",
+      "price_monthly": 199.00,
+      "price_annually": 1990.00,
+      "max_active_jobs": -1,
+      "job_visibility_days": 90,
+      "has_candidate_cv_access": true,
+      "promoted_listings_count": 5,
+      "has_priority_support": true,
+      "stripe_monthly_price_id": "price_monthly_enterprise",
+      "stripe_annual_price_id": "price_annual_enterprise",
+      "is_active": true,
+      "order": 4
+    }
+  },
+  {
+    "model": "jobs.subscriptionplan",
+    "pk": 5,
+    "fields": {
+      "tier": "promoted_only",
+      "name": "Promoted Only Plan",
+      "description": "Highlight your existing job listings with premium promotion features without changing your current plan.",
+      "price_monthly": 5.00,
+      "price_annually": 50.00,
+      "max_active_jobs": 0,
+      "job_visibility_days": 30,
+      "has_candidate_cv_access": false,
+      "promoted_listings_count": 3,
+      "has_priority_support": false,
+      "stripe_monthly_price_id": "price_monthly_promoted_only",
+      "stripe_annual_price_id": "price_annual_promoted_only",
+      "is_active": true,
+      "order": 5
+    }
+  }
+]

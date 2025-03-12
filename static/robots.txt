@@ -1,0 +1,20 @@
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /accounts/
+Disallow: /user-dashboard/
+Disallow: /company-dashboard/
+
+# Allow Adsense bot
+User-agent: Mediapartners-Google
+Allow: /
+
+# Allow Google Mobile Ads bot
+User-agent: AdsBot-Google-Mobile
+Allow: /
+
+# Allow Google Image bot 
+User-agent: Googlebot-Image
+Allow: /
+
+Sitemap: https://joburipentruromani.ro/sitemap.xml

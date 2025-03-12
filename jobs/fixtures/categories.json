@@ -1,0 +1,82 @@
+[
+  {
+    "model": "jobs.category",
+    "pk": 1,
+    "fields": {
+      "name": "Șoferi TIR",
+      "slug": "soferi-tir",
+      "icon": "fas fa-truck-moving",
+      "job_count": 120
+    }
+  },
+  {
+    "model": "jobs.category",
+    "pk": 2,
+    "fields": {
+      "name": "Construcții",
+      "slug": "constructii",
+      "icon": "fas fa-hard-hat",
+      "job_count": 80
+    }
+  },
+  {
+    "model": "jobs.category",
+    "pk": 3,
+    "fields": {
+      "name": "Operatori",
+      "slug": "operatori",
+      "icon": "fas fa-cogs",
+      "job_count": 200
+    }
+  },
+  {
+    "model": "jobs.category",
+    "pk": 4,
+    "fields": {
+      "name": "Asistenți Medicali",
+      "slug": "asistenti-medicali",
+      "icon": "fas fa-heartbeat",
+      "job_count": 90
+    }
+  },
+  {
+    "model": "jobs.category",
+    "pk": 5,
+    "fields": {
+      "name": "Sudori",
+      "slug": "sudori",
+      "icon": "fas fa-drafting-compass",
+      "job_count": 40
+    }
+  },
+  {
+    "model": "jobs.category",
+    "pk": 6,
+    "fields": {
+      "name": "Îngrijire Bătrâni",
+      "slug": "ingrijire-batrani",
+      "icon": "fas fa-clock",
+      "job_count": 120
+    }
+  },
+  {
+    "model": "jobs.category",
+    "pk": 7,
+    "fields": {
+      "name": "Curățenie",
+      "slug": "curatenie",
+      "icon": "fas fa-broom",
+      "job_count": 50
+    }
+  },
+  {
+    "model": "jobs.category",
+    "pk": 8,
+    "fields": {
+      "name": "Agricultură",
+      "slug": "agricultura",
+      "icon": "fas fa-tractor",
+      "job_count": 30
+    }
+  }
+]

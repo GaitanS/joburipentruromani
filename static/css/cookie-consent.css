@@ -1,0 +1,108 @@
+/**
+ * Cookie Consent Styles
+ */
+
+#cookie-consent-banner {
+    animation: slide-up 0.5s ease-out;
+    box-shadow: 0 -2px 20px rgba(0, 0, 0, 0.15);
+}
+
+#cookie-preferences-button {
+    transition: opacity 0.3s ease;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+#cookie-preferences-button:hover {
+    opacity: 1;
+}
+
+.cookie-options {
+    background-color: #f8f9fa;
+    border-radius: 0.5rem;
+    padding: 1rem;
+}
+
+.form-check-input:checked {
+    background-color: #0d6efd;
+    border-color: #0d6efd;
+}
+
+/* Disabled but checked checkboxes for required cookies */
+.form-check-input:disabled:checked {
+    opacity: 0.7;
+    background-color: #6c757d;
+    border-color: #6c757d;
+}
+
+/* Animation for banner appearance */
+@keyframes slide-up {
+    from {
+        transform: translateY(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* Pulse animation for the cookie button */
+@keyframes pulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(13, 110, 253, 0.4);
+    }
+    70% {
+        box-shadow: 0 0 0 10px rgba(13, 110, 253, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(13, 110, 253, 0);
+    }
+}
+
+.pulse-animation {
+    animation: pulse 2s infinite;
+}
+
+/* Add a slight animation when hovering over cookie options */
+.form-check:hover {
+    transform: translateX(3px);
+    transition: transform 0.2s ease;
+}
+
+/* Style the cookie preference toggles */
+.cookie-options .form-check-input {
+    width: 2.2em;
+    height: 1.2em;
+    margin-top: 0.25em;
+}
+
+/* Style for the cookie preference headings */
+.cookie-options .form-check-label strong {
+    font-size: 1rem;
+}
+
+/* Style cookie description text */
+.cookie-options .small {
+    font-size: 0.75rem;
+    color: #6c757d;
+}
+
+/* Responsive adjustments */
+@media (max-width: 767.98px) {
+    #cookie-consent-banner .container {
+        padding: 0.5rem;
+    }
+    
+    #cookie-consent-banner h5 {
+        font-size: 1.1rem;
+    }
+    
+    #cookie-consent-banner .small {
+        font-size: 0.7rem;
+    }
+    
+    #cookie-preferences-button {
+        font-size: 0.7rem;
+        padding: 0.25rem 0.5rem;
+    }
+}

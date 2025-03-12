@@ -1,0 +1,299 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load adsense %}
+{% load humanize %}
+
+{% block title %}{{ category.name }} - Locuri de muncă - JoburipentruRomani{% endblock %}
+
+{% block meta_description %}Găsește cele mai bune joburi în categoria {{ category.name }} din toată România. Aplică acum pentru noi oportunități!{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row">
+        <!-- Sidebar -->
+        <div class="col-lg-3 mb-4">
+            <!-- Category Info -->
+            <div class="bg-white p-4 rounded shadow-sm mb-4">
+                <div class="category-icon-lg text-center mb-3">
+                    <div class="category-icon-wrapper mx-auto" style="width: 100px; height: 100px; font-size: 2.5rem;">
+                        <i class="{{ category.icon }}"></i>
+                    </div>
+                </div>
+                <h1 class="h3 text-center mb-3">{{ category.name }}</h1>
+                <p class="text-center mb-0">{{ category.job_count }} joburi disponibile</p>
+            </div>
+            
+            <!-- Other Categories -->
+            <div class="bg-white p-4 rounded shadow-sm mb-4">
+                <h3 class="h5 mb-3">Alte categorii</h3>
+                <ul class="list-unstyled categories-list">
+                    {% for cat in categories %}
+                        {% if cat != category %}
+                            <li class="mb-2">
+                                <a href="{% url 'jobs:category_detail' cat.slug %}" class="text-decoration-none d-flex align-items-center">
+                                    <div class="small-icon me-2">
+                                        <i class="{{ cat.icon }}"></i>
+                                    </div>
+                                    <span>{{ cat.name }}</span>
+                                    <span class="badge bg-light text-dark ms-auto">{{ cat.job_count }}</span>
+                                </a>
+                            </li>
+                        {% endif %}
+                    {% endfor %}
+                </ul>
+            </div>
+            
+            <!-- AdSense Sidebar -->
+            <div class="sticky-top" style="top: 20px; z-index: 1;">
+                <div class="bg-white p-4 rounded shadow-sm mb-4" id="ad-container-sidebar">
+                    <div class="small text-muted mb-2">Sponsorizat</div>
+                    {% render_ad 'sidebar' %}
+                </div>
+            </div>
+        </div>
+        
+        <!-- Main Content -->
+        <div class="col-lg-9">
+            <div class="bg-white p-4 rounded shadow-sm mb-4">
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <h2 class="h3 mb-0">Joburi în {{ category.name }}</h2>
+                    <span class="badge bg-secondary">{{ jobs.paginator.count }} joburi găsite</span>
+                </div>
+                
+                <!-- Search Box -->
+                <div class="job-search-box mb-4">
+                    <form action="{% url 'jobs:job_list' %}" method="GET" class="d-flex">
+                        <input type="hidden" name="category" value="{{ category.slug }}">
+                        <div class="input-group">
+                            <span class="input-group-text bg-white border-end-0">
+                                <i class="fas fa-search text-muted"></i>
+                            </span>
+                            <input type="text" name="q" class="form-control border-start-0" placeholder="Caută în {{ category.name }}...">
+                            <button type="submit" class="btn btn-primary">Caută</button>
+                        </div>
+                    </form>
+                </div>
+                
+                <!-- AdSense Top of Category Jobs -->
+                <div class="mb-4 p-3 bg-light rounded border-start border-3 border-primary" id="ad-container-category-top">
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                        <span class="small text-muted">Sponsorizat</span>
+                        <span class="badge bg-primary">{{ category.name }} - Oportunități</span>
+                    </div>
+                    {% render_ad 'job_listing' %}
+                </div>
+                
+                <!-- Job Listings -->
+                <div class="job-listings">
+                    {% if jobs %}
+                        {% for job in jobs %}
+                            <div class="job-item p-3 mb-3 border rounded">
+                                <div class="row align-items-center">
+                                    <div class="col-md-2 col-lg-1 mb-3 mb-md-0 text-center">
+                                        {% if job.company.logo %}
+                                            <img src="{{ job.company.logo.url }}" alt="{{ job.company.name }}" class="img-fluid rounded" width="60">
+                                        {% else %}
+                                            <div class="logo-placeholder rounded" style="width: 60px; height: 60px; font-size: 1.5rem;">
+                                                {{ job.company.name|slice:":1" }}
+                                            </div>
+                                        {% endif %}
+                                    </div>
+                                    <div class="col-md-6 col-lg-7 mb-2 mb-md-0">
+                                        <h3 class="h5 mb-1">
+                                            <a href="{% url 'jobs:job_detail' job.slug %}" class="text-decoration-none stretched-link">{{ job.title }}</a>
+                                        </h3>
+                                        <p class="company-name mb-1">{{ job.company.name }}</p>
+                                        <p class="location mb-0 text-muted">
+                                            <i class="fas fa-map-marker-alt me-1"></i> {{ job.location.city }}
+                                            {% if job.is_remote %}
+                                                <span class="badge bg-success ms-2">Remote</span>
+                                            {% endif %}
+                                        </p>
+                                    </div>
+                                    <div class="col-md-4 col-lg-4 text-md-end">
+                                        <div class="job-meta mb-2">
+                                            <span class="badge bg-light text-dark me-2">{{ job.get_job_type_display }}</span>
+                                            <span class="text-muted small">{{ job.created_at|date:"d M Y" }}</span>
+                                        </div>
+                                        {% if job.salary_min and job.salary_max %}
+                                            <div class="salary text-success fw-bold">{{ job.salary_min|intcomma }} - {{ job.salary_max|intcomma }} RON/lună</div>
+                                        {% elif job.salary_min %}
+                                            <div class="salary text-success fw-bold">De la {{ job.salary_min|intcomma }} RON/lună</div>
+                                        {% else %}
+                                            <div class="salary text-muted">Salariu nespecificat</div>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            {% if forloop.counter == 2 or forloop.counter|divisibleby:4 %}
+                                <!-- Insert ad after 2nd job and then every 4 jobs -->
+                                <div class="ad-wrapper my-4 p-2 bg-light rounded border">
+                                    <div class="small text-muted mb-2">Sponsorizat</div>
+                                    {% render_ad 'job_listing' %}
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                        
+                        <!-- Pagination -->
+                        {% if jobs.paginator.num_pages > 1 %}
+                            <div class="d-flex justify-content-center mt-4">
+                                <nav aria-label="Job navigation">
+                                    <ul class="pagination">
+                                        {% if jobs.has_previous %}
+                                            <li class="page-item">
+                                                <a class="page-link" href="?page=1" aria-label="First">
+                                                    <span aria-hidden="true">&laquo;&laquo;</span>
+                                                </a>
+                                            </li>
+                                            <li class="page-item">
+                                                <a class="page-link" href="?page={{ jobs.previous_page_number }}" aria-label="Previous">
+                                                    <span aria-hidden="true">&laquo;</span>
+                                                </a>
+                                            </li>
+                                        {% endif %}
+                                        
+                                        {% for i in jobs.paginator.page_range %}
+                                            {% if jobs.number == i %}
+                                                <li class="page-item active"><span class="page-link">{{ i }}</span></li>
+                                            {% elif i > jobs.number|add:"-3" and i < jobs.number|add:"3" %}
+                                                <li class="page-item">
+                                                    <a class="page-link" href="?page={{ i }}">{{ i }}</a>
+                                                </li>
+                                            {% endif %}
+                                        {% endfor %}
+                                        
+                                        {% if jobs.has_next %}
+                                            <li class="page-item">
+                                                <a class="page-link" href="?page={{ jobs.next_page_number }}" aria-label="Next">
+                                                    <span aria-hidden="true">&raquo;</span>
+                                                </a>
+                                            </li>
+                                            <li class="page-item">
+                                                <a class="page-link" href="?page={{ jobs.paginator.num_pages }}" aria-label="Last">
+                                                    <span aria-hidden="true">&raquo;&raquo;</span>
+                                                </a>
+                                            </li>
+                                        {% endif %}
+                                    </ul>
+                                </nav>
+                            </div>
+                        {% endif %}
+                    {% else %}
+                        <div class="alert alert-info">
+                            <i class="fas fa-info-circle me-2"></i> Nu există momentan joburi în această categorie. Te rugăm să revii mai târziu.
+                        </div>
+                        
+                        <!-- When no jobs, show native ad -->
+                        <div class="mt-4">
+                            <div class="native-ad-container p-3 border border-warning rounded">
+                                <div class="small text-muted mb-2">Sponsorizat</div>
+                                {% render_native_ad_job %}
+                            </div>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+            
+            <!-- Category Description and Tips -->
+            <div class="bg-white p-4 rounded shadow-sm mb-4">
+                <h3 class="h4 mb-3">Despre joburi în {{ category.name }}</h3>
+                <p>Descoperiți cele mai bune oportunități de angajare în domeniul {{ category.name }} din toată România. Pe JoburipentruRomani.ro, vă oferim acces la o gamă largă de locuri de muncă de la companii de top din acest sector.</p>
+                
+                <h4 class="h5 mt-4 mb-3">Sfaturi pentru candidați în {{ category.name }}</h4>
+                <ul class="mb-0">
+                    <li>Asigurați-vă că CV-ul reflectă experiența și calificările relevante pentru {{ category.name }}</li>
+                    <li>Documentați-vă despre companiile din acest domeniu înainte de a aplica</li>
+                    <li>Pregătiți exemple concrete de realizări din proiectele anterioare</li>
+                    <li>Actualizați-vă cunoștințele despre ultimele tendințe și tehnologii din domeniu</li>
+                </ul>
+            </div>
+            
+            <!-- AdSense Bottom of Category Page -->
+            <div class="mt-4 p-3 bg-light rounded" id="ad-container-category-bottom">
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                    <span class="small text-muted">Sponsorizat</span>
+                    <span class="badge bg-success">Oferte {{ category.name }}</span>
+                </div>
+                {% render_ad 'footer' %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    /* Ad styling for better visibility and engagement */
+    #ad-container-category-top:hover, 
+    #ad-container-category-bottom:hover,
+    #ad-container-sidebar:hover,
+    .ad-wrapper:hover,
+    .native-ad-container:hover {
+        box-shadow: 0 0 10px rgba(0, 123, 255, 0.25);
+        transition: box-shadow 0.3s ease;
+    }
+    
+    /* Styling for category icon */
+    .category-icon-wrapper {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: rgba(13, 110, 253, 0.1);
+        border-radius: 50%;
+        color: #0d6efd;
+    }
+    
+    /* For smaller category icons in the sidebar */
+    .small-icon {
+        color: #0d6efd;
+    }
+    
+    /* Animation for native ad when no jobs */
+    .native-ad-container {
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .native-ad-container::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+        animation: shine 2s infinite;
+    }
+    
+    @keyframes shine {
+        to {
+            left: 100%;
+        }
+    }
+</style>
+
+{% block extra_scripts %}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Track scroll depth for optimized ad visibility
+        const jobList = document.querySelector('.job-listings');
+        const bottomAd = document.getElementById('ad-container-category-bottom');
+        let isHalfwayScrolled = false;
+        
+        window.addEventListener('scroll', function() {
+            if (!isHalfwayScrolled && jobList && window.scrollY > (jobList.offsetTop + jobList.offsetHeight/2)) {
+                isHalfwayScrolled = true;
+                
+                // Highlight bottom ad when user scrolls halfway through job listings
+                if (bottomAd) {
+                    setTimeout(function() {
+                        bottomAd.classList.add('border');
+                        bottomAd.classList.add('border-success');
+                        bottomAd.classList.add('border-3');
+                    }, 500);
+                }
+            }
+        });
+    });
+</script>
+{% endblock %}
+{% endblock %}

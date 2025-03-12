@@ -1,0 +1,256 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load adsense %}
+
+{% block title %}Despre noi - JoburipentruRomani{% endblock %}
+
+{% block meta_description %}Află mai multe despre JoburipentruRomani - platforma dedicată locurilor de muncă pentru români.{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row">
+        <!-- Main Content -->
+        <div class="col-lg-8">
+            <div class="bg-white p-4 rounded shadow-sm mb-4">
+                <h1 class="h2 mb-4">Despre JoburipentruRomani</h1>
+                
+                <div class="mb-5">
+                    <p class="lead">Platforma JoburipentruRomani a fost creată cu scopul de a conecta angajatorii cu potențialii candidați din clasa muncitoare - operatori, constructori, șoferi, asistenți medicali și multe alte profesii tehnice și de specialitate.</p>
+                    
+                    <p>Ne-am dat seama că majoritatea platformelor de recrutare online se concentrează pe joburi pentru profesioniști din domenii precum IT, financiar sau management, iar cerințele pentru candidați care lucrează în domenii tehnice sau operaționale sunt adesea neglijate.</p>
+                    
+                    <p>JoburipentruRomani vine să umple acest gol, oferind o platformă dedicată locurilor de muncă pentru clasa muncitoare, cu funcționalități adaptate nevoilor specifice ale acestor domenii de activitate.</p>
+                </div>
+                
+                <!-- AdSense In-Content -->
+                <div class="my-5" id="ad-container-about-content">
+                    {% render_ad 'content' %}
+                </div>
+                
+                <div class="mb-5">
+                    <h2 class="h4 mb-3">Misiunea noastră</h2>
+                    <p>Misiunea JoburipentruRomani este să faciliteze accesul la locuri de muncă de calitate pentru lucrătorii din domeniile tehnice, operaționale și de specialitate din România.</p>
+                    
+                    <div class="row mt-4">
+                        <div class="col-md-4 mb-4">
+                            <div class="card h-100 border-0 bg-light">
+                                <div class="card-body p-4 text-center">
+                                    <div class="mb-3">
+                                        <i class="fas fa-handshake text-primary" style="font-size: 2.5rem;"></i>
+                                    </div>
+                                    <h3 class="h5 mb-3">Conectăm oamenii</h3>
+                                    <p class="text-muted mb-0">Facilităm întâlnirea dintre candidații calificați și angajatorii care au nevoie de ei.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-4">
+                            <div class="card h-100 border-0 bg-light">
+                                <div class="card-body p-4 text-center">
+                                    <div class="mb-3">
+                                        <i class="fas fa-award text-primary" style="font-size: 2.5rem;"></i>
+                                    </div>
+                                    <h3 class="h5 mb-3">Promovăm calitatea</h3>
+                                    <p class="text-muted mb-0">Susținem joburile cu condiții de muncă bune și salarii corecte.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-4">
+                            <div class="card h-100 border-0 bg-light">
+                                <div class="card-body p-4 text-center">
+                                    <div class="mb-3">
+                                        <i class="fas fa-rocket text-primary" style="font-size: 2.5rem;"></i>
+                                    </div>
+                                    <h3 class="h5 mb-3">Sprijinim dezvoltarea</h3>
+                                    <p class="text-muted mb-0">Oferim resurse și informații pentru dezvoltarea carierei.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="mb-5">
+                    <h2 class="h4 mb-3">Echipa noastră</h2>
+                    <p>Suntem o echipă de profesioniști cu experiență în recrutare, IT și marketing, dedicați creării unei platforme de joburi accesibile și eficiente.</p>
+                    
+                    <div class="row mt-4">
+                        <div class="col-md-4 mb-4">
+                            <div class="card h-100 border-0">
+                                <div class="card-body text-center">
+                                    <div class="team-avatar mb-3 mx-auto rounded-circle bg-light d-flex align-items-center justify-content-center" style="width: 100px; height: 100px;">
+                                        <i class="fas fa-user text-primary" style="font-size: 2rem;"></i>
+                                    </div>
+                                    <h3 class="h5 mb-1">Andrei Popescu</h3>
+                                    <p class="text-muted small mb-2">Fondator & CEO</p>
+                                    <p class="text-muted small mb-0">Cu peste 10 ani de experiență în industria de recrutare și resurse umane.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-4">
+                            <div class="card h-100 border-0">
+                                <div class="card-body text-center">
+                                    <div class="team-avatar mb-3 mx-auto rounded-circle bg-light d-flex align-items-center justify-content-center" style="width: 100px; height: 100px;">
+                                        <i class="fas fa-user text-primary" style="font-size: 2rem;"></i>
+                                    </div>
+                                    <h3 class="h5 mb-1">Maria Ionescu</h3>
+                                    <p class="text-muted small mb-2">Director Operațional</p>
+                                    <p class="text-muted small mb-0">Specialistă în procese de recrutare și managementul relațiilor cu clienții.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-4">
+                            <div class="card h-100 border-0">
+                                <div class="card-body text-center">
+                                    <div class="team-avatar mb-3 mx-auto rounded-circle bg-light d-flex align-items-center justify-content-center" style="width: 100px; height: 100px;">
+                                        <i class="fas fa-user text-primary" style="font-size: 2rem;"></i>
+                                    </div>
+                                    <h3 class="h5 mb-1">Mihai Dumitrescu</h3>
+                                    <p class="text-muted small mb-2">CTO & Lead Developer</p>
+                                    <p class="text-muted small mb-0">Expert în dezvoltarea platformelor web și mobile pentru recrutare.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- AdSense In-Content -->
+                <div class="my-5" id="ad-container-about-bottom">
+                    {% render_ad 'footer' %}
+                </div>
+                
+                <div class="mb-5" id="contact">
+                    <h2 class="h4 mb-4">Contactează-ne</h2>
+                    
+                    <div class="row">
+                        <div class="col-md-6 mb-4 mb-md-0">
+                            <h3 class="h5 mb-3">Informații de contact</h3>
+                            <ul class="list-unstyled">
+                                <li class="mb-3 d-flex">
+                                    <div class="me-3">
+                                        <i class="fas fa-map-marker-alt text-primary"></i>
+                                    </div>
+                                    <div>
+                                        <p class="mb-0">Str. Exemplului nr. 123</p>
+                                        <p class="mb-0">București, România</p>
+                                    </div>
+                                </li>
+                                <li class="mb-3 d-flex">
+                                    <div class="me-3">
+                                        <i class="fas fa-phone text-primary"></i>
+                                    </div>
+                                    <div>
+                                        <p class="mb-0">+40 712 345 678</p>
+                                    </div>
+                                </li>
+                                <li class="mb-3 d-flex">
+                                    <div class="me-3">
+                                        <i class="fas fa-envelope text-primary"></i>
+                                    </div>
+                                    <div>
+                                        <p class="mb-0">contact@joburipentruromani.ro</p>
+                                    </div>
+                                </li>
+                                <li class="d-flex">
+                                    <div class="me-3">
+                                        <i class="fas fa-clock text-primary"></i>
+                                    </div>
+                                    <div>
+                                        <p class="mb-0">Luni-Vineri: 9:00 - 18:00</p>
+                                    </div>
+                                </li>
+                            </ul>
+                            
+                            <div class="mt-4">
+                                <h3 class="h5 mb-3">Urmărește-ne</h3>
+                                <div class="social-icons">
+                                    <a href="#" class="me-2 text-decoration-none">
+                                        <i class="fab fa-facebook fa-2x text-primary"></i>
+                                    </a>
+                                    <a href="#" class="me-2 text-decoration-none">
+                                        <i class="fab fa-linkedin fa-2x text-primary"></i>
+                                    </a>
+                                    <a href="#" class="me-2 text-decoration-none">
+                                        <i class="fab fa-instagram fa-2x text-primary"></i>
+                                    </a>
+                                    <a href="#" class="text-decoration-none">
+                                        <i class="fab fa-twitter fa-2x text-primary"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-6">
+                            <h3 class="h5 mb-3">Trimite-ne un mesaj</h3>
+                            <form>
+                                <div class="mb-3">
+                                    <label for="name" class="form-label">Nume complet</label>
+                                    <input type="text" class="form-control" id="name" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="email" class="form-label">Email</label>
+                                    <input type="email" class="form-control" id="email" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="subject" class="form-label">Subiect</label>
+                                    <input type="text" class="form-control" id="subject" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="message" class="form-label">Mesaj</label>
+                                    <textarea class="form-control" id="message" rows="4" required></textarea>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Trimite mesajul</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Sidebar -->
+        <div class="col-lg-4">
+            <!-- AdSense Sidebar -->
+            <div class="bg-white p-4 rounded shadow-sm mb-4">
+                {% render_ad 'sidebar' %}
+            </div>
+            
+            <!-- Newsletter -->
+            <div class="bg-white p-4 rounded shadow-sm mb-4">
+                <h3 class="h5 mb-3">Abonează-te la newsletter</h3>
+                <p class="text-muted mb-3">Fii la curent cu cele mai noi joburi și sfaturi pentru carieră.</p>
+                
+                <form>
+                    <div class="mb-3">
+                        <input type="email" class="form-control" placeholder="Adresa ta de email" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary w-100">Abonează-te</button>
+                </form>
+            </div>
+            
+            <!-- Latest Articles -->
+            <div class="bg-white p-4 rounded shadow-sm">
+                <h3 class="h5 mb-3">Articole recente</h3>
+                
+                <div class="article-item mb-3 pb-3 border-bottom">
+                    <h4 class="h6 mb-1"><a href="#" class="text-decoration-none">Cum să te pregătești pentru un interviu în domeniul tehnic</a></h4>
+                    <p class="text-muted small mb-0">15 Februarie 2023</p>
+                </div>
+                
+                <div class="article-item mb-3 pb-3 border-bottom">
+                    <h4 class="h6 mb-1"><a href="#" class="text-decoration-none">Top 10 cele mai căutate meserii din România în 2023</a></h4>
+                    <p class="text-muted small mb-0">3 Februarie 2023</p>
+                </div>
+                
+                <div class="article-item">
+                    <h4 class="h6 mb-1"><a href="#" class="text-decoration-none">Avantajele reconversiei profesionale în domeniul tehnic</a></h4>
+                    <p class="text-muted small mb-0">28 Ianuarie 2023</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .team-avatar {
+        box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+    }
+</style>
+{% endblock %}

@@ -1,0 +1,161 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load adsense %}
+
+{% block title %}Termeni și Condiții - JoburipentruRomani{% endblock %}
+{% block meta_description %}Termeni și condiții de utilizare a platformei JoburipentruRomani. Vă rugăm să citiți cu atenție înainte de a utiliza serviciile noastre.{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row">
+        <div class="col-lg-8">
+            <div class="bg-white p-4 rounded shadow-sm mb-4">
+                <h1 class="h2 mb-4">Termeni și Condiții</h1>
+                <p class="text-muted small">Ultima actualizare: {{ current_date }}</p>
+                
+                <div class="mb-5">
+                    <p>Vă rugăm să citiți cu atenție acești Termeni și Condiții înainte de a utiliza platforma JoburipentruRomani. Prin accesarea sau utilizarea platformei noastre, sunteți de acord să respectați acești termeni și condiții de utilizare.</p>
+                </div>
+                
+                <!-- AdSense In-Content -->
+                <div class="my-4">
+                    {% render_ad 'content' %}
+                </div>
+                
+                <div class="mb-4">
+                    <h2 class="h4 mb-3">1. Acceptarea Termenilor</h2>
+                    <p>Prin accesarea sau utilizarea platformei JoburipentruRomani (denumită în continuare "platforma", "site-ul", "noi" sau "noastră"), sunteți de acord să respectați acești Termeni și Condiții, Politica noastră de Confidențialitate și orice alte politici sau ghiduri de utilizare publicate pe platformă. Dacă nu sunteți de acord cu acești termeni, vă rugăm să nu utilizați platforma noastră.</p>
+                </div>
+                
+                <div class="mb-4">
+                    <h2 class="h4 mb-3">2. Descrierea Serviciului</h2>
+                    <p>JoburipentruRomani este o platformă online care facilitează conectarea angajatorilor cu persoanele aflate în căutarea unui loc de muncă. Platforma permite companiilor să publice anunțuri de angajare și candidaților să caute și să aplice pentru locuri de muncă.</p>
+                </div>
+                
+                <div class="mb-4">
+                    <h2 class="h4 mb-3">3. Conținutul Utilizatorilor</h2>
+                    <p><strong>3.1. Responsabilitatea pentru Conținut</strong></p>
+                    <p>JoburipentruRomani este o platformă care permite publicarea de conținut generat de utilizatori. Utilizatorii sunt singurii responsabili pentru conținutul pe care îl postează, incluzând, dar fără a se limita la, anunțurile de angajare, profilurile companiilor, CV-urile și orice alte informații furnizate.</p>
+                    
+                    <p><strong>3.2. Disclaimer privind Conținutul Utilizatorilor</strong></p>
+                    <p class="bg-light p-3 border-start border-4 border-warning"><strong>IMPORTANT:</strong> JoburipentruRomani acționează exclusiv ca o platformă intermediară între angajatori și persoanele aflate în căutarea unui loc de muncă. Nu verificăm, nu garantăm și nu ne asumăm responsabilitatea pentru acuratețea, legalitatea, calitatea sau autenticitatea conținutului postat de utilizatorii platformei. Nu suntem implicați în tranzacțiile sau relațiile dintre utilizatori și nu garantăm disponibilitatea sau legitimitatea locurilor de muncă postate sau calificările candidaților.</p>
+                    
+                    <p><strong>3.3. Conținut Interzis</strong></p>
+                    <p>Utilizatorii se obligă să nu publice conținut care:</p>
+                    <ul>
+                        <li>Este fals, înșelător sau fraudulos</li>
+                        <li>Încalcă drepturile de proprietate intelectuală ale terților</li>
+                        <li>Este ilegal, abuziv, hărțuitor, defăimător, obscen sau ofensator</li>
+                        <li>Promovează discriminarea, bigotismul, rasismul sau violența</li>
+                        <li>Este dăunător minorilor în orice mod</li>
+                        <li>Conține viruși, malware sau alte coduri malițioase</li>
+                        <li>Încalcă legislația aplicabilă</li>
+                    </ul>
+                    
+                    <p><strong>3.4. Dreptul de a Elimina Conținutul</strong></p>
+                    <p>Ne rezervăm dreptul, fără a avea obligația, de a elimina sau de a refuza publicarea oricărui conținut care, în opinia noastră, încalcă acești Termeni și Condiții sau este considerat dăunător platformei sau utilizatorilor săi. Cu toate acestea, nu avem obligația de a monitoriza sau de a revizui conținutul postat de utilizatori.</p>
+                </div>
+                
+                <div class="mb-4">
+                    <h2 class="h4 mb-3">4. Limitarea Răspunderii</h2>
+                    <p class="bg-light p-3 border-start border-4 border-danger"><strong>NOTĂ IMPORTANTĂ:</strong> În măsura maximă permisă de legea aplicabilă, JoburipentruRomani și afiliații, directorii, angajații sau agenții săi nu vor fi răspunzători pentru niciun fel de daune directe, indirecte, incidentale, speciale, punitive sau de consecință care rezultă din utilizarea sau imposibilitatea de a utiliza platforma, inclusiv, dar fără a se limita la:</p>
+                    <ul>
+                        <li>Orice conținut inexact, înșelător sau fraudulos postat de utilizatori</li>
+                        <li>Orice locuri de muncă false sau înșelătoare publicate pe platformă</li>
+                        <li>Orice pierdere de date, profit, oportunități de afaceri sau alte pierderi intangibile</li>
+                        <li>Orice acces neautorizat, utilizare sau modificare a transmisiilor sau datelor utilizatorului</li>
+                        <li>Orice întreruperi ale serviciului, erori, omisiuni sau defecte în operare</li>
+                    </ul>
+                    <p>Prin utilizarea platformei, recunoașteți și sunteți de acord că JoburipentruRomani nu are nicio responsabilitate de a verifica identitatea utilizatorilor sau acuratețea informațiilor furnizate de aceștia.</p>
+                </div>
+                
+                <div class="mb-4">
+                    <h2 class="h4 mb-3">5. Indemnizare</h2>
+                    <p>Sunteți de acord să apărați, să despăgubiți și să exonerați de răspundere JoburipentruRomani, afiliații, directorii, angajații și agenții săi de orice pretenții, daune, obligații, pierderi, răspunderi, costuri sau datorii, inclusiv, dar fără a se limita la, onorariile rezonabile ale avocaților, care rezultă din:</p>
+                    <ul>
+                        <li>Utilizarea și accesul dumneavoastră la platformă</li>
+                        <li>Orice conținut postat, transmis sau pus la dispoziție prin intermediul platformei</li>
+                        <li>Încălcarea acestor Termeni și Condiții</li>
+                        <li>Încălcarea oricăror drepturi ale unei terțe părți, inclusiv, dar fără a se limita la, drepturile de proprietate intelectuală, confidențialitate sau proprietate</li>
+                    </ul>
+                </div>
+                
+                <!-- AdSense In-Content -->
+                <div class="my-4">
+                    {% render_ad 'content' %}
+                </div>
+                
+                <div class="mb-4">
+                    <h2 class="h4 mb-3">6. Înregistrare și Securitatea Contului</h2>
+                    <p>Pentru a utiliza anumite funcții ale platformei, poate fi necesară crearea unui cont. Sunteți responsabil pentru păstrarea confidențialității datelor de autentificare și pentru toate activitățile care au loc în contul dumneavoastră. Vă angajați să ne notificați imediat cu privire la orice utilizare neautorizată a contului dumneavoastră sau la orice altă încălcare a securității.</p>
+                </div>
+                
+                <div class="mb-4">
+                    <h2 class="h4 mb-3">7. Proprietate Intelectuală</h2>
+                    <p>Conținutul platformei, inclusiv, dar fără a se limita la, text, grafică, logo-uri, pictograme, imagini, clipuri audio, descărcări digitale și compilații de date, este proprietatea JoburipentruRomani sau a furnizorilor săi de conținut și este protejat de legile române și internaționale privind drepturile de autor și proprietatea intelectuală.</p>
+                </div>
+                
+                <div class="mb-4">
+                    <h2 class="h4 mb-3">8. Modificări ale Termenilor</h2>
+                    <p>Ne rezervăm dreptul, la discreția noastră, de a modifica acești Termeni și Condiții în orice moment. Dacă modificăm acești termeni, vom posta termenii modificați pe platformă și vom actualiza data „Ultima actualizare" de la începutul acestor Termeni și Condiții. Vă încurajăm să verificați periodic acești termeni pentru a rămâne informat despre obligațiile dumneavoastră.</p>
+                </div>
+                
+                <div class="mb-4">
+                    <h2 class="h4 mb-3">9. Rezilierea</h2>
+                    <p>Ne rezervăm dreptul, la discreția noastră, de a restricționa, suspenda sau termina accesul dumneavoastră la platformă, în totalitate sau parțial, fără notificare prealabilă, în orice moment și din orice motiv, inclusiv, dar fără a se limita la, încălcarea acestor Termeni și Condiții.</p>
+                </div>
+                
+                <div class="mb-4">
+                    <h2 class="h4 mb-3">10. Legislația Aplicabilă</h2>
+                    <p>Acești Termeni și Condiții sunt guvernați și interpretați în conformitate cu legile României. Orice dispută care decurge din sau în legătură cu acești termeni va fi supusă jurisdicției exclusive a instanțelor din România.</p>
+                </div>
+                
+                <div class="mb-4">
+                    <h2 class="h4 mb-3">11. Dispoziții Diverse</h2>
+                    <p><strong>11.1. Întregul Acord</strong></p>
+                    <p>Acești Termeni și Condiții, împreună cu Politica de Confidențialitate, constituie întregul acord dintre dumneavoastră și JoburipentruRomani cu privire la utilizarea platformei.</p>
+                    
+                    <p><strong>11.2. Separabilitate</strong></p>
+                    <p>Dacă orice prevedere a acestor Termeni și Condiții este considerată ilegală, nulă sau inaplicabilă din orice motiv, acea prevedere va fi considerată separabilă de acești termeni și nu va afecta validitatea și aplicabilitatea oricăror prevederi rămase.</p>
+                    
+                    <p><strong>11.3. Renunțare</strong></p>
+                    <p>Eșecul nostru de a aplica orice drept sau prevedere a acestor Termeni și Condiții nu va fi considerat o renunțare la aceste drepturi.</p>
+                </div>
+                
+                <div class="mb-4">
+                    <h2 class="h4 mb-3">12. Contact</h2>
+                    <p>Dacă aveți întrebări cu privire la acești Termeni și Condiții, vă rugăm să ne contactați la:</p>
+                    <p><strong>Email:</strong> contact@joburipentruromani.ro</p>
+                    <p><strong>Adresă:</strong> Str. Exemplului nr. 123, București, România</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-lg-4">
+            <!-- AdSense Sidebar -->
+            <div class="bg-white p-4 rounded shadow-sm mb-4">
+                {% render_ad 'sidebar' %}
+            </div>
+            
+            <!-- Table of Contents -->
+            <div class="bg-white p-4 rounded shadow-sm mb-4 sticky-top" style="top: 20px;">
+                <h3 class="h5 mb-3">Cuprins</h3>
+                <ul class="list-unstyled">
+                    <li class="mb-2"><a href="#" class="text-decoration-none">1. Acceptarea Termenilor</a></li>
+                    <li class="mb-2"><a href="#" class="text-decoration-none">2. Descrierea Serviciului</a></li>
+                    <li class="mb-2"><a href="#" class="text-decoration-none">3. Conținutul Utilizatorilor</a></li>
+                    <li class="mb-2"><a href="#" class="text-decoration-none">4. Limitarea Răspunderii</a></li>
+                    <li class="mb-2"><a href="#" class="text-decoration-none">5. Indemnizare</a></li>
+                    <li class="mb-2"><a href="#" class="text-decoration-none">6. Înregistrare și Securitate</a></li>
+                    <li class="mb-2"><a href="#" class="text-decoration-none">7. Proprietate Intelectuală</a></li>
+                    <li class="mb-2"><a href="#" class="text-decoration-none">8. Modificări ale Termenilor</a></li>
+                    <li class="mb-2"><a href="#" class="text-decoration-none">9. Rezilierea</a></li>
+                    <li class="mb-2"><a href="#" class="text-decoration-none">10. Legislația Aplicabilă</a></li>
+                    <li class="mb-2"><a href="#" class="text-decoration-none">11. Dispoziții Diverse</a></li>
+                    <li class="mb-2"><a href="#" class="text-decoration-none">12. Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

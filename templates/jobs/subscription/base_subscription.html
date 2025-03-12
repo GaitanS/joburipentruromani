@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load adsense %}
+
+{% block content %}
+<div class="container py-5">
+    <!-- Top AdSense Placement -->
+    <div class="mb-4">
+        {% render_ad 'subscription_top' %}
+    </div>
+    
+    <div class="row">
+        <!-- Sidebar -->
+        <div class="col-lg-3 mb-4">
+            <div class="list-group shadow-sm">
+                <a href="{% url 'jobs:subscription_dashboard' %}" class="list-group-item list-group-item-action {% if active_tab == 'dashboard' %}active{% endif %}">
+                    <i class="fas fa-th-large me-2"></i> Dashboard Abonament
+                </a>
+                <a href="{% url 'jobs:subscription_plans' %}" class="list-group-item list-group-item-action {% if active_tab == 'plans' %}active{% endif %}">
+                    <i class="fas fa-list-alt me-2"></i> Planuri Disponibile
+                </a>
+                <a href="{% url 'jobs:subscription_billing' %}" class="list-group-item list-group-item-action {% if active_tab == 'billing' %}active{% endif %}">
+                    <i class="fas fa-credit-card me-2"></i> Facturare și Plăți
+                </a>
+                <a href="{% url 'jobs:subscription_upgrade' %}" class="list-group-item list-group-item-action {% if active_tab == 'upgrade' %}active{% endif %}">
+                    <i class="fas fa-arrow-up me-2"></i> Upgrade Abonament
+                </a>
+                <a href="{% url 'jobs:company_dashboard' %}" class="list-group-item list-group-item-action">
+                    <i class="fas fa-arrow-left me-2"></i> Înapoi la Dashboard
+                </a>
+            </div>
+            
+            <!-- AdSense Sidebar -->
+            <div class="mt-4">
+                {% render_ad 'subscription_sidebar' %}
+            </div>
+        </div>
+        
+        <!-- Main Content -->
+        <div class="col-lg-9">
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="alert alert-{% if message.tags == 'error' %}danger{% else %}{{ message.tags }}{% endif %} alert-dismissible fade show mb-4" role="alert">
+                        {{ message }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                {% endfor %}
+            {% endif %}
+            
+            {% block subscription_content %}{% endblock %}
+        </div>
+    </div>
+    
+    <!-- Bottom AdSense Placement -->
+    <div class="mt-4">
+        {% render_ad 'subscription_bottom' %}
+    </div>
+</div>
+{% endblock %}

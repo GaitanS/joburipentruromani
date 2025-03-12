@@ -1,0 +1,426 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load adsense %}
+
+{% block title %}Pentru companii - JoburipentruRomani{% endblock %}
+{% block meta_description %}Recrutează cei mai buni candidați pentru joburile tale. Află cum JoburipentruRomani poate ajuta compania ta să găsească angajați calificați rapid și eficient.{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row">
+        <!-- Main Content -->
+        <div class="col-lg-8">
+            <div class="bg-white p-4 rounded shadow-sm mb-4">
+                <h1 class="h2 mb-4">Soluții de recrutare pentru compania ta</h1>
+                
+                <div class="mb-5">
+                    <p class="lead">JoburipentruRomani conectează angajatorii cu candidați calificați și motivați din domenii tehnice, operaționale și de specialitate.</p>
+                    
+                    <p>Ne-am specializat în recrutarea clasei muncitoare - operatori, constructori, șoferi, asistenți medicali și multe alte profesii tehnice și de specialitate, oferind companiilor o soluție eficientă pentru a găsi candidații potriviți.</p>
+                </div>
+                
+                <!-- AdSense High-Visibility Top Banner -->
+                <div class="mb-5 bg-light p-3 rounded">
+                    {% render_ad 'header' %}
+                </div>
+                
+                <!-- AdSense In-Content -->
+                <div class="my-5">
+                    {% render_ad 'content' %}
+                </div>
+                
+                <div class="mb-5">
+                    <h2 class="h4 mb-3">De ce să alegi JoburipentruRomani</h2>
+                    
+                    <div class="row mt-4">
+                        <div class="col-md-6 mb-4">
+                            <div class="card h-100 border-0 bg-light">
+                                <div class="card-body p-4">
+                                    <div class="mb-3 text-primary">
+                                        <i class="fas fa-users fa-2x"></i>
+                                    </div>
+                                    <h3 class="h5 mb-3">Candidați calificați și motivați</h3>
+                                    <p class="text-muted mb-0">Acces la o bază mare de candidați calificați, specializați în domenii tehnice și operaționale.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-4">
+                            <div class="card h-100 border-0 bg-light">
+                                <div class="card-body p-4">
+                                    <div class="mb-3 text-primary">
+                                        <i class="fas fa-clock fa-2x"></i>
+                                    </div>
+                                    <h3 class="h5 mb-3">Economisești timp și resurse</h3>
+                                    <p class="text-muted mb-0">Reduci timpul și costurile de recrutare prin procese optimizate și acces direct la candidați calificați.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-4">
+                            <div class="card h-100 border-0 bg-light">
+                                <div class="card-body p-4">
+                                    <div class="mb-3 text-primary">
+                                        <i class="fas fa-bullseye fa-2x"></i>
+                                    </div>
+                                    <h3 class="h5 mb-3">Targetare precisă</h3>
+                                    <p class="text-muted mb-0">Anunțurile tale ajung direct la candidații potriviți, cu experiență și calificările necesare pentru poziția deschisă.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-4">
+                            <div class="card h-100 border-0 bg-light">
+                                <div class="card-body p-4">
+                                    <div class="mb-3 text-primary">
+                                        <i class="fas fa-chart-line fa-2x"></i>
+                                    </div>
+                                    <h3 class="h5 mb-3">Vizibilitate maximă</h3>
+                                    <p class="text-muted mb-0">Anunțurile tale beneficiază de vizibilitate maximă prin platformă, notificări email și promovare în social media.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- AdSense After Pricing Plans (High Intent Area) -->
+                    <div class="mt-4 bg-light p-3 rounded">
+                        <div class="small text-muted mb-2">Oferte speciale pentru angajatori</div>
+                        {% render_ad 'job_listing' %}
+                    </div>
+                </div>
+                
+                <div class="mb-5">
+                    <h2 class="h4 mb-3">Disclaimer privind postările utilizatorilor</h2>
+                    
+                    <div class="bg-light p-4 rounded">
+                        <p class="mb-3"><strong>NOTĂ IMPORTANTĂ:</strong> JoburipentruRomani acționează exclusiv ca o platformă intermediară între angajatori și persoanele aflate în căutarea unui loc de muncă.</p>
+                        
+                        <p>Prin utilizarea serviciilor noastre, înțelegeți și sunteți de acord că:</p>
+                        
+                        <ul>
+                            <li class="mb-2">Conținutul postat în anunțurile de angajare este responsabilitatea exclusivă a companiei care le publică.</li>
+                            <li class="mb-2">JoburipentruRomani nu verifică sau garantează acuratețea, legalitatea sau autenticitatea anunțurilor publicate de angajatori sau a informațiilor furnizate de candidați.</li>
+                            <li class="mb-2">Nu suntem responsabili pentru nicio postare falsă, înșelătoare sau frauduloasă făcută de utilizatorii platformei.</li>
+                            <li class="mb-2">Ne rezervăm dreptul de a elimina orice conținut care încalcă Termenii și Condițiile noastre, fără a avea însă obligația de a monitoriza toate postările.</li>
+                        </ul>
+                        
+                        <p class="mb-0">Pentru mai multe informații, vă rugăm să consultați <a href="{% url 'jobs:terms' %}" class="text-decoration-none">Termenii și Condițiile</a> și <a href="{% url 'jobs:privacy' %}" class="text-decoration-none">Politica de Confidențialitate</a>.</p>
+                    </div>
+                </div>
+                
+                <!-- AdSense In-Content -->
+                <div class="my-5">
+                    {% render_ad 'content' %}
+                </div>
+                
+                <div class="mb-5">
+                    <h2 class="h4 mb-3">Planuri de Abonament</h2>
+                    
+                    <!-- AdSense Before Pricing Plans (High CTR Area) -->
+                    <div class="my-3 bg-light p-3 rounded">
+                        {% render_ad 'between_categories' %}
+                    </div>
+                    
+                    <p class="mb-4">Alegeți planul potrivit pentru nevoile companiei dumneavoastră. Toate planurile includ acces la instrumentele de recrutare și dashboard-ul angajatorului.</p>
+                    
+                    <div class="row mt-4">
+                        <div class="col-md-6 col-lg-4 mb-4">
+                            <div class="card h-100">
+                                <div class="card-header text-center">
+                                    <h3 class="h5 mb-0">Free Plan</h3>
+                                </div>
+                                <div class="card-body">
+                                    <div class="price text-center mb-4">
+                                        <span class="h2">0€</span>
+                                        <span class="text-muted">/lună</span>
+                                    </div>
+                                    <ul class="list-unstyled">
+                                        <li class="mb-2"><i class="fas fa-check text-success me-2"></i> 1 anunț activ</li>
+                                        <li class="mb-2"><i class="fas fa-check text-success me-2"></i> 30 zile vizibilitate</li>
+                                        <li class="mb-2"><i class="fas fa-check text-success me-2"></i> Dashboard angajator</li>
+                                        <li class="mb-2"><i class="fas fa-check text-success me-2"></i> Acces la CV-uri candidați</li>
+                                        <li class="mb-2"><i class="fas fa-times text-danger me-2"></i> Anunțuri promovate</li>
+                                        <li class="mb-2"><i class="fas fa-times text-danger me-2"></i> Suport prioritar</li>
+                                    </ul>
+                                </div>
+                                <div class="card-footer bg-white text-center">
+                                    <a href="{% url 'register' %}" class="btn btn-outline-primary btn-sm">Înregistrează-te acum</a>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-6 col-lg-4 mb-4">
+                            <div class="card h-100 border-primary">
+                                <div class="card-header bg-primary text-white text-center">
+                                    <h3 class="h5 mb-0">Standard</h3>
+                                </div>
+                                <div class="card-body">
+                                    <div class="price text-center mb-4">
+                                        <span class="h2">25€</span>
+                                        <span class="text-muted">/lună</span>
+                                    </div>
+                                    <ul class="list-unstyled">
+                                        <li class="mb-2"><i class="fas fa-check text-success me-2"></i> 5 anunțuri active</li>
+                                        <li class="mb-2"><i class="fas fa-check text-success me-2"></i> 30 zile vizibilitate</li>
+                                        <li class="mb-2"><i class="fas fa-check text-success me-2"></i> Dashboard angajator</li>
+                                        <li class="mb-2"><i class="fas fa-check text-success me-2"></i> Acces la CV-uri candidați</li>
+                                        <li class="mb-2"><i class="fas fa-times text-danger me-2"></i> Anunțuri promovate (disponibil ca add-on)</li>
+                                        <li class="mb-2"><i class="fas fa-times text-danger me-2"></i> Suport prioritar</li>
+                                    </ul>
+                                </div>
+                                <div class="card-footer bg-white text-center">
+                                    <a href="{% url 'jobs:subscription_plans' %}" class="btn btn-outline-primary btn-sm">Alege acest plan</a>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-6 col-lg-4 mb-4">
+                            <div class="card h-100 border-primary position-relative">
+                                <div class="badge bg-warning position-absolute" style="top: -10px; right: 10px;">Popular</div>
+                                <div class="card-header bg-primary text-white text-center">
+                                    <h3 class="h5 mb-0">Business</h3>
+                                </div>
+                                <div class="card-body">
+                                    <div class="price text-center mb-4">
+                                        <span class="h2">99€</span>
+                                        <span class="text-muted">/lună</span>
+                                    </div>
+                                    <ul class="list-unstyled">
+                                        <li class="mb-2"><i class="fas fa-check text-success me-2"></i> 15 anunțuri active</li>
+                                        <li class="mb-2"><i class="fas fa-check text-success me-2"></i> 45 zile vizibilitate</li>
+                                        <li class="mb-2"><i class="fas fa-check text-success me-2"></i> Dashboard angajator</li>
+                                        <li class="mb-2"><i class="fas fa-check text-success me-2"></i> Acces la CV-uri candidați</li>
+                                        <li class="mb-2"><i class="fas fa-check text-success me-2"></i> 2 anunțuri promovate</li>
+                                        <li class="mb-2"><i class="fas fa-times text-danger me-2"></i> Suport prioritar</li>
+                                    </ul>
+                                </div>
+                                <div class="card-footer bg-white text-center">
+                                    <a href="{% url 'jobs:subscription_plans' %}" class="btn btn-primary btn-sm">Alege acest plan</a>
+                                </div>
+                            </div>
+                        
+                        </div>
+                        <div class="col-md-6 col-lg-4 mb-4">
+                            <div class="card h-100 border-primary">
+                                <div class="card-header bg-primary text-white text-center">
+                                    <h3 class="h5 mb-0">Enterprise</h3>
+                                </div>
+                                <div class="card-body">
+                                    <div class="price text-center mb-4">
+                                        <span class="h2">199€</span>
+                                        <span class="text-muted">/lună</span>
+                                    </div>
+                                    <ul class="list-unstyled">
+                                        <li class="mb-2"><i class="fas fa-check text-success me-2"></i> Anunțuri nelimitate</li>
+                                        <li class="mb-2"><i class="fas fa-check text-success me-2"></i> 90 zile vizibilitate</li>
+                                        <li class="mb-2"><i class="fas fa-check text-success me-2"></i> Dashboard angajator</li>
+                                        <li class="mb-2"><i class="fas fa-check text-success me-2"></i> Acces la CV-uri candidați</li>
+                                        <li class="mb-2"><i class="fas fa-check text-success me-2"></i> 5 anunțuri promovate</li>
+                                        <li class="mb-2"><i class="fas fa-check text-success me-2"></i> Suport prioritar</li>
+                                    </ul>
+                                </div>
+                                <div class="card-footer bg-white text-center">
+                                    <a href="{% url 'jobs:subscription_plans' %}" class="btn btn-outline-primary btn-sm">Alege acest plan</a>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-6 col-lg-4 mb-4">
+                            <div class="card h-100 border-primary">
+                                <div class="card-header bg-primary text-white text-center">
+                                    <h3 class="h5 mb-0">Promoted Only</h3>
+                                </div>
+                                <div class="card-body">
+                                    <div class="price text-center mb-4">
+                                        <span class="h2">5€</span>
+                                        <span class="text-muted">/lună</span>
+                                    </div>
+                                    <ul class="list-unstyled">
+                                        <li class="mb-2"><i class="fas fa-times text-danger me-2"></i> Anunțuri active (doar promovare)</li>
+                                        <li class="mb-2"><i class="fas fa-check text-success me-2"></i> Vizibilitate îmbunătățită</li>
+                                        <li class="mb-2"><i class="fas fa-check text-success me-2"></i> Dashboard angajator limitat</li>
+                                        <li class="mb-2"><i class="fas fa-times text-danger me-2"></i> Acces la CV-uri candidați</li>
+                                        <li class="mb-2"><i class="fas fa-check text-success me-2"></i> 3 anunțuri promovate</li>
+                                        <li class="mb-2"><i class="fas fa-times text-danger me-2"></i> Suport prioritar</li>
+                                    </ul>
+                                </div>
+                                <div class="card-footer bg-white text-center">
+                                    <a href="{% url 'jobs:subscription_plans' %}" class="btn btn-outline-primary btn-sm">Alege acest plan</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="mb-5">
+                    <h2 class="h4 mb-3">Testimoniale de la angajatori</h2>
+                    
+                    <div class="row mt-4">
+                        <div class="col-md-6 mb-4">
+                            <div class="card h-100 border-0">
+                                <div class="card-body">
+                                    <div class="mb-3 text-warning">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                    </div>
+                                    <p class="testimonial-text mb-4">"Prin JoburipentruRomani am reușit să găsim rapid șoferi profesioniști pentru flota noastră. Procesul a fost simplu, iar candidații au fost bine potriviți pentru cerințele noastre."</p>
+                                    <div class="d-flex align-items-center">
+                                        <div class="flex-shrink-0">
+                                            <div class="bg-light rounded-circle d-flex align-items-center justify-content-center" style="width: 50px; height: 50px;">
+                                                <span class="h5 mb-0">T</span>
+                                            </div>
+                                        </div>
+                                        <div class="flex-grow-1 ms-3">
+                                            <h3 class="h6 mb-0">Mihai Popescu</h3>
+                                            <p class="text-muted small mb-0">Director HR, Transport Internațional SRL</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-4">
+                            <div class="card h-100 border-0">
+                                <div class="card-body">
+                                    <div class="mb-3 text-warning">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star-half-alt"></i>
+                                    </div>
+                                    <p class="testimonial-text mb-4">"Ca firmă de construcții, provocarea noastră este de a găsi personal calificat. JoburipentruRomani ne-a ajutat să găsim zidari și tâmplari cu experiență într-un timp foarte scurt."</p>
+                                    <div class="d-flex align-items-center">
+                                        <div class="flex-shrink-0">
+                                            <div class="bg-light rounded-circle d-flex align-items-center justify-content-center" style="width: 50px; height: 50px;">
+                                                <span class="h5 mb-0">C</span>
+                                            </div>
+                                        </div>
+                                        <div class="flex-grow-1 ms-3">
+                                            <h3 class="h6 mb-0">Ana Marinescu</h3>
+                                            <p class="text-muted small mb-0">Manager Resurse Umane, Construct Plus SRL</p>
+                                        </div>
+                                    </div>
+                
+                <!-- AdSense Sidebar Bottom (Sticky on scroll for desktop) -->
+                <div class="d-none d-lg-block mt-4 bg-light p-3 rounded position-sticky" style="top: 100px;">
+                    <div class="small text-muted mb-2">Instrumente de recrutare recomandate</div>
+                    {% render_ad 'user_dashboard' %}
+                </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- AdSense After Testimonials (Trust Building Area) -->
+                    <div class="mt-4 bg-light p-3 rounded">
+                        <div class="small text-muted mb-2">Conținut sponsorizat pentru angajatori</div>
+                        {% render_ad 'after_apply' %}
+                    </div>
+                </div>
+                
+                <div class="cta-section bg-primary text-white p-4 rounded text-center">
+                    <h2 class="h4 mb-3">Gata să începi recrutarea?</h2>
+                    <p class="mb-4">Înregistrează-te acum și găsește candidații potriviți pentru afacerea ta!</p>
+                    <a href="{% url 'register' %}" class="btn btn-light">Creează cont angajator</a>
+                </div>
+                
+                <!-- AdSense Bottom of Page (Exit Intent Area) -->
+                <div class="mt-5 bg-light p-3 rounded">
+                    <div class="small text-muted mb-2">Servicii recomandate pentru angajatori</div>
+                    {% render_ad 'footer' %}
+                </div>
+            </div>
+        </div>
+        
+        <!-- Sidebar -->
+        <div class="col-lg-4">
+            <!-- AdSense Sidebar -->
+            <div class="bg-white p-4 rounded shadow-sm mb-4">
+                <div class="small text-muted mb-2">Servicii pentru angajatori</div>
+                {% render_ad 'sidebar' %}
+  
+            </div>
+            
+            <!-- Contact Form -->
+            <div class="bg-white p-4 rounded shadow-sm mb-4">
+                <h3 class="h5 mb-3">Ai întrebări? Contactează-ne</h3>
+                <form>
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Numele companiei</label>
+                        <input type="text" class="form-control" id="name" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="email" class="form-control" id="email" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="phone" class="form-label">Telefon</label>
+                        <input type="tel" class="form-control" id="phone">
+                    </div>
+                    <div class="mb-3">
+                        <label for="message" class="form-label">Mesaj</label>
+                        <textarea class="form-control" id="message" rows="4" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary w-100">Trimite mesajul</button>
+                </form>
+            </div>
+            
+            <!-- FAQs -->
+            <div class="bg-white p-4 rounded shadow-sm">
+                <h3 class="h5 mb-3">Întrebări frecvente</h3>
+                
+                <div class="accordion" id="faqAccordion">
+                    <div class="accordion-item">
+                        <h4 class="accordion-header" id="headingOne">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne">
+                                Cum pot posta un anunț de angajare?
+                            </button>
+                        </h4>
+                        <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">
+                                Pentru a posta un anunț, trebuie să vă înregistrați un cont de angajator, să alegeți un pachet și să completați detaliile anunțului în dashboard-ul companiei.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h4 class="accordion-header" id="headingTwo">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo">
+                                Cât timp rămâne vizibil un anunț?
+                            </button>
+                        </h4>
+                        <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">
+                                Durata de vizibilitate depinde de pachetul ales: Standard - 30 zile, Business - 45 zile, Enterprise - 60 zile.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h4 class="accordion-header" id="headingThree">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree">
+                                Ce se întâmplă când un candidat aplică?
+                            </button>
+                        </h4>
+                        <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">
+                                Veți primi o notificare prin email și veți putea vedea toate aplicările în dashboard-ul companiei, inclusiv CV-urile și scrisorile de intenție ale candidaților.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h4 class="accordion-header" id="headingFour">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour">
+                                Pot modifica un anunț după publicare?
+                            </button>
+                        </h4>
+                        <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">
+                                Da, puteți edita detaliile anunțului oricând din dashboard-ul companiei. Modificările vor fi vizibile imediat.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

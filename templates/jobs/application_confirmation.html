@@ -1,0 +1,190 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load adsense %}
+
+{% block title %}Aplicare trimisă cu succes - JoburipentruRomani{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow-sm border-0 mb-4">
+                <div class="card-body p-5 text-center">
+                    <div class="success-icon mb-4">
+                        <i class="fas fa-check-circle text-success" style="font-size: 4rem;"></i>
+                    </div>
+                    <h1 class="h3 mb-4">Aplicarea ta a fost trimisă cu succes!</h1>
+                    <p class="lead mb-4">Aplicarea ta pentru poziția <strong>{{ application.job.title }}</strong> la <strong>{{ application.job.company.name }}</strong> a fost înregistrată.</p>
+                    <p class="mb-4">Angajatorul va primi CV-ul și scrisoarea ta de intenție. Vei primi o notificare când aplicarea ta va fi verificată.</p>
+                    
+                    <div class="text-center mt-4">
+                        <a href="{% url 'jobs:job_detail' application.job.slug %}" class="btn btn-outline-primary me-2">Înapoi la detalii job</a>
+                        <a href="{% url 'jobs:user_dashboard' %}" class="btn btn-primary">Vezi toate aplicările</a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- AdSense After Application -->
+            <div id="ad-container-after-apply" class="p-3 bg-light rounded border-start border-4 border-success">
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                    <span class="small text-muted">Sponsorizat</span>
+                    <span class="badge bg-success">Joburi care ți se potrivesc</span>
+                </div>
+                {% render_ad 'after_apply' %}
+            </div>
+            
+            <!-- Related Jobs -->
+            <div class="card shadow-sm border-0 mt-4">
+                <div class="card-body p-4">
+                    <h2 class="h4 mb-4">Joburi similare</h2>
+                    
+                    <div class="row row-cols-1 row-cols-md-2 g-4">
+                        {% for job in related_jobs|slice:":2" %}
+                            <div class="col">
+                                <div class="card h-100 job-card">
+                                    <div class="card-body">
+                                        <h5 class="card-title">
+                                            <a href="{% url 'jobs:job_detail' job.slug %}" class="text-decoration-none">{{ job.title }}</a>
+                                        </h5>
+                                        <p class="company-name">{{ job.company.name }}</p>
+                                        <p class="location text-muted">
+                                            <i class="fas fa-map-marker-alt me-1"></i> {{ job.location.city }}
+                                        </p>
+                                        <p class="job-type">
+                                            <span class="badge bg-light text-dark">{{ job.get_job_type_display }}</span>
+                                        </p>
+                                    </div>
+                                    <div class="card-footer bg-white">
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <a href="{% url 'jobs:job_detail' job.slug %}" class="btn btn-outline-primary btn-sm">Vezi detalii</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        {% empty %}
+                            <div class="col-12">
+                                <p class="text-center text-muted">Nu am găsit joburi similare momentan.</p>
+                            </div>
+                        {% endfor %}
+                        
+                        <!-- Native Ad within Related Jobs -->
+                        <div class="col">
+                            <div class="card h-100 job-card border-warning">
+                                <div class="card-body">
+                                    <div class="small text-muted mb-1">Sponsorizat</div>
+                                    <h5 class="card-title">
+                                        {% render_native_ad_job %}
+                                    </h5>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Tips for Applicants -->
+            <div class="card shadow-sm border-0 mt-4">
+                <div class="card-body p-4">
+                    <h2 class="h4 mb-4">Sfaturi pentru candidați</h2>
+                    
+                    <div class="tips-list">
+                        <div class="tip-item mb-3">
+                            <div class="d-flex">
+                                <div class="tip-icon me-3">
+                                    <i class="fas fa-envelope text-primary"></i>
+                                </div>
+                                <div>
+                                    <h5 class="h6 mb-1">Verifică-ți email-ul</h5>
+                                    <p class="text-muted small mb-0">Verifică regulat email-ul pentru comunicări de la angajator.</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="tip-item mb-3">
+                            <div class="d-flex">
+                                <div class="tip-icon me-3">
+                                    <i class="fas fa-phone text-primary"></i>
+                                </div>
+                                <div>
+                                    <h5 class="h6 mb-1">Pregătește-te pentru interviu</h5>
+                                    <p class="text-muted small mb-0">Documentează-te despre companie și pregătește răspunsuri pentru întrebările frecvente.</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="tip-item">
+                            <div class="d-flex">
+                                <div class="tip-icon me-3">
+                                    <i class="fas fa-briefcase text-primary"></i>
+                                </div>
+                                <div>
+                                    <h5 class="h6 mb-1">Continuă căutarea</h5>
+                                    <p class="text-muted small mb-0">Nu te opri din aplicat la alte joburi până nu primești o ofertă fermă.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Bottom AdSense Placement -->
+            <div class="card shadow-sm border-0 mt-4">
+                <div class="card-body p-4">
+                    <h2 class="h5 mb-3">Dezvoltă-ți cariera</h2>
+                    <div class="p-3 bg-light rounded" id="ad-container-bottom">
+                        <div class="small text-muted mb-2">Sponsorizat</div>
+                        {% render_ad 'after_apply' %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    /* Ad Styling */
+    #ad-container-after-apply:hover, 
+    #ad-container-bottom:hover,
+    .card.border-warning:hover {
+        box-shadow: 0 0 10px rgba(0, 123, 255, 0.3);
+        transition: box-shadow 0.3s ease;
+    }
+    
+    .success-icon {
+        animation: pulse 2s infinite;
+    }
+    
+    @keyframes pulse {
+        0% { transform: scale(1); }
+        50% { transform: scale(1.05); }
+        100% { transform: scale(1); }
+    }
+</style>
+
+{% block extra_scripts %}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Track user engagement for ad optimization
+        const adContainers = document.querySelectorAll('[id^="ad-container"]');
+        const tipsSection = document.querySelector('.tips-list');
+        let tipsViewed = false;
+        
+        // Highlight bottom ad when user scrolls to tips
+        window.addEventListener('scroll', function() {
+            if (!tipsViewed && tipsSection && window.scrollY > (tipsSection.offsetTop - window.innerHeight)) {
+                tipsViewed = true;
+                
+                // Add animation to bottom ad to draw attention
+                setTimeout(function() {
+                    const bottomAd = document.getElementById('ad-container-bottom');
+                    if (bottomAd) {
+                        bottomAd.classList.add('border');
+                        bottomAd.classList.add('border-primary');
+                    }
+                }, 800);
+            }
+        });
+    });
+</script>
+{% endblock %}
+{% endblock %}

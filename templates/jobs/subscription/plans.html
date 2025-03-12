@@ -1,0 +1,236 @@
+{% extends 'jobs/subscription/base_subscription.html' %}
+{% load static %}
+{% load i18n %}
+{% load adsense %}
+
+{% block title %}Planuri de Abonament - JoburipentruRomani{% endblock %}
+
+{% block subscription_content %}
+<!-- AdSense Top of Subscription Page -->
+<div class="bg-light rounded p-3 mb-4">
+    <div class="small text-muted mb-2">Conținut sponsorizat</div>
+    {% render_ad 'subscription_top' %}
+</div>
+
+<div class="bg-white rounded shadow-sm p-4 mb-4">
+    <h1 class="h3 mb-4">Planuri de Abonament</h1>
+    
+    <p class="lead mb-4">Alege planul care se potrivește cel mai bine nevoilor tale de recrutare</p>
+    
+    <form method="post" action="{% url 'jobs:subscription_plans' %}" id="subscription-form">
+        {% csrf_token %}
+        
+        <div class="row row-cols-1 row-cols-md-3 g-4 mb-5">
+            {% for plan in plans %}
+                <div class="col">
+                    <div class="card h-100 subscription-plan-card {% if plan.tier == 'business' %}border-primary{% endif %} position-relative">
+                        {% if plan.tier == 'business' %}
+                            <div class="badge bg-primary position-absolute top-0 end-0 mt-2 me-2">Recomandat</div>
+                        {% endif %}
+                        <div class="card-header text-center {% if plan.tier == 'business' %}bg-primary text-white{% endif %}">
+                            <h3 class="h5 mb-0">{{ plan.name }}</h3>
+                        </div>
+                        <div class="card-body d-flex flex-column">
+                            <div class="text-center mb-3">
+                                <span class="h2 text-primary fw-bold">
+                                    {% if plan.tier == 'free' %}
+                                        0€
+                                    {% else %}
+                                        <span class="monthly-price {% if form.billing_cycle.value == 'annual' %}d-none{% endif %}">{{ plan.price_monthly }}€</span>
+                                        <span class="annual-price {% if form.billing_cycle.value != 'annual' %}d-none{% endif %}">{{ plan.price_annually }}€</span>
+                                    {% endif %}
+                                </span>
+                                <span class="text-muted">
+                                    {% if plan.tier != 'free' %}
+                                    / <span class="billing-period">{% if form.billing_cycle.value == 'annual' %}an{% else %}lună{% endif %}</span>
+                                    {% endif %}
+                                </span>
+                            </div>
+                            
+                            <ul class="list-unstyled mb-4">
+                                <li class="mb-2 d-flex align-items-center">
+                                    <i class="fas {% if plan.max_active_jobs > 0 %}fa-check text-success{% else %}fa-times text-danger{% endif %} me-2"></i>
+                                    <span>
+                                        {% if plan.max_active_jobs == 1 %}
+                                            1 anunț activ
+                                        {% elif plan.max_active_jobs < 0 %}
+                                            Anunțuri nelimitate
+                                        {% else %}
+                                            {{ plan.max_active_jobs }} anunțuri active
+                                        {% endif %}
+                                    </span>
+                                </li>
+                                <li class="mb-2 d-flex align-items-center">
+                                    <i class="fas fa-check text-success me-2"></i>
+                                    <span>{{ plan.job_visibility_days }} zile vizibilitate</span>
+                                </li>
+                                <li class="mb-2 d-flex align-items-center">
+                                    <i class="fas {% if plan.has_candidate_cv_access %}fa-check text-success{% else %}fa-times text-danger{% endif %} me-2"></i>
+                                    <span>Acces la CV-uri candidați</span>
+                                </li>
+                                <li class="mb-2 d-flex align-items-center">
+                                    <i class="fas {% if plan.promoted_listings_count > 0 %}fa-check text-success{% else %}fa-times text-danger{% endif %} me-2"></i>
+                                    <span>
+                                        {% if plan.promoted_listings_count == 0 %}
+                                            Fără anunțuri promovate
+                                        {% elif plan.promoted_listings_count == 1 %}
+                                            1 anunț promovat
+                                        {% else %}
+                                            {{ plan.promoted_listings_count }} anunțuri promovate
+                                        {% endif %}
+                                    </span>
+                                </li>
+                                <li class="mb-2 d-flex align-items-center">
+                                    <i class="fas {% if plan.has_priority_support %}fa-check text-success{% else %}fa-times text-danger{% endif %} me-2"></i>
+                                    <span>Suport prioritar</span>
+                                </li>
+                            </ul>
+                            
+                            <div class="mt-auto text-center">
+                                <div class="form-check mb-3">
+                                    <input class="form-check-input" type="radio" name="{{ form.plan.html_name }}" 
+                                           id="plan-{{ plan.id }}" value="{{ plan.id }}" 
+                                           {% if form.plan.value|add:"0" == plan.id or forloop.first and not form.plan.value %}checked{% endif %}>
+                                    <label class="form-check-label" for="plan-{{ plan.id }}">
+                                        Selectează acest plan
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        
+        <div class="mb-4 bg-light p-4 rounded">
+            <h4 class="h5 mb-3">Perioada de facturare</h4>
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="{{ form.billing_cycle.html_name }}" 
+                               id="billing-monthly" value="monthly" 
+                               {% if form.billing_cycle.value != 'annual' %}checked{% endif %}>
+                        <label class="form-check-label" for="billing-monthly">Lunar</label>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="{{ form.billing_cycle.html_name }}" 
+                               id="billing-annual" value="annual" 
+                               {% if form.billing_cycle.value == 'annual' %}checked{% endif %}>
+                        <label class="form-check-label" for="billing-annual">Anual <span class="badge bg-success">Economisești până la 20%</span></label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="text-center">
+            <button type="submit" class="btn btn-primary btn-lg">Continuă la plată</button>
+        </div>
+    </form>
+</div>
+
+<!-- AdSense Between Plans and FAQ -->
+<div class="bg-light rounded p-3 mb-4">
+    <div class="small text-muted mb-2">Conținut sponsorizat</div>
+    {% render_ad 'subscription_comparison' %}
+</div>
+
+<div class="d-none d-lg-block col-lg-3">{% render_ad 'subscription_sidebar' %}</div>
+
+<!-- FAQ Section -->
+<div class="bg-white rounded shadow-sm p-4">
+    <h2 class="h4 mb-4">Întrebări Frecvente</h2>
+    
+    <div class="accordion" id="faqAccordion">
+        <div class="accordion-item">
+            <h3 class="accordion-header" id="headingOne">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne">
+                    Ce se întâmplă dacă depășesc limita de anunțuri active?
+                </button>
+            </h3>
+            <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#faqAccordion">
+                <div class="accordion-body">
+                    Dacă atingi limita de anunțuri active pentru planul tău, va trebui să dezactivezi un anunț existent înainte de a putea posta unul nou, sau să faci upgrade la un plan superior cu mai multe anunțuri permise.
+                </div>
+            </div>
+        </div>
+        <div class="accordion-item">
+            <h3 class="accordion-header" id="headingTwo">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo">
+                    Pot anula sau schimba planul în orice moment?
+                </button>
+            </h3>
+            <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#faqAccordion">
+                <div class="accordion-body">
+                    Da, poți anula sau schimba planul în orice moment. Dacă faci upgrade, vei plăti doar diferența prorata pentru perioada rămasă. Dacă faci downgrade sau anulezi, planul curent va rămâne activ până la sfârșitul perioadei de facturare.
+                </div>
+            </div>
+        </div>
+        <div class="accordion-item">
+            <h3 class="accordion-header" id="headingThree">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree">
+                    Ce înseamnă "anunțuri promovate"?
+                </button>
+            </h3>
+            <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#faqAccordion">
+                <div class="accordion-body">
+                    Anunțurile promovate apar la începutul listelor de joburi, sunt evidențiate vizual și primesc expunere suplimentară în emailurile către candidați și în social media. Sunt o modalitate excelentă de a atrage mai mulți candidați calificați.
+                </div>
+            </div>
+        </div>
+        <div class="accordion-item">
+            <h3 class="accordion-header" id="headingFour">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour">
+                    Cum sunt procesate plățile?
+                </button>
+            </h3>
+            <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour" data-bs-parent="#faqAccordion">
+                <div class="accordion-body">
+                    Procesăm plățile în mod securizat prin Stripe. Acceptăm majoritatea cardurilor de credit și debit (Visa, Mastercard, American Express). Informațiile tale de plată sunt criptate și protejate conform celor mai înalte standarde de securitate.
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- AdSense Bottom of Subscription Page -->
+<div class="bg-light rounded p-3 mt-4">
+    <div class="small text-muted mb-2">Conținut sponsorizat</div>
+    {% render_ad 'subscription_bottom' %}
+</div>
+
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Toggle between monthly and annual pricing
+        const monthlyRadio = document.getElementById('billing-monthly');
+        const annualRadio = document.getElementById('billing-annual');
+        const monthlyPrices = document.querySelectorAll('.monthly-price');
+        const annualPrices = document.querySelectorAll('.annual-price');
+        const billingPeriods = document.querySelectorAll('.billing-period');
+        
+        function updatePriceDisplay(isAnnual) {
+            monthlyPrices.forEach(el => el.classList.toggle('d-none', isAnnual));
+            annualPrices.forEach(el => el.classList.toggle('d-none', !isAnnual));
+            billingPeriods.forEach(el => {
+                el.textContent = isAnnual ? 'an' : 'lună';
+            });
+        }
+        
+        monthlyRadio.addEventListener('change', function() {
+            if (this.checked) {
+                updatePriceDisplay(false);
+            }
+        });
+        
+        annualRadio.addEventListener('change', function() {
+            if (this.checked) {
+                updatePriceDisplay(true);
+            }
+        });
+    });
+</script>
+{% endblock %}

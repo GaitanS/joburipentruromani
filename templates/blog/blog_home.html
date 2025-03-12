@@ -1,0 +1,183 @@
+{% extends 'blog/blog_base.html' %}
+{% load static %}
+{% load humanize %}
+{% load adsense %}
+
+{% block meta_title %}Blog - Sfaturi, Articole și Resurse pentru Carieră | JoburiPentruRomani{% endblock %}
+{% block meta_description %}Articole, sfaturi și resurse pentru dezvoltarea carierei și căutarea de locuri de muncă pentru români. Ghiduri de carieră și informații profesionale.{% endblock %}
+
+{% block blog_content %}
+<div class="blog-home">
+    <!-- Header -->
+    <div class="blog-header mb-5">
+        <h1 class="display-5 fw-bold mb-3">Blog JoburiPentruRomani</h1>
+        <p class="lead text-secondary mb-0">
+            Sfaturi și articole despre carieră, interviuri, CV-uri și dezvoltare profesională
+        </p>
+    </div>
+    
+    <!-- Featured Posts Carousel -->
+    {% if featured_posts %}
+    <div class="featured-posts-carousel mb-5">
+        <h2 class="h4 mb-3 border-start border-4 border-primary ps-3">Articole în evidență</h2>
+        <div id="featuredPostsCarousel" class="carousel slide carousel-fade shadow-sm rounded" data-bs-ride="carousel">
+            <div class="carousel-indicators">
+                {% for post in featured_posts %}
+                    <button type="button" data-bs-target="#featuredPostsCarousel" data-bs-slide-to="{{ forloop.counter0 }}" {% if forloop.first %}class="active"{% endif %} aria-label="Slide {{ forloop.counter }}"></button>
+                {% endfor %}
+            </div>
+            <div class="carousel-inner rounded">
+                {% for post in featured_posts %}
+                    <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                        <a href="{% url 'jobs:blog_detail' post.slug %}" class="text-decoration-none">
+                            {% if post.featured_image %}
+                                <img src="{{ post.featured_image.url }}" class="d-block w-100" alt="{{ post.title }}">
+                            {% else %}
+                                <img src="{% static 'images/blog/default-featured.jpg' %}" class="d-block w-100" alt="{{ post.title }}">
+                            {% endif %}
+                            <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-50 p-3 rounded">
+                                <h3 class="h5">{{ post.title }}</h3>
+                                <p class="d-none d-lg-block">{{ post.summary|truncatechars:120 }}</p>
+                                <div class="d-flex align-items-center justify-content-center small text-white">
+                                    <span class="me-3"><i class="far fa-clock me-1"></i> {{ post.reading_time }} min</span>
+                                    <span><i class="far fa-folder me-1"></i> {{ post.category.name }}</span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                {% endfor %}
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#featuredPostsCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#featuredPostsCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+    </div>
+    {% endif %}
+    
+    <!-- AdSense After Featured Posts -->
+    <div class="ad-container mb-5 p-3 bg-light rounded border-start border-4 border-primary">
+        <div class="small text-muted mb-1 text-center">Oferte de muncă recomandate</div>
+        {% render_ad 'between_categories' %}
+    </div>
+    
+    <!-- Latest Posts -->
+    <div class="latest-posts">
+        <h2 class="h4 mb-4 border-start border-4 border-primary ps-3">Articole recente</h2>
+        
+        <div class="row row-cols-1 row-cols-md-2 g-4 mb-4">
+            {% for post in posts %}
+                <div class="col">
+                    <div class="card h-100 border-0 shadow-sm blog-card">
+                        <a href="{% url 'jobs:blog_detail' post.slug %}" class="text-decoration-none">
+                            <div class="position-relative">
+                                {% if post.featured_image %}
+                                    <img src="{{ post.featured_image.url }}" class="card-img-top" alt="{{ post.title }}">
+                                {% else %}
+                                    <img src="{% static 'images/blog/default-card.jpg' %}" class="card-img-top" alt="{{ post.title }}">
+                                {% endif %}
+                                
+                                <div class="blog-card-category position-absolute">
+                                    <span class="badge bg-primary">{{ post.category.name }}</span>
+                                </div>
+                            </div>
+                        </a>
+                        
+                        <div class="card-body">
+                            <div class="card-meta small text-muted mb-2">
+                                <span class="me-3"><i class="far fa-calendar-alt me-1"></i> {{ post.published_at|date:"d M Y" }}</span>
+                                <span><i class="far fa-clock me-1"></i> {{ post.reading_time }} min</span>
+                            </div>
+                            
+                            <h3 class="card-title h5 mb-2">
+                                <a href="{% url 'jobs:blog_detail' post.slug %}" class="text-decoration-none text-dark stretched-link">
+                                    {{ post.title }}
+                                </a>
+                            </h3>
+                            
+                            <p class="card-text text-muted">{{ post.summary|truncatechars:120 }}</p>
+                        </div>
+                        
+                        <div class="card-footer bg-white border-0 pt-0">
+                            <div class="d-flex align-items-center">
+                                <div class="author-avatar">
+                                    {% if post.author.profile.avatar %}
+                                        <img src="{{ post.author.profile.avatar.url }}" alt="{{ post.author.get_full_name }}" class="rounded-circle" width="32" height="32">
+                                    {% else %}
+                                        <div class="avatar-placeholder rounded-circle d-flex align-items-center justify-content-center">
+                                            {{ post.author.first_name|first }}{{ post.author.last_name|first }}
+                                        </div>
+                                    {% endif %}
+                                </div>
+                                <div class="author-name ms-2 small">
+                                    {{ post.author.get_full_name }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                {% if forloop.counter|divisibleby:4 %}
+                    </div><div class="ad-container my-4 p-3 bg-light rounded border">
+                        <div class="small text-muted mb-1 text-center">Oferte de angajare</div>
+                        {% render_ad 'job_listing' %}
+                    </div><div class="row row-cols-1 row-cols-md-2 g-4 mb-4">
+                {% endif %}
+            {% empty %}
+                <div class="col-12">
+                    <div class="alert alert-info">
+                        <i class="fas fa-info-circle me-2"></i> Nu există articole publicate încă. Reveniți în curând!
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        
+        <!-- Pagination -->
+        {% if page_obj.has_other_pages %}
+            <nav aria-label="Blog pagination" class="mt-5">
+                <ul class="pagination justify-content-center">
+                    {% if page_obj.has_previous %}
+                        <li class="page-item">
+                            <a class="page-link" href="?page=1" aria-label="First">
+                                <span aria-hidden="true">&laquo;&laquo;</span>
+                            </a>
+                        </li>
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ page_obj.previous_page_number }}" aria-label="Previous">
+                                <span aria-hidden="true">&laquo;</span>
+                            </a>
+                        </li>
+                    {% endif %}
+                    
+                    {% for i in page_obj.paginator.page_range %}
+                        {% if page_obj.number == i %}
+                            <li class="page-item active"><span class="page-link">{{ i }}</span></li>
+                        {% elif i > page_obj.number|add:"-3" and i < page_obj.number|add:"3" %}
+                            <li class="page-item">
+                                <a class="page-link" href="?page={{ i }}">{{ i }}</a>
+                            </li>
+                        {% endif %}
+                    {% endfor %}
+                    
+                    {% if page_obj.has_next %}
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ page_obj.next_page_number }}" aria-label="Next">
+                                <span aria-hidden="true">&raquo;</span>
+                            </a>
+                        </li>
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ page_obj.paginator.num_pages }}" aria-label="Last">
+                                <span aria-hidden="true">&raquo;&raquo;</span>
+                            </a>
+                        </li>
+                    {% endif %}
+                </ul>
+            </nav>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

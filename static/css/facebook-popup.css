@@ -1,0 +1,191 @@
+/* Facebook Popup Styling */
+.fb-popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.fb-popup-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.fb-popup-container {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 5px 30px rgba(0, 0, 0, 0.3);
+    width: 90%;
+    max-width: 500px;
+    position: relative;
+    animation: popupFadeIn 0.5s ease;
+    overflow: hidden;
+}
+
+.fb-popup-header {
+    padding: 15px 20px;
+    background-color: #f0f2f5;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #dddfe2;
+}
+
+.fb-popup-title {
+    margin: 0;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #1c1e21;
+}
+
+.fb-popup-close {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    transition: background-color 0.2s ease;
+}
+
+.fb-popup-close:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+.fb-popup-close img {
+    width: 20px;
+    height: 20px;
+}
+
+.fb-popup-content {
+    padding: 20px;
+}
+
+.fb-like-container {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.fb-action-btn {
+    padding: 8px 24px;
+    font-weight: 600;
+    font-size: 14px;
+    border-radius: 6px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.fb-page-preview {
+    border: 1px solid #dddfe2;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.fb-page-banner {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+}
+
+.fb-page-info {
+    padding: 15px;
+}
+
+.fb-page-profile {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.fb-page-profile-img {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    border: 4px solid white;
+    box-shadow: 0 1px 6px rgba(0, 0, 0, 0.1);
+    margin-right: 15px;
+    margin-top: -30px;
+}
+
+.fb-page-meta {
+    display: flex;
+    flex-direction: column;
+}
+
+.fb-page-name {
+    margin: 0;
+    font-size: 1.1rem;
+    font-weight: 700;
+}
+
+.fb-page-followers {
+    margin: 5px 0 0;
+    color: #65676b;
+    font-size: 0.9rem;
+}
+
+.fb-page-actions {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.fb-follow-btn,
+.fb-share-btn {
+    flex: 1;
+    text-align: center;
+    padding: 8px 12px;
+    font-size: 14px;
+    border-radius: 6px;
+}
+
+/* Facebook colors */
+.fb-follow-btn {
+    background-color: #1877f2;
+    border-color: #1877f2;
+}
+
+.fb-follow-btn:hover {
+    background-color: #166fe5;
+    border-color: #166fe5;
+}
+
+@keyframes popupFadeIn {
+    from {
+        transform: translateY(20px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* Mobile responsive adjustments */
+@media (max-width: 576px) {
+    .fb-page-actions {
+        flex-direction: column;
+    }
+    
+    .fb-popup-container {
+        width: 95%;
+    }
+    
+    .fb-page-banner {
+        height: 120px;
+    }
+}

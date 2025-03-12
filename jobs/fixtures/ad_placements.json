@@ -1,0 +1,158 @@
+[
+  {
+    "model": "jobs.adplacement",
+    "pk": 1,
+    "fields": {
+      "name": "Header Banner",
+      "position": "header",
+      "ad_code": "<div class=\"ad-container header-ad\">\n<!-- Google AdSense Header -->\n<ins class=\"adsbygoogle\"\n     style=\"display:block\"\n     data-ad-client=\"ca-pub-XXXXXXXXXXXXXXXX\"\n     data-ad-slot=\"XXXXXXXXXX\"\n     data-ad-format=\"auto\"\n     data-full-width-responsive=\"true\"></ins>\n<script>\n     (adsbygoogle = window.adsbygoogle || []).push({});\n</script>\n</div>",
+      "is_active": true,
+      "display_order": 1,
+      "target_devices": "all"
+    }
+  },
+  {
+    "model": "jobs.adplacement",
+    "pk": 2,
+    "fields": {
+      "name": "Între Categorii și Joburi",
+      "position": "between_categories",
+      "ad_code": "<div class=\"ad-container\" id=\"ad-container-between-categories\">\n<!-- Google AdSense Between Categories -->\n<ins class=\"adsbygoogle\"\n     style=\"display:block\"\n     data-ad-client=\"ca-pub-XXXXXXXXXXXXXXXX\"\n     data-ad-slot=\"XXXXXXXXXX\"\n     data-ad-format=\"auto\"\n     data-full-width-responsive=\"true\"></ins>\n<script>\n     (adsbygoogle = window.adsbygoogle || []).push({});\n</script>\n</div>",
+      "is_active": true,
+      "display_order": 2,
+      "target_devices": "all"
+    }
+  },
+  {
+    "model": "jobs.adplacement",
+    "pk": 3,
+    "fields": {
+      "name": "Sidebar",
+      "position": "sidebar",
+      "ad_code": "<div class=\"ad-container sidebar-ad\">\n<!-- Google AdSense Sidebar -->\n<ins class=\"adsbygoogle\"\n     style=\"display:block\"\n     data-ad-client=\"ca-pub-XXXXXXXXXXXXXXXX\"\n     data-ad-slot=\"XXXXXXXXXX\"\n     data-ad-format=\"auto\"\n     data-full-width-responsive=\"true\"></ins>\n<script>\n     (adsbygoogle = window.adsbygoogle || []).push({});\n</script>\n</div>",
+      "is_active": true,
+      "display_order": 3,
+      "target_devices": "desktop"
+    }
+  },
+  {
+    "model": "jobs.adplacement",
+    "pk": 4,
+    "fields": {
+      "name": "Între Joburi",
+      "position": "job_listing",
+      "ad_code": "<div class=\"ad-container\">\n<!-- Google AdSense Job Listings -->\n<ins class=\"adsbygoogle\"\n     style=\"display:block\"\n     data-ad-client=\"ca-pub-XXXXXXXXXXXXXXXX\"\n     data-ad-slot=\"XXXXXXXXXX\"\n     data-ad-format=\"auto\"\n     data-full-width-responsive=\"true\"></ins>\n<script>\n     (adsbygoogle = window.adsbygoogle || []).push({});\n</script>\n</div>",
+      "is_active": true,
+      "display_order": 4,
+      "target_devices": "all"
+    }
+  },
+  {
+    "model": "jobs.adplacement",
+    "pk": 5,
+    "fields": {
+      "name": "Sub Detalii Job",
+      "position": "job_detail",
+      "ad_code": "<div class=\"ad-container\">\n<!-- Google AdSense Job Details -->\n<ins class=\"adsbygoogle\"\n     style=\"display:block\"\n     data-ad-client=\"ca-pub-XXXXXXXXXXXXXXXX\"\n     data-ad-slot=\"XXXXXXXXXX\"\n     data-ad-format=\"auto\"\n     data-full-width-responsive=\"true\"></ins>\n<script>\n     (adsbygoogle = window.adsbygoogle || []).push({});\n</script>\n</div>",
+      "is_active": true,
+      "display_order": 5,
+      "target_devices": "all"
+    }
+  },
+  {
+    "model": "jobs.adplacement",
+    "pk": 6,
+    "fields": {
+      "name": "Footer",
+      "position": "footer",
+      "ad_code": "<div class=\"ad-container footer-ad\">\n<!-- Google AdSense Footer -->\n<ins class=\"adsbygoogle\"\n     style=\"display:block\"\n     data-ad-client=\"ca-pub-XXXXXXXXXXXXXXXX\"\n     data-ad-slot=\"XXXXXXXXXX\"\n     data-ad-format=\"auto\"\n     data-full-width-responsive=\"true\"></ins>\n<script>\n     (adsbygoogle = window.adsbygoogle || []).push({});\n</script>\n</div>",
+      "is_active": true,
+      "display_order": 6,
+      "target_devices": "all"
+    }
+  },
+  {
+    "model": "jobs.adplacement",
+    "pk": 7,
+    "fields": {
+      "name": "Dashboard Utilizator",
+      "position": "user_dashboard",
+      "ad_code": "<div class=\"ad-container\">\n<!-- Google AdSense User Dashboard -->\n<ins class=\"adsbygoogle\"\n     style=\"display:block\"\n     data-ad-client=\"ca-pub-XXXXXXXXXXXXXXXX\"\n     data-ad-slot=\"XXXXXXXXXX\"\n     data-ad-format=\"auto\"\n     data-full-width-responsive=\"true\"></ins>\n<script>\n     (adsbygoogle = window.adsbygoogle || []).push({});\n</script>\n</div>",
+      "is_active": true,
+      "display_order": 7,
+      "target_devices": "all"
+    }
+  },
+  {
+    "model": "jobs.adplacement",
+    "pk": 8,
+    "fields": {
+      "name": "După Aplicare",
+      "position": "after_apply",
+      "ad_code": "<div class=\"ad-container\" id=\"ad-container-after-apply\">\n<!-- Google AdSense After Apply -->\n<ins class=\"adsbygoogle\"\n     style=\"display:block\"\n     data-ad-client=\"ca-pub-XXXXXXXXXXXXXXXX\"\n     data-ad-slot=\"XXXXXXXXXX\"\n     data-ad-format=\"auto\"\n     data-full-width-responsive=\"true\"></ins>\n<script>\n     (adsbygoogle = window.adsbygoogle || []).push({});\n</script>\n</div>",
+      "is_active": true,
+      "display_order": 8,
+      "target_devices": "all"
+    }
+  },
+  {
+    "model": "jobs.adplacement",
+    "pk": 9,
+    "fields": {
+      "name": "Mobile Bottom Fixed",
+      "position": "mobile_bottom",
+      "ad_code": "<div class=\"ad-container mobile-bottom-ad\">\n<!-- Google AdSense Mobile Bottom Fixed -->\n<ins class=\"adsbygoogle\"\n     style=\"display:block\"\n     data-ad-client=\"ca-pub-XXXXXXXXXXXXXXXX\"\n     data-ad-slot=\"XXXXXXXXXX\"\n     data-ad-format=\"horizontal\"\n     data-full-width-responsive=\"true\"></ins>\n<script>\n     (adsbygoogle = window.adsbygoogle || []).push({});\n</script>\n</div>",
+      "is_active": true,
+      "display_order": 9,
+      "target_devices": "mobile"
+    }
+  },
+  {
+    "model": "jobs.adplacement",
+    "pk": 10,
+    "fields": {
+      "name": "Content Banner",
+      "position": "content",
+      "ad_code": "<div class=\"ad-container content-ad\">\n<!-- Google AdSense In-Content -->\n<ins class=\"adsbygoogle\"\n     style=\"display:block\"\n     data-ad-client=\"ca-pub-XXXXXXXXXXXXXXXX\"\n     data-ad-slot=\"XXXXXXXXXX\"\n     data-ad-format=\"auto\"\n     data-full-width-responsive=\"true\"></ins>\n<script>\n     (adsbygoogle = window.adsbygoogle || []).push({});\n</script>\n</div>",
+      "is_active": true,
+      "display_order": 10,
+      "target_devices": "all"
+    }
+  },
+  {
+    "model": "jobs.adplacement",
+    "pk": 11,
+    "fields": {
+      "name": "Subscription Top",
+      "position": "subscription_top",
+      "ad_code": "<div class=\"ad-container subscription-top-ad\">\n<!-- Google AdSense Subscription Top -->\n<ins class=\"adsbygoogle\"\n     style=\"display:block\"\n     data-ad-client=\"ca-pub-XXXXXXXXXXXXXXXX\"\n     data-ad-slot=\"XXXXXXXXXX\"\n     data-ad-format=\"auto\"\n     data-full-width-responsive=\"true\"></ins>\n<script>\n     (adsbygoogle = window.adsbygoogle || []).push({});\n</script>\n</div>",
+      "is_active": true,
+      "display_order": 11,
+      "target_devices": "all"
+    }
+  },
+  {
+    "model": "jobs.adplacement",
+    "pk": 12,
+    "fields": {
+      "name": "Subscription Bottom",
+      "position": "subscription_bottom",
+      "ad_code": "<div class=\"ad-container subscription-bottom-ad\">\n<!-- Google AdSense Subscription Bottom -->\n<ins class=\"adsbygoogle\"\n     style=\"display:block\"\n     data-ad-client=\"ca-pub-XXXXXXXXXXXXXXXX\"\n     data-ad-slot=\"XXXXXXXXXX\"\n     data-ad-format=\"auto\"\n     data-full-width-responsive=\"true\"></ins>\n<script>\n     (adsbygoogle = window.adsbygoogle || []).push({});\n</script>\n</div>",
+      "is_active": true,
+      "display_order": 12,
+      "target_devices": "all"
+    }
+  },
+  {
+    "model": "jobs.adplacement",
+    "pk": 13,
+    "fields": {
+      "name": "Subscription Sidebar",
+      "position": "subscription_sidebar",
+      "ad_code": "<div class=\"ad-container subscription-sidebar-ad\">\n<!-- Google AdSense Subscription Sidebar -->\n<ins class=\"adsbygoogle\"\n     style=\"display:block\"\n     data-ad-client=\"ca-pub-XXXXXXXXXXXXXXXX\"\n     data-ad-slot=\"XXXXXXXXXX\"\n     data-ad-format=\"auto\"\n     data-full-width-responsive=\"true\"></ins>\n<script>\n     (adsbygoogle = window.adsbygoogle || []).push({});\n</script>\n</div>",
+      "is_active": true,
+      "display_order": 13,
+      "target_devices": "desktop"
+    }
+  }
+]

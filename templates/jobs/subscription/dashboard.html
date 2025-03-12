@@ -1,0 +1,360 @@
+{% extends 'jobs/subscription/base_subscription.html' %}
+{% load static %}
+{% load i18n %}
+{% load humanize %}
+{% load adsense %}
+
+{% block title %}Dashboard Abonament - JoburipentruRomani{% endblock %}
+
+{% block subscription_content %}
+<!-- AdSense Top of Subscription Dashboard -->
+<div class="bg-light rounded p-3 mb-4">
+    <div class="small text-muted mb-2">Conținut sponsorizat</div>
+    {% render_ad 'subscription_dashboard' %}
+</div>
+
+<!-- Subscription Overview -->
+<div class="bg-white rounded shadow-sm p-4 mb-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1 class="h3 mb-0">Dashboard Abonament</h1>
+        {% if days_remaining <= 5 and subscription.status == 'active' %}
+            <span class="badge bg-warning text-dark">
+                Expiră în {{ days_remaining }} zile
+            </span>
+        {% endif %}
+    </div>
+
+    <div class="row">
+        <div class="col-md-6 mb-4">
+            <div class="card h-100 border-0 bg-light">
+                <div class="card-body">
+                    <h2 class="h5 mb-3">Plan Curent</h2>
+                    
+                    <div class="d-flex align-items-center mb-2">
+                        <span class="badge bg-primary me-2">{{ subscription.plan.name }}</span>
+                        <span class="text-muted small">
+                            {% if subscription.billing_cycle == 'annual' %}
+                                Facturat anual ({{ subscription.plan.price_annually }}€)
+                            {% else %}
+                                Facturat lunar ({{ subscription.plan.price_monthly }}€)
+                            {% endif %}
+                        </span>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <div class="d-flex justify-content-between mb-1 small">
+                            <span>Status:</span>
+                            {% if subscription.status == 'active' %}
+                                <span class="text-success">Activ</span>
+                            {% elif subscription.status == 'past_due' %}
+                                <span class="text-warning">Plată întârziată</span>
+                            {% elif subscription.status == 'canceled' %}
+                                <span class="text-danger">Anulat</span>
+                            {% elif subscription.status == 'trialing' %}
+                                <span class="text-info">Perioadă de probă</span>
+                            {% else %}
+                                <span class="text-danger">Expirat</span>
+                            {% endif %}
+                        </div>
+                        
+                        <div class="d-flex justify-content-between mb-1 small">
+                            <span>Reînnoire automată:</span>
+                            <span>{% if subscription.auto_renew %}Da{% else %}Nu{% endif %}</span>
+                        </div>
+                        
+                        <div class="d-flex justify-content-between mb-1 small">
+                            <span>Data început:</span>
+                            <span>{{ subscription.start_date|date:"d M Y" }}</span>
+                        </div>
+                        
+                        <div class="d-flex justify-content-between small">
+                            <span>Data expirare:</span>
+                            <span>{{ subscription.end_date|date:"d M Y" }}</span>
+                        </div>
+                    </div>
+                    
+                    <div class="d-flex mt-4">
+                        <a href="{% url 'jobs:subscription_upgrade' %}" class="btn btn-sm btn-primary me-2">
+                            <i class="fas fa-arrow-up me-1"></i> Upgrade Plan
+                        </a>
+                        {% if subscription.auto_renew %}
+                            <a href="{% url 'jobs:subscription_cancel' %}" class="btn btn-sm btn-outline-danger">
+                                <i class="fas fa-ban me-1"></i> Anulează Reînnoirea
+                            </a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-6 mb-4">
+            <div class="card h-100 border-0 bg-light">
+                <div class="card-body">
+                    <h2 class="h5 mb-3">Utilizare Abonament</h2>
+                    
+                    <div class="mb-4">
+                        <div class="d-flex justify-content-between mb-2">
+                            <span>Joburi active:</span>
+                            <span class="fw-bold">
+                                {{ active_jobs_count }} / 
+                                {% if subscription.plan.max_active_jobs < 0 %}
+                                    Nelimitat
+                                {% else %}
+                                    {{ subscription.plan.max_active_jobs }}
+                                {% endif %}
+                            </span>
+                        </div>
+                        
+                        <div class="progress" style="height: 8px;">
+                            {% if subscription.plan.max_active_jobs > 0 %}
+                                {% with percentage=active_jobs_count|mul:100|div:subscription.plan.max_active_jobs %}
+                                    <div class="progress-bar {% if percentage > 80 %}bg-warning{% endif %}" role="progressbar" style="width: {{ percentage }}%"></div>
+                                {% endwith %}
+                            {% else %}
+                                <div class="progress-bar" role="progressbar" style="width: 10%"></div>
+                            {% endif %}
+                        </div>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <div class="d-flex justify-content-between mb-2">
+                            <span>Anunțuri promovate:</span>
+                            <span class="fw-bold">
+                                {{ subscription.plan.promoted_listings_count|sub:remaining_promoted }} / {{ subscription.plan.promoted_listings_count }}
+                            </span>
+                        </div>
+                        
+                        <div class="progress" style="height: 8px;">
+                            {% if subscription.plan.promoted_listings_count > 0 %}
+                                {% with used=subscription.plan.promoted_listings_count|sub:remaining_promoted %}
+                                {% with percentage=used|mul:100|div:subscription.plan.promoted_listings_count %}
+                                    <div class="progress-bar" role="progressbar" style="width: {{ percentage }}%"></div>
+                                {% endwith %}
+                                {% endwith %}
+                            {% else %}
+                                <div class="progress-bar" role="progressbar" style="width: 0%"></div>
+                            {% endif %}
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <div class="d-flex justify-content-between mb-2">
+                            <span>Perioada rămasă:</span>
+                            <span class="fw-bold">{{ days_remaining }} zile</span>
+                        </div>
+                        
+                        <div class="progress" style="height: 8px;">
+                            {% if subscription.billing_cycle == 'annual' %}
+                                {% with percentage=days_remaining|mul:100|div:365 %}
+                                    <div class="progress-bar" role="progressbar" style="width: {{ percentage }}%"></div>
+                                {% endwith %}
+                            {% else %}
+                                {% with percentage=days_remaining|mul:100|div:30 %}
+                                    <div class="progress-bar" role="progressbar" style="width: {{ percentage }}%"></div>
+                                {% endwith %}
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- AdSense sidebar for desktop -->
+<div class="d-none d-lg-block">
+    <div class="bg-light rounded p-3 mb-4">
+        {% render_ad 'subscription_sidebar' %}
+    </div>
+</div>
+
+<!-- Feature Access -->
+<div class="bg-white rounded shadow-sm p-4 mb-4">
+    <h2 class="h4 mb-3">Caracteristici Incluse</h2>
+    
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+        <div class="col">
+            <div class="card h-100 border-0 bg-light">
+                <div class="card-body">
+                    <div class="d-flex align-items-center mb-3">
+                        <div class="feature-icon bg-primary bg-opacity-10 p-2 rounded-circle text-primary me-3">
+                            <i class="fas fa-briefcase"></i>
+                        </div>
+                        <h3 class="h6 mb-0">Anunțuri de job</h3>
+                    </div>
+                    
+                    <p class="card-text small text-muted mb-0">
+                        {% if subscription.plan.max_active_jobs == 1 %}
+                            1 anunț activ
+                        {% elif subscription.plan.max_active_jobs < 0 %}
+                            Anunțuri nelimitate
+                        {% else %}
+                            {{ subscription.plan.max_active_jobs }} anunțuri active
+                        {% endif %}
+                    </p>
+                    
+                    <div class="mt-3">
+                        <a href="{% url 'jobs:company_dashboard' %}" class="btn btn-sm btn-outline-primary">
+                            <i class="fas fa-plus me-1"></i> Adaugă job
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col">
+            <div class="card h-100 border-0 bg-light">
+                <div class="card-body">
+                    <div class="d-flex align-items-center mb-3">
+                        <div class="feature-icon bg-primary bg-opacity-10 p-2 rounded-circle text-primary me-3">
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <h3 class="h6 mb-0">Anunțuri promovate</h3>
+                    </div>
+                    
+                    <p class="card-text small text-muted mb-0">
+                        {% if subscription.plan.promoted_listings_count == 0 %}
+                            Promovarea nu este inclusă în acest plan
+                        {% elif subscription.plan.promoted_listings_count == 1 %}
+                            1 anunț promovat
+                        {% else %}
+                            {{ subscription.plan.promoted_listings_count }} anunțuri promovate
+                        {% endif %}
+                    </p>
+                    
+                    {% if subscription.plan.promoted_listings_count > 0 %}
+                        <div class="mt-3">
+                            <a href="{% url 'jobs:company_dashboard' %}" class="btn btn-sm btn-outline-primary">
+                                <i class="fas fa-star me-1"></i> Promovează job
+                            </a>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        
+        <div class="col">
+            <div class="card h-100 border-0 bg-light">
+                <div class="card-body">
+                    <div class="d-flex align-items-center mb-3">
+                        <div class="feature-icon bg-primary bg-opacity-10 p-2 rounded-circle text-primary me-3">
+                            <i class="fas fa-file-alt"></i>
+                        </div>
+                        <h3 class="h6 mb-0">Acces CV Candidați</h3>
+                    </div>
+                    
+                    <p class="card-text small text-muted mb-0">
+                        {% if subscription.plan.has_candidate_cv_access %}
+                            Acces complet la CV-urile candidaților
+                        {% else %}
+                            CV-urile nu sunt incluse în acest plan
+                        {% endif %}
+                    </p>
+                    
+                    {% if subscription.plan.has_candidate_cv_access %}
+                        <div class="mt-3">
+                            <a href="#" class="btn btn-sm btn-outline-primary">
+                                <i class="fas fa-search me-1"></i> Caută CV-uri
+                            </a>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- AdSense Between Sections -->
+<div class="bg-light rounded p-3 mb-4">
+    <div class="small text-muted mb-2">Conținut sponsorizat</div>
+    {% render_ad 'subscription_top' %}
+</div>
+
+<!-- Recent Payments -->
+<div class="bg-white rounded shadow-sm p-4 mb-4">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h2 class="h4 mb-0">Plăți Recente</h2>
+        <a href="{% url 'jobs:subscription_billing' %}" class="btn btn-sm btn-outline-primary">
+            Vezi toate plățile
+        </a>
+    </div>
+    
+    {% if recent_payments %}
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead class="table-light">
+                    <tr>
+                        <th>Data</th>
+                        <th>Sumă</th>
+                        <th>Status</th>
+                        <th>Metodă de plată</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for payment in recent_payments %}
+                        <tr>
+                            <td>{{ payment.payment_date|date:"d M Y" }}</td>
+                            <td>{{ payment.amount }} {{ payment.currency }}</td>
+                            <td>
+                                {% if payment.is_successful %}
+                                    <span class="badge bg-success">Reușit</span>
+                                {% else %}
+                                    <span class="badge bg-danger">Eșuat</span>
+                                {% endif %}
+                            </td>
+                            <td>{{ payment.payment_method|title }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    {% else %}
+        <div class="alert alert-info">
+            <i class="fas fa-info-circle me-2"></i> Nu ai efectuat încă nicio plată.
+        </div>
+    {% endif %}
+</div>
+
+<!-- Need Help Section -->
+<div class="bg-white rounded shadow-sm p-4 mb-4">
+    <h2 class="h4 mb-3">Ai nevoie de ajutor?</h2>
+    
+    <div class="row g-4">
+        <div class="col-md-6">
+            <div class="d-flex">
+                <div class="flex-shrink-0 text-primary me-3">
+                    <i class="fas fa-question-circle fa-2x"></i>
+                </div>
+                <div>
+                    <h3 class="h5 mb-2">Întrebări Frecvente</h3>
+                    <p class="text-muted small mb-2">
+                        Consultă răspunsurile la cele mai frecvente întrebări despre abonamente.
+                    </p>
+                    <a href="#" class="btn btn-sm btn-link px-0">Vezi FAQ</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="d-flex">
+                <div class="flex-shrink-0 text-primary me-3">
+                    <i class="fas fa-headset fa-2x"></i>
+                </div>
+                <div>
+                    <h3 class="h5 mb-2">Contactează Suport</h3>
+                    <p class="text-muted small mb-2">
+                        Echipa noastră este disponibilă pentru a te ajuta cu orice întrebare.
+                    </p>
+                    <a href="#" class="btn btn-sm btn-link px-0">Contactează-ne</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- AdSense Bottom of Subscription Dashboard -->
+<div class="bg-light rounded p-3">
+    <div class="small text-muted mb-2">Conținut sponsorizat</div>
+    {% render_ad 'subscription_bottom' %}
+</div>
+
+{% endblock %}

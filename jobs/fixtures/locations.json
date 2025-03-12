@@ -1,0 +1,122 @@
+[
+  {
+    "model": "jobs.location",
+    "pk": 1,
+    "fields": {
+      "city": "București",
+      "county": "București"
+    }
+  },
+  {
+    "model": "jobs.location",
+    "pk": 2,
+    "fields": {
+      "city": "Cluj-Napoca",
+      "county": "Cluj"
+    }
+  },
+  {
+    "model": "jobs.location",
+    "pk": 3,
+    "fields": {
+      "city": "Timișoara",
+      "county": "Timiș"
+    }
+  },
+  {
+    "model": "jobs.location",
+    "pk": 4,
+    "fields": {
+      "city": "Iași",
+      "county": "Iași"
+    }
+  },
+  {
+    "model": "jobs.location",
+    "pk": 5,
+    "fields": {
+      "city": "Constanța",
+      "county": "Constanța"
+    }
+  },
+  {
+    "model": "jobs.location",
+    "pk": 6,
+    "fields": {
+      "city": "Brașov",
+      "county": "Brașov"
+    }
+  },
+  {
+    "model": "jobs.location",
+    "pk": 7,
+    "fields": {
+      "city": "Craiova",
+      "county": "Dolj"
+    }
+  },
+  {
+    "model": "jobs.location",
+    "pk": 8,
+    "fields": {
+      "city": "Galați",
+      "county": "Galați"
+    }
+  },
+  {
+    "model": "jobs.location",
+    "pk": 9,
+    "fields": {
+      "city": "Oradea",
+      "county": "Bihor"
+    }
+  },
+  {
+    "model": "jobs.location",
+    "pk": 10,
+    "fields": {
+      "city": "Ploiești",
+      "county": "Prahova"
+    }
+  },
+  {
+    "model": "jobs.location",
+    "pk": 11,
+    "fields": {
+      "city": "Sibiu",
+      "county": "Sibiu"
+    }
+  },
+  {
+    "model": "jobs.location",
+    "pk": 12,
+    "fields": {
+      "city": "Pitești",
+      "county": "Argeș"
+    }
+  },
+  {
+    "model": "jobs.location",
+    "pk": 13,
+    "fields": {
+      "city": "Arad",
+      "county": "Arad"
+    }
+  },
+  {
+    "model": "jobs.location",
+    "pk": 14,
+    "fields": {
+      "city": "Bacău",
+      "county": "Bacău"
+    }
+  },
+  {
+    "model": "jobs.location",
+    "pk": 15,
+    "fields": {
+      "city": "Baia Mare",
+      "county": "Maramureș"
+    }
+  }
+]
